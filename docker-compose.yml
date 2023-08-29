@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  fractal-db:
+  db:
     container_name: fractal-db
     image: postgres:15.4-alpine
     restart: always
@@ -25,10 +25,10 @@ services:
       timeout: 5s
       retries: 5
 
-  fractal-server:
+  server:
     container_name: fractal-server
     depends_on:
-      fractal-db:
+      db:
         condition: service_healthy
     image: fractal-server
     build:
@@ -36,3 +36,14 @@ services:
       dockerfile: Dockerfile.server
     ports:
       - 8000:8000
+
+  client:
+    container_name: fractal-client
+    depends_on:
+      - server
+    image: fractal-client
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    ports:
+      - 5173:5173
