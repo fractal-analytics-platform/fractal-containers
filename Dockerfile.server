@@ -6,18 +6,12 @@ FROM python:3.11-slim
 # creating a workdir
 WORKDIR /app
 
-# copying requirement generation file
-# only standard modules required, so no pre-pip
-COPY gen_requirements.py .
+# installing system packages, required for psycopg2
+RUN apt-get update
+RUN apt-get -y install gcc postgresql postgresql-contrib libpq-dev
 
-# generating requirements.txt file for package
-RUN ["python3", "gen_requirements.py", "fractal-server", "requirements.txt"]
-
-# installing dependencies
-RUN pip install -r requirements.txt
-
-# installing main package
-RUN pip install fractal-server
+# installing package
+RUN pip install fractal-server[postgres,gunicorn]==1.3.4
 
 # launch command
 CMD ["fractalctl", "start"]

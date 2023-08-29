@@ -1,6 +1,3 @@
-.PHONY: docs
-
-
 run:
 	docker compose up --build
 clean:
