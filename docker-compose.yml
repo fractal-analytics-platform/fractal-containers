@@ -24,3 +24,16 @@ services:
         #      interval: 5s
         #      timeout: 5s
         #      retries: 5
+
+  fractal-server:
+    container_name: fractal-server
+    depends_on:
+      - fractal-db
+      #      geoclima-db:
+      #        condition: service_healthy
+    image: fractal-server
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    ports:
+      - 8000:8000
