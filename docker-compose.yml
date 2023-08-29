@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  fractal-db:
+    container_name: fractal-db
+    image: postgres:15.4-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - ./fractal-db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: fractal
+      POSTGRES_PASSWORD: fractal
+      POSTGRES_DB: fractal
+        #      # required for the check below - otherwise postgresql
+        #      # will use undefined 'root' user and raise errors
+        #      PGUSER: fractal
+        #    healthcheck:
+        #      # postgresql starts up, stops, and then restarts
+        #      # => errors if the server connects before the stop
+        #      # this checks if the system is ready
+        #      test: [ "CMD-SHELL", "pg_isready" ]
+        #      interval: 5s
+        #      timeout: 5s
+        #      retries: 5
