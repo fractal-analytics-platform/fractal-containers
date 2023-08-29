@@ -13,24 +13,23 @@ services:
       POSTGRES_USER: fractal
       POSTGRES_PASSWORD: fractal
       POSTGRES_DB: fractal
-        #      # required for the check below - otherwise postgresql
-        #      # will use undefined 'root' user and raise errors
-        #      PGUSER: fractal
-        #    healthcheck:
-        #      # postgresql starts up, stops, and then restarts
-        #      # => errors if the server connects before the stop
-        #      # this checks if the system is ready
-        #      test: [ "CMD-SHELL", "pg_isready" ]
-        #      interval: 5s
-        #      timeout: 5s
-        #      retries: 5
+      # required for the check below - otherwise postgresql
+      # will use undefined 'root' user and raise errors
+      PGUSER: fractal
+    healthcheck:
+      # postgresql starts up, stops, and then restarts
+      # => errors if the server connects before the stop
+      # this checks if the system is ready
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   fractal-server:
     container_name: fractal-server
     depends_on:
-      - fractal-db
-      #      geoclima-db:
-      #        condition: service_healthy
+      fractal-db:
+        condition: service_healthy
     image: fractal-server
     build:
       context: .

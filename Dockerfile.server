@@ -13,5 +13,8 @@ RUN apt-get -y install gcc postgresql postgresql-contrib libpq-dev
 # installing package
 RUN pip install fractal-server[postgres,gunicorn]==1.3.4
 
+# setting up DB configuration
+COPY fractal_server.env ./.fractal_server.env
+
 # launch command
-CMD ["fractalctl", "start"]
+CMD fractalctl set-db && fractalctl start
