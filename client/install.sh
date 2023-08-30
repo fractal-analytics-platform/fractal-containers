@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RELEASE="0.5.2"
+RELEASE="0.5.3"
 
 echo "*** Fetching a clean copy of fractal-web ${RELEASE} ***"
 

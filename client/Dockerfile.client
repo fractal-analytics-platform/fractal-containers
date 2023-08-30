@@ -19,12 +19,9 @@ WORKDIR /app/fractal-web/
 # setting up environment variables
 COPY client/client.env ./.env
 
-RUN ls -a
-
 # Installing dependencies and building
 RUN npm install
 RUN npm run build
-RUN ORIGIN=http://localhost:5173 PORT=5173 node build
 
-# launch command
-CMD ["npm", "run", "dev"]
+# Running
+CMD ORIGIN=http://localhost:5173 PORT=5173 node build
