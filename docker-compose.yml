@@ -33,7 +33,7 @@ services:
     image: fractal-server
     build:
       context: .
-      dockerfile: Dockerfile.server
+      dockerfile: server/Dockerfile.server
     ports:
       - 8000:8000
 
@@ -44,6 +44,6 @@ services:
     image: fractal-client
     build:
       context: .
-      dockerfile: Dockerfile.client
+      dockerfile: client/Dockerfile.client
     ports:
       - 5173:5173
