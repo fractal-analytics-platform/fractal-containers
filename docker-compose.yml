@@ -41,7 +41,9 @@ services:
     container_name: fractal-proxy
     depends_on:
       - server
-    image: nginx:1.25.2-alpine
+    build:
+      context: .
+      dockerfile: proxy/Dockerfile.proxy
     ports:
       - 8080:8080
 
