@@ -37,20 +37,8 @@ services:
     ports:
       - 8000:8000
 
-  proxy:
-    container_name: fractal-proxy
-    depends_on:
-      - server
-    build:
-      context: .
-      dockerfile: proxy/Dockerfile.proxy
-    ports:
-      - 8080:8080
-
   client:
     container_name: fractal-client
-    depends_on:
-      - proxy
     image: fractal-client
     build:
       context: .

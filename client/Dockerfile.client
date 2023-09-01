@@ -8,6 +8,7 @@ WORKDIR /app
 
 # installing bash shell
 RUN apk add --no-cache bash
+RUN apk add --no-cache git
 
 # installing selected program version
 COPY client/install.sh .
