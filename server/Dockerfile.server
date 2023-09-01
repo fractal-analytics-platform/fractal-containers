@@ -20,4 +20,3 @@ RUN apt install vim -y
 
 # launch command
 CMD fractalctl set-db && fractalctl start --host 0.0.0.0 -p 8000
-# CMD tail -f
