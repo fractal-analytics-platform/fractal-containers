@@ -1,0 +1,10 @@
+# syntax=docker/dockerfile:1
+
+# selecting slurm master image
+FROM rancavil/slurm-node:19.05.5-1
+
+# copying config files
+COPY slurm/slurm.conf /etc/slurm-llnl/
+
+# entrypoint script, from the image
+ENTRYPOINT ["/etc/slurm-llnl/docker-entrypoint.sh"]

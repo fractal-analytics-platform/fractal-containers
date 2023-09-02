@@ -68,7 +68,7 @@ relative instructions are detailed in
 The latter is accessible from the host system at the
 [localhost:5173](localhost:5173) address. All operations
 performed via its interface generate HTTP requests which are
-sent to the server service (see below).
+sent to the server service on its `8000` port (see below).
 
 
 ### Server
@@ -90,12 +90,13 @@ instructions are detailed in `server/Dockerfile.server`.
 
 For data storage purposes, the server here uses PostgreSQL as a
 database service, here handled by a separate `fractal-db`
-container. The latter is based on the `postgres:15.4-alpine`
-image, and will save DB data in the `fractal-db-data/` folder
-in the code directory. A healthcheck is defined to avoid the
-server crashing after the DB service restarts at the first
-activation, with server startup being conditional on its
-success.
+container which receives instructions from the server via its
+`5432` port. The DB container is based on the
+`postgres:15.4-alpine` image, and will save data in the
+`fractal-db-data/` folder in the root project directory. A
+healthcheck is defined to avoid the server crashing after the
+DB service restarts at the first activation, with server
+startup being conditional on its success.
 
 The server is accessible from the host system at the
 [http://localhost.8000](http://localhost.8000) address.
