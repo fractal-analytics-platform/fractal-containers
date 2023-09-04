@@ -1,19 +1,13 @@
 #!/bin/bash
 
-#RELEASE="0.5.3"
+RELEASE="0.5.4"
 
-#echo "*** Fetching a clean copy of fractal-web ${RELEASE} ***"
+echo "*** Fetching a clean copy of fractal-web ${RELEASE} ***"
 
-#rm -fr fractal-web-${RELEASE}
-#rm -f ${RELEASE}.tar.gz
+rm -fr fractal-web-${RELEASE}
+rm -f ${RELEASE}.tar.gz
 
-# wget https://github.com/fractal-analytics-platform/fractal-web/archive/refs/tags/${RELEASE}.tar.gz
-# tar -xvf ${RELEASE}.tar.gz
-# mv fractal-web-${RELEASE}/ fractal-web/
-# rm ${RELEASE}.tar.gz
-
-rm -rf fractal-web/
-
-git clone https://github.com/fractal-analytics-platform/fractal-web.git
-cd fractal-web
-git checkout 274-fix-cookie-issue
+wget https://github.com/fractal-analytics-platform/fractal-web/archive/refs/tags/${RELEASE}.tar.gz
+tar -xvf ${RELEASE}.tar.gz
+mv fractal-web-${RELEASE}/ fractal-web/
+rm ${RELEASE}.tar.gz
