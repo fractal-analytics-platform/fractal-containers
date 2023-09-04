@@ -91,7 +91,7 @@ instructions are detailed in `server/Dockerfile.server`.
 For data storage purposes, the server here uses PostgreSQL as a
 database service, here handled by a separate `fractal-db`
 container which receives instructions from the server via its
-`5432` port. The DB container is based on the
+`5433` port. The DB container is based on the
 `postgres:15.4-alpine` image, and will save data in the
 `fractal-db-data/` folder in the root project directory. A
 healthcheck is defined to avoid the server crashing after the
