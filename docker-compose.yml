@@ -61,7 +61,6 @@ services:
     ports:
       - 6817:6817
       - 6818:6818
-      - 6819:6819
 
   slurm-node:
     container_name: fractal-slurm-node

@@ -10,8 +10,5 @@ ADD slurm/sudoers /etc/sudoers
 # adding slurm user
 RUN useradd --uid 2000 -m fractal -s /usr/bin/bash -d /home/fractal && echo "fractal:fractal" | chpasswd
 
-# exposing communication port
-#EXPOSE 50097
-
 # entrypoint script, from the image
 ENTRYPOINT ["/etc/slurm-llnl/docker-entrypoint.sh"]
