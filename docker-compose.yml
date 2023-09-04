@@ -20,7 +20,7 @@ services:
       # postgresql starts up, stops, and then restarts
       # => errors if the server connects before the stop
       # this checks if the system is ready
-      test: [ "CMD-SHELL", "pg_isready" ]
+      test: ["CMD-SHELL", "pg_isready"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -38,9 +38,19 @@ services:
       - 8000:8000
     volumes:
       - /tmp/fractal_test:/tmp/fractal_test/
+    healthcheck:
+      # check if server is up from within the container
+      # (hence the localhost)
+      test: curl --fail http://localhost:8000/api/alive/ || exit 1
+      interval: 5s
+      timeout: 2s
+      retries: 5
 
   client:
     container_name: fractal-client
+    depends_on:
+      server:
+        condition: service_healthy
     image: fractal-client
     build:
       context: .
