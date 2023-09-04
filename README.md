@@ -8,7 +8,7 @@
 
 
 `fractal-containers` is a containerized implementation of the
-[Fractal](https://github.com/fractal-analytics-platform)
+[Fractal](https://fractal-analytics-platform.github.io)
 analytics platform for image analysis. The goal of this project
 is to allow rapid local deployment of the components of the
 framework, especially suitable for demonstration purposes.
