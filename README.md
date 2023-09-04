@@ -1,33 +1,31 @@
 # fractal-containers
 
-[![fractal-server](https://img.shields.io/badge/fractal--server-1.3.5a1-blue)](https://github.com/fractal-analytics-platform/fractal-server)
-[![fractal-web](https://img.shields.io/badge/fractal--web-acdea0c-blue)](https://github.com/fractal-analytics-platform/fractal-web)
+[![fractal-server](https://img.shields.io/badge/fractal--server-1.3.5a1-blue)](https://pypi.org/project/fractal-server/1.3.5a1/)
+[![fractal-web](https://img.shields.io/badge/fractal--web-0.5.4-blue)](https://github.com/fractal-analytics-platform/fractal-web/releases/tag/0.5.4)
 [![docker](https://img.shields.io/badge/deployment-docker-blue)](https://github.com/docker)
 [![postgresql](https://img.shields.io/badge/PostgreSQL-FF0000)](https://github.com/postgres/postgres)
 
 
 
 `fractal-containers` is a containerized implementation of the
-[fractal](https://github.com/fractal-analytics-platform)
-analytics platform for data analysis. The goal of this project
-is to allow rapid deployment of the components of the
-framework.
-
-
+[Fractal](https://fractal-analytics-platform.github.io)
+analytics platform for image analysis. The goal of this project
+is to allow rapid local deployment of the components of the
+framework, especially suitable for demonstration purposes.
 
 
 ## Quick start
 - To simultaneously launch all the containers of the project
   (see below for an introduction to the architecture) execute
   the command
-
+ 
         $ mkdir -p fractal-data/
         $ docker compose up --build
-
+  
     or
-
+  
         $ make run
-
+  
     - The client service is accessible at the URL
       [http://localhost:5173/](http://localhost:5173).
 
@@ -36,14 +34,12 @@ framework.
 
 - To remove the generated containers after usage, execute the
   command
-
+  
         $ docker compose down
-
-    o
-
+  
+    or
+  
         $ make clean
-
-
 
 
 ## Architecture overview
@@ -58,7 +54,9 @@ the `docker-compose.yml` file in the project root.
 
 The web client service allows the user to import datasets and
 to schedule workflows for data analysis. Its source code is
-available on its [git repository](https://github.com/fractal-analytics-platform/fractal-web), with additional documentation being available [here](X).
+available on its [git
+repository](https://github.com/fractal-analytics-platform/fractal-web),
+with additional documentation being available [here](X).
 
 Here, the web client is ran on the node.js-based
 `fractal-client` container, which clones the git repository,
