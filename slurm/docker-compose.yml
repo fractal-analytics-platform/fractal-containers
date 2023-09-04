@@ -36,6 +36,8 @@ services:
       dockerfile: server/Dockerfile.server
     ports:
       - 8000:8000
+    volumes:
+      - /tmp/fractal_test:/tmp/fractal_test/
 
   client:
     container_name: fractal-client
