@@ -45,3 +45,35 @@ services:
       dockerfile: client/Dockerfile.client
     ports:
       - 5173:5173
+
+  slurm-master:
+    container_name: fractal-slurm-master
+    image: fractal-slurm-master
+    build:
+      context: .
+      dockerfile: slurm/Dockerfile.master
+    hostname: fractal-slurm-master
+    user: admin
+    volumes:
+      - ./fractal-slurm-data:/home/admin
+    environment:
+      - SLURM_CPUS_ON_NODE=1
+    ports:
+      - 6817:6817
+      - 6818:6818
+
+  slurm-node:
+    container_name: fractal-slurm-node
+    depends_on:
+      - slurm-master
+    image: fractal-slurm-node
+    build:
+      context: .
+      dockerfile: slurm/Dockerfile.node
+    hostname: fractal-slurm-node
+    user: admin
+    volumes:
+      - ./fractal-slurm-data:/home/admin
+    environment:
+      - SLURM_NODENAME=slurm-node-1
+      - SLURM_CPUS_ON_NODE=1
