@@ -21,6 +21,7 @@ framework.
   (see below for an introduction to the architecture) execute
   the command
 
+        $ mkdir -p fractal-data/
         $ docker compose up --build
 
     or
@@ -87,6 +88,15 @@ Here, the server is ran on the python-based `fractal-server`
 container, which installs the server package and relative
 dependencies from PyPI and runs the service. The relative
 instructions are detailed in `server/Dockerfile.server`.
+
+When started using the commands mentioned above, the folder
+`fractal-data` in the project root directory can be used to
+store data from the host system. The container will mount this
+folder in its filesystem at `/home/fractal-data/`. Both the
+container and the host can freely read and modify data within
+this folder. If this folder is deleted on the host system, it
+is recommended to re-create it *from the host* before launching
+the containers.
 
 For data storage purposes, the server here uses PostgreSQL as a
 database service, here handled by a separate `fractal-db`
