@@ -19,7 +19,7 @@ framework, especially suitable for demonstration purposes.
   (see below for an introduction to the architecture) execute
   the command
  
-        $ mkdir -p fractal-data/
+        $ mkdir -p fractal-share/
         $ docker compose up --build
   
     or
@@ -88,9 +88,9 @@ dependencies from PyPI and runs the service. The relative
 instructions are detailed in `server/Dockerfile.server`.
 
 When started using the commands mentioned above, the folder
-`fractal-data` in the project root directory can be used to
+`fractal-share` in the project root directory can be used to
 store data from the host system. The container will mount this
-folder in its filesystem at `/home/fractal-data/`. Both the
+folder in its filesystem at `/home/fractal-share/`. Both the
 container and the host can freely read and modify data within
 this folder. If this folder is deleted on the host system, it
 is recommended to re-create it *from the host* before launching

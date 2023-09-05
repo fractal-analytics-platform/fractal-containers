@@ -39,8 +39,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./fractal-data/:/home/fractal-data/
-      - /tmp/fractal_test:/tmp/fractal_test/
+      - ./fractal-share/:/home/fractal-share/
     healthcheck:
       # check if server is up from within the container
       # (hence the localhost)

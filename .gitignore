@@ -1,5 +1,7 @@
 fractal-data/
+fractal-share/
 fractal-db-data/
 
+advanced/fractal-share/
 advanced/fractal-db-data/
 advanced/fractal-slurm-data/
