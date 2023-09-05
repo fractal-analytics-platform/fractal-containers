@@ -1,7 +1,7 @@
 # fractal-containers
 
-[![fractal-server](https://img.shields.io/badge/fractal--server-1.3.5a1-blue)](https://pypi.org/project/fractal-server/1.3.5a1/)
-[![fractal-web](https://img.shields.io/badge/fractal--web-0.5.4-blue)](https://github.com/fractal-analytics-platform/fractal-web/releases/tag/0.5.4)
+[![fractal-server](https://img.shields.io/badge/fractal--server-blue)](https://pypi.org/project/fractal-server)
+[![fractal-web](https://img.shields.io/badge/fractal--web-blue)](https://github.com/fractal-analytics-platform/fractal-web)
 [![docker](https://img.shields.io/badge/deployment-docker-blue)](https://github.com/docker)
 [![postgresql](https://img.shields.io/badge/PostgreSQL-FF0000)](https://github.com/postgres/postgres)
 
