@@ -31,12 +31,9 @@ an actual image-analysis workflow.
 7. Open the workflow and run it.
   
 
-To remove the generated containers after usage, execute the command
+To remove the generated containers after usage, execute one of these commands
 ```
 docker compose down
-```
-or
-```
 make clean
 ```
 
