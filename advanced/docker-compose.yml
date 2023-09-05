@@ -32,15 +32,21 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    image: fractal-server
+    image: fractal-slurm-server
     build:
       context: .
       dockerfile: server/Dockerfile.server
+    hostname: fractal-server
+    user: admin
     ports:
+      - 6817:6817
+      - 6818:6818
       - 8000:8000
     volumes:
-      - ./fractal-data/:/home/fractal-data/
-      - /tmp/fractal_test:/tmp/fractal_test/
+      - ./fractal-share/:/home/fractal-share/
+      - ./fractal-slurm-data:/home/admin
+    environment:
+      - SLURM_CPUS_ON_NODE=1
     healthcheck:
       # check if server is up from within the container
       # (hence the localhost)
@@ -61,26 +67,10 @@ services:
     ports:
       - 5173:5173
 
-  slurm-master:
-    container_name: fractal-slurm-master
-    image: fractal-slurm-master
-    build:
-      context: .
-      dockerfile: slurm/Dockerfile.master
-    hostname: fractal-slurm-master
-    user: admin
-    volumes:
-      - ./fractal-slurm-data:/home/admin
-    environment:
-      - SLURM_CPUS_ON_NODE=1
-    ports:
-      - 6817:6817
-      - 6818:6818
-
   slurm-node:
     container_name: fractal-slurm-node
     depends_on:
-      - slurm-master
+      - server
     image: fractal-slurm-node
     build:
       context: .
