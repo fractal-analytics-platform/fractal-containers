@@ -38,7 +38,7 @@ make clean
 ```
 
 
-## Architecture overview
+## Overview
 
 The Fractal framework uses several services which operate together to run
 complex image analysis workflows, and are containerized in this repository. The
@@ -106,3 +106,10 @@ napari --plugin napari-ome-zarr fractal-share/data/output/20200812-Cardiomyocyte
 If the `fractal-share` folder is deleted on the host system, it is recommended
 to re-create it *from the host* before launching the containers (so that its
 permissions are set correctly).
+
+
+## Advanced features
+
+What is described above is the "vanilla" version of `fractal-containers`. More
+advanced features (e.g. integration of a containerized SLURM cluster) will be
+available in the `advanced` subfolder.
