@@ -1,11 +1,5 @@
 # fractal-containers
 
-[![fractal-server](https://img.shields.io/badge/fractal--server-blue)](https://pypi.org/project/fractal-server)
-[![fractal-web](https://img.shields.io/badge/fractal--web-blue)](https://github.com/fractal-analytics-platform/fractal-web)
-[![docker](https://img.shields.io/badge/deployment-docker-blue)](https://github.com/docker)
-[![postgresql](https://img.shields.io/badge/PostgreSQL-FF0000)](https://github.com/postgres/postgres)
-
-
 `fractal-containers` is a containerized implementation of the
 [Fractal](https://fractal-analytics-platform.github.io) analytics platform for
 image analysis. The goal of this project is to allow rapid local deployment of
