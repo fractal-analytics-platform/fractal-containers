@@ -25,17 +25,11 @@ an actual image-analysis workflow.
 7. Open the workflow and run it.
 
 
-> **NOTE**: because of [a kwown issue in
-> `fractal-tasks-core`](https://github.com/fractal-analytics-platform/fractal-tasks-core/issues/508),
-> the instructions above will fail when using version 0.10.1.
-  
-
 To remove the generated containers after usage, execute one of these commands
 ```
 docker compose down
 make clean
 ```
-
 
 ## Overview
 
