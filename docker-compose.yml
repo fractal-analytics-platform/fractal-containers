@@ -23,7 +23,7 @@ services:
       # => errors if the server connects before the stop
       # this checks if the system is ready
       test: pg_isready -p 5433
-      interval: 1s
+      interval: 5s
       timeout: 5s
       retries: 5
 
@@ -44,9 +44,22 @@ services:
       # check if server is up from within the container
       # (hence the localhost)
       test: curl --fail http://localhost:8000/api/alive/ || exit 1
-      interval: 1s
-      timeout: 5s
+      interval: 5s
+      timeout: 2s
       retries: 5
+
+
+  client:
+    container_name: fractal-client
+    depends_on:
+      server:
+        condition: service_healthy
+    image: fractal-client
+    build:
+      context: .
+      dockerfile: client/Dockerfile.client
+    ports:
+      - 5173:5173
 
   demos:
     container_name: fractal-demos
