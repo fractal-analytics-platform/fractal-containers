@@ -1,6 +1,6 @@
 run:
 	mkdir -p fractal-share/tasks fractal-share/data
-	docker compose up --build
+	docker compose up --build --force-recreate
 
 clean:
 	docker compose down
