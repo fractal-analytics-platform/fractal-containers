@@ -26,6 +26,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - fractal
 
   server:
     container_name: fractal-server
@@ -47,6 +49,8 @@ services:
       interval: 5s
       timeout: 2s
       retries: 5
+    networks:
+      - fractal
 
 
   client:
@@ -60,6 +64,8 @@ services:
       dockerfile: client/Dockerfile.client
     ports:
       - 5173:5173
+    networks:
+      - fractal
 
   demos:
     container_name: fractal-demos
@@ -72,3 +78,17 @@ services:
       dockerfile: demos/Dockerfile.demos
     volumes:
       - ./fractal-share/:/home/fractal-share/
+    stdin_open: true 
+    tty: true
+    command: bash -c "
+      cp -r fractal-demos/* /home/fractal-share
+      && cd /home/fractal-share/examples
+      && fractal task collect fractal-tasks-core --package-version 0.11.0 --package-extras fractal-tasks
+      && . /run_all_demos.sh"
+    
+    networks:
+      - fractal
+
+networks:
+  fractal:
+    driver: bridge
