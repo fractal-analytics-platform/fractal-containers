@@ -84,7 +84,7 @@ services:
       cp -r fractal-demos/* /home/fractal-share
       && cd /home/fractal-share/examples
       && fractal task collect fractal-tasks-core --package-version 0.11.0 --package-extras fractal-tasks
-      && . /run_all_demos.sh"
+      && . ./run_all_demos.sh"
     
     networks:
       - fractal
