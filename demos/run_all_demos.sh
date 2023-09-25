@@ -1,19 +1,5 @@
 #!/bin/bash
 
-
-cp -v .fractal.env /home/fractal-share/
-cd /home/fractal-share
-pwd
-
-git clone https://github.com/fractal-analytics-platform/fractal-demos.git
-
-cd fractal-demos/examples
-pwd
-cp -v ../../.fractal.env .
-
-# Trigger task collection
-fractal task collect fractal-tasks-core --package-version 0.11.0 --package-extras fractal-tasks
-
 # Wait for the end of task collection
 while [ "$(fractal task list)" == "[]" ]; do
     echo "No task available, wait 10 seconds.";
