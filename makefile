@@ -4,7 +4,7 @@ run:
 
 run-demos:
 	mkdir -p fractal-share/tasks fractal-share/data
-	docker compose up --build --force-recreate --file docker-compose-demos.yml
+	docker compose --file docker-compose-demos.yml up --build --force-recreate
 
 clean:
 	docker compose down
