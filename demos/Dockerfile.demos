@@ -17,4 +17,3 @@ ADD demos/fractal.env ./fractal-demos/examples/.fractal.env
 ADD demos/run_all_demos.sh ./fractal-demos/examples/run_all_demos.sh
 
 RUN mkdir /home/fractal-share
-
