@@ -15,7 +15,7 @@ RUN apt-get -y install gcc postgresql postgresql-contrib libpq-dev
 RUN apt-get -y install libaec-dev
 
 # installing package
-RUN pip install fractal-server[postgres,gunicorn]==1.3.8a2
+RUN pip install fractal-server[postgres,gunicorn]==1.3.8a3
 
 # required for healthcheck
 RUN apt-get -y install curl
