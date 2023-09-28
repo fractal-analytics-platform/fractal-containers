@@ -10,5 +10,5 @@ clean:
 	docker compose down
 
 clean-all:
-	rm -r fractal-db-data
-	rm -r fractal-share
+	rm -rf fractal-db-data
+	rm -rf fractal-share
