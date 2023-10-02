@@ -52,13 +52,12 @@ services:
     networks:
       - fractal
 
-
-  client:
-    container_name: fractal-client
+  webclient:
+    container_name: fractal-webclient
     depends_on:
       server:
         condition: service_healthy
-    image: fractal-client
+    image: fractal-webclient
     build:
       context: .
       dockerfile: client/Dockerfile.client
@@ -78,8 +77,7 @@ services:
       dockerfile: demos/Dockerfile.demos
     volumes:
       - fractal_share:/home/fractal_share/
-    stdin_open: true
-    tty: true
+      - ./resources:/home/fractal_share/resources
     command: bash -c "
       cp -r ./fractal-demos /home/fractal_share/
       && cd /home/fractal_share/fractal-demos/examples
