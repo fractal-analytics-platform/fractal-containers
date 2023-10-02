@@ -7,6 +7,7 @@ FROM python:3.11-slim
 RUN apt-get update
 RUN apt-get -y install git
 
+RUN mkdire fractal_share
 # Install fractal-client
 RUN pip install fractal-client==1.3.6
 RUN pip install zenodo-get
@@ -15,3 +16,4 @@ RUN git clone https://github.com/fractal-analytics-platform/fractal-demos.git
 
 ADD demos/fractal.env ./fractal-demos/examples/.fractal.env
 ADD demos/run_all_demos.sh ./fractal-demos/examples/run_all_demos.sh
+
