@@ -81,7 +81,7 @@ services:
     stdin_open: true
     tty: true
     command: bash -c "
-      cp -r /home/fractal-demos /home/fractal_share/
+      cp -r ./fractal-demos /home/fractal_share/
       && cd /home/fractal_share/fractal-demos/examples
       && fractal task collect fractal-tasks-core --package-version 0.12.0 --package-extras fractal-tasks
       && . ./run_all_demos.sh"
