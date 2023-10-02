@@ -8,7 +8,7 @@ services:
     ports:
       - 5433:5433
     volumes:
-      - ./fractal-db-data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     command:
       -p 5433
     environment:
@@ -41,7 +41,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./fractal-share/:/home/fractal-share/
+      - fractal_share:/home/fractal_share/
     healthcheck:
       # check if server is up from within the container
       # (hence the localhost)
@@ -77,17 +77,23 @@ services:
       context: .
       dockerfile: demos/Dockerfile.demos
     volumes:
-      - ./fractal-share/:/home/fractal-share/
+      - fractal_share:/home/fractal-demos/
     stdin_open: true
     tty: true
     command: bash -c "
-      cp -r fractal-demos/* /home/fractal-share
-      && cd /home/fractal-share/examples
+      cd ./fractal-demos/examples
       && fractal task collect fractal-tasks-core --package-version 0.12.0 --package-extras fractal-tasks
       && . ./run_all_demos.sh"
-
     networks:
       - fractal
+
+volumes:
+  fractal_share:
+    name: fractal_share
+    external: false
+  db_data:
+    name: db_data
+    external: false
 
 networks:
   fractal:

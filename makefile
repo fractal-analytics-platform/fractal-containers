@@ -3,12 +3,15 @@ run:
 	docker compose up --build --force-recreate
 
 run-demos:
-	mkdir -p fractal-share/tasks fractal-share/data
 	docker compose --file docker-compose-demos.yml up --build --force-recreate
 
 clean:
-	docker compose down
+	docker compose -f docker-compose-demos.yml down -v
 
 clean-all:
 	rm -rf fractal-db-data
 	rm -rf fractal-share
+
+list-share:
+	tree | docker volume inspect --format '{{ .Mountpoint }}' fractal_share
+
