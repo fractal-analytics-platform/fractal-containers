@@ -1,12 +1,17 @@
-run:
+xxxrun:
 	mkdir -p fractal-share/tasks fractal-share/data
 	docker compose up --build --force-recreate
 
 run-demos:
-	docker compose --file docker-compose-demos.yml up --build --force-recreate
+	docker build --file server/Dockerfile.base --tag fractal/server-base:1 .
+	docker compose --file docker-compose-demos.yml build server --no-cache
+	docker compose --file docker-compose-demos.yml up
 
 run-demos-github:
-	docker compose --file docker-compose-demos.yml up demos --build --force-recreate --abort-on-container-exit
+	docker build --file server/Dockerfile.base --tag fractal/server-base:1 .
+	# docker compose --file docker-compose-demos.yml build server --no-cache
+	# demos is to avoid activating webclient
+	docker compose --file docker-compose-demos.yml up demos --abort-on-container-exit
 
 clean:
 	docker compose -f docker-compose-demos.yml down -v
