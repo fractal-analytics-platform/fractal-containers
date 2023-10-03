@@ -5,6 +5,9 @@ run:
 run-demos:
 	docker compose --file docker-compose-demos.yml up --build --force-recreate
 
+run-demos-github:
+	docker compose --file docker-compose-demos.yml up demos --build --force-recreate --abort-on-container-exit
+
 clean:
 	docker compose -f docker-compose-demos.yml down -v
 
@@ -14,4 +17,3 @@ clean-all:
 
 list-share:
 	tree | docker volume inspect --format '{{ .Mountpoint }}' fractal_share
-
