@@ -11,13 +11,5 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    # Following two steps are taken from
-    # https://github.com/marketplace/actions/docker-layer-caching
-
-    - run: docker compose --file docker-compose-demos.yml pull
-
-    - uses: jpribyl/action-docker-layer-caching@v0.1.1
-      continue-on-error: true
-
     - name: Start containers
       run: docker compose --file docker-compose-demos.yml up --build --force-recreate
