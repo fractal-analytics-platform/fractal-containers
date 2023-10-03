@@ -29,4 +29,4 @@ COPY server/server.env ./.fractal_server.env
 ENV PIP_DEFAULT_TIMEOUT=100
 
 # launch command
-CMD fractalctl set-db && fractalctl start --host 0.0.0.0 -p 8000
+CMD fractalctl set-db && fractalctl start --host 0.0.0.0 -p 8000 # && sleep 5 && fractal --user admin@fractal.xy --password 1234 task collect fractal-tasks-core --package-version 0.12.0 --package-extras fractal-tasks
