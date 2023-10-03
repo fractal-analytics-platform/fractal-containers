@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd /home/fractal_share/fractal-demos/examples
-
 cp .fractal.env 00_user_setup
 
 # TASK COLLECTION

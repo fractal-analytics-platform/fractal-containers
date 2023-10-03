@@ -80,6 +80,7 @@ services:
       - ./resources:/home/fractal_share/resources
     command: bash -c "
       cp -r ./fractal-demos /home/fractal_share/
+      cd /home/fractal_share/fractal-demos/examples
       && . ./run_all_demos.sh"
     networks:
       - fractal
