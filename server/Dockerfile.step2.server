@@ -7,7 +7,6 @@ COPY server/server.env ./.fractal_server.env
 
 # Install fractal-server (behavior depends on some environment variables)
 COPY config_env.sh .
-RUN bash -c "source config_env.sh"
 COPY server/install_fractal_server.sh .
 RUN bash install_fractal_server.sh
 
