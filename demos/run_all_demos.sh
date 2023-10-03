@@ -22,7 +22,16 @@ cp ../.fractal.env .
 
 # FIXME: we need to get the exit code of run_example.sh, and to log it.
 
-# FIXME: run `python3 check_results.py` and log its ouput and exit code
+# FIXME: run validation script, and log its output/exitcode. Something like this.
+# This should be something like
+# $ LOGFILE="log.txt"
+# $ SUMMARY="summary.txt"
+# $ echo "START RESULTS VALIDATION" >> $LOGFILE
+# $ python validate_results.py >> $LOGFILE 2>&1
+# $ VALIDATION_EXIT_CODE=$?
+# $ echo "END RESULTS VALIDATION" >> $LOGFILE
+# $ echo "Validation exit code: $VALIDATION_EXIT_CODE" >> $LOGFILE
+# $ echo "Validation exit code: $VALIDATION_EXIT_CODE" >> $SUMMARY
 
 
 cd ..
