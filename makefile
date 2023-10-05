@@ -1,8 +1,16 @@
 server-base:
 	docker build --file server/Dockerfile.server.step1 --tag fractal/server-base:1 .
 
-run-demos: server-base
+server-no-cache: server-base
 	docker compose --file docker-compose-demos.yml build server --no-cache
+
+demos-no-cache:
+	docker compose --file docker-compose-demos.yml build demos --no-cache
+
+webclient-no-cache:
+	docker compose --file docker-compose-demos.yml build webclient --no-cache
+
+run-demos: server-no-cache demos-no-cache webclient-no-cache
 	docker compose --file docker-compose-demos.yml up
 
 run-demos-github: server-base
