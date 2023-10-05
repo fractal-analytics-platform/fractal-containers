@@ -1,33 +1,51 @@
 #!/bin/bash
 
-cp .fractal.env 00_user_setup
+echo "START run_all_demos.sh"
 
-# TASK COLLECTION
+# FIXME: this is a workaround, for how the run_example.sh scripts are written.
+# Maybe we should fix it in fractal-demos.
+cp .fractal.env 00_user_setup
+cp .fractal.env 01_cardio_tiny_dataset
+
+
+# FIXME: check this works
+# FIXME: also include another image folder, possibly with DOI in folder names
+mkdir images
+cp -r /home/fractal_share/resources/images images/10.5281_zenodo.8287221
+
+# Trigger task collection (FIXME: add logic to handle version)
 fractal task collect fractal-tasks-core --package-version 0.12.0 --package-extras fractal-tasks
+
+# Wait for task collection to be complete
 while [ "$(fractal task list)" == "[]" ]; do
     echo "No task available, wait 10 seconds.";
     sleep 10;
 done
-fractal task list
 
-# Run example 01
+# Enter 01_cardio_tiny_dataset folder and define log file
 cd 01_cardio_tiny_dataset
-mkdir -p ../images
-cp ../.fractal.env .
+LOGFILE="log_example_01.txt"
 
-# FIXME: replace with cp -r /home/fractal_share/resources/...
-./fetch_test_data_from_zenodo.sh
-
-LOGFILE="log_01.txt"
-
-echo "RUN EXAMPLE 01 - START" >> $LOGFILE
-./run_example.sh >> $LOGFILE 2>&1
+# Run example 01 and capture exit code
+echo "START examples/01 API calls"
+TMPFILE="tmp_01_api.txt"
+./run_example.sh >> $TMPFILE 2>&1
 API_EXITCODE=$?
-cat $LOGFILE
-PROJECT_ID=$(cat $LOGFILE | grep PRJ_ID | cut -d ':' -f 2)
-JOB_ID=$(tail -n 1 $LOGFILE)
-echo "PROJECT_ID: $PROJECT_ID"
+cat $TMPFILE
 
+# Check exit code
+if [ $API_EXITCODE -ne 0 ]; then
+    echo "Error: API_EXITCODE=$API_EXITCODE"
+    exit 1
+fi
+
+# Parse temporary file to extract PROJECT_ID and JOB_ID
+PROJECT_ID=$(cat $LOGFILE | grep "JOB_ID" | cut -d '=' -f 2)
+JOB_ID=$(cat $LOGFILE | grep "JOB_ID" | cut -d '=' -f 2)
+echo "PROJECT_ID=$PROJECT_ID"
+echo "JOB_ID=$JOB_ID"
+
+# Wait for job to be done or failed
 while true; do
     STATUS_LINE=$(fractal job show $PROJECT_ID $JOB_ID | grep "status")
     echo $STATUS_LINE
@@ -37,29 +55,22 @@ while true; do
     sleep 1
 done
 
-# Write status to log
+# Check job status, once again
 fractal job show $PROJECT_ID $JOB_ID
+echo "END examples/01 API calls"
 
-echo "START RESULTS VALIDATION"
-echo
-pwd
-ls -lh
-echo
-python validate_results.py >> tmp 2>&1
+# Start output validation
+echo "START examples/01 output validation"
+TMPFILE="tmp_01_validation.txt"
+python validate_results.py >> $TMPFILE 2>&1
 VALIDATION_EXIT_CODE=$?
-echo
-cat tmp
-echo
-echo "END RESULTS VALIDATION"
-echo
-echo "Validation exit code: $VALIDATION_EXIT_CODE"
-echo
+cat $TMPFILE
 
+# Check exit code
+if [ $VALIDATION_EXIT_CODE-ne 0 ]; then
+    echo "Error: VALIDATION_EXIT_CODE=$VALIDATION_EXIT_CODE"
+    exit 1
+fi
 
-cd ..
-echo "RUN EXAMPLE 01 - END"
-
-# Run example 02
-# ...
-
-echo "ALL GOOD"
+echo "END examples/01 output validation"
+echo "END run_all_demos.sh"
