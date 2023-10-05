@@ -1,3 +1,5 @@
+# Single components
+
 server-base:
 	docker build --file server/Dockerfile.server.step1 --tag fractal/server-base:1 .
 
@@ -10,11 +12,15 @@ demos-no-cache:
 webclient-no-cache:
 	docker compose --file docker-compose-demos.yml build webclient --no-cache
 
+# End-to-end testing
+
 run-demos: server-no-cache demos-no-cache webclient-no-cache
 	docker compose --file docker-compose-demos.yml up
 
 run-demos-github: server-base
 	docker compose --file docker-compose-demos.yml up demos --abort-on-container-exit
+
+# Auxiliary targets
 
 clean:
 	docker compose -f docker-compose-demos.yml down -v
@@ -22,6 +28,7 @@ clean:
 list-share:
 	tree | docker volume inspect --format '{{ .Mountpoint }}' fractal_share
 
+# Old targets
 
 OLD-run:
 	mkdir -p fractal-share/tasks fractal-share/data
