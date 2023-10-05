@@ -8,7 +8,6 @@ RUN apt-get update
 RUN apt-get -y install git
 
 RUN mkdir fractal_share
-RUN pip install zenodo-get  # FIXME remove this, after bundling/copying all files from repo
 RUN pip install zarr
 
 ##########
