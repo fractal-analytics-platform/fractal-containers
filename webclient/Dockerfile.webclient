@@ -10,14 +10,14 @@ WORKDIR /app
 RUN apk add --no-cache bash
 
 # installing selected program version
-COPY client/install.sh .
+COPY webclient/install.sh .
 RUN bash install.sh
 
 # moving to repository directory
 WORKDIR /app/fractal-web/
 
 # setting up environment variables
-COPY client/client.env ./.env
+COPY webclient/client.env ./.env
 
 # Installing dependencies and building
 RUN npm install
