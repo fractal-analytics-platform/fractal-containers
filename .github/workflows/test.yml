@@ -16,5 +16,5 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Start containers
+    - name: Run demos
       run: make run-demos-github
