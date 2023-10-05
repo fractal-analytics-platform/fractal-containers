@@ -60,7 +60,7 @@ services:
     image: fractal-webclient
     build:
       context: .
-      dockerfile: client/Dockerfile.client
+      dockerfile: webclient/Dockerfile.webclient
     ports:
       - 5173:5173
     networks:
