@@ -10,7 +10,7 @@ RUN apt-get -y install git
 RUN mkdir fractal_share
 RUN pip install zarr
 
-##########
+########## FIXME split here
 
 # FIXME move to script and handle version
 RUN pip install fractal-client==1.3.6
