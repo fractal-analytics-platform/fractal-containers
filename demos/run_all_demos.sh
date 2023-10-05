@@ -22,9 +22,8 @@ while [ "$(fractal task list)" == "[]" ]; do
     sleep 10;
 done
 
-# Enter 01_cardio_tiny_dataset folder and define log file
+# Enter 01_cardio_tiny_dataset folder
 cd 01_cardio_tiny_dataset
-LOGFILE="log_example_01.txt"
 
 # Run example 01 and capture exit code
 echo "START examples/01 API calls"
@@ -40,8 +39,8 @@ if [ $API_EXITCODE -ne 0 ]; then
 fi
 
 # Parse temporary file to extract PROJECT_ID and JOB_ID
-PROJECT_ID=$(cat $LOGFILE | grep "JOB_ID" | cut -d '=' -f 2)
-JOB_ID=$(cat $LOGFILE | grep "JOB_ID" | cut -d '=' -f 2)
+PROJECT_ID=$(cat $TMPFILE | grep "JOB_ID" | cut -d '=' -f 2)
+JOB_ID=$(cat $TMPFILE | grep "JOB_ID" | cut -d '=' -f 2)
 echo "PROJECT_ID=$PROJECT_ID"
 echo "JOB_ID=$JOB_ID"
 
