@@ -37,7 +37,7 @@ services:
     image: fractal-server
     build:
       context: .
-      dockerfile: server/Dockerfile.step2.server
+      dockerfile: server/Dockerfile.server.step2
     ports:
       - 8000:8000
     volumes:

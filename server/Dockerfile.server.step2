@@ -7,8 +7,8 @@ COPY server/server.env ./.fractal_server.env
 
 # Install fractal-server (behavior depends on some environment variables)
 COPY config.env .
-COPY server/install_fractal_server.sh .
-RUN bash install_fractal_server.sh
+COPY server/install.sh .
+RUN bash install.sh
 
 ENV PIP_DEFAULT_TIMEOUT=100
 

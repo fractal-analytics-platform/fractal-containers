@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# FIXME: add all logic to handle versions
+
 RELEASE="0.5.6"
 
 echo "*** Fetching a clean copy of fractal-web ${RELEASE} ***"
