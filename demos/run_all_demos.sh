@@ -7,13 +7,32 @@ echo "START run_all_demos.sh"
 cp .fractal.env 00_user_setup
 cp .fractal.env 01_cardio_tiny_dataset
 
-
-# FIXME: also include another image folder, possibly with DOI in folder names
+# Copy images from Resources folder
 mkdir images
 cp -r /home/fractal_share/Resources/images/10.5281_zenodo.8287221 images/
 
-# Trigger task collection (FIXME: add logic to handle version)
-fractal task collect fractal-tasks-core --package-version 0.12.0 --package-extras fractal-tasks
+# Trigger task collection
+source config.env
+echo "FRACTAL_TASKS_RELEASE=$FRACTAL_TASKS_RELEASE"
+echo "FRACTAL_TASKS_GIT=$FRACTAL_TASKS_GIT"
+if [ -z "${FRACTAL_TASKS_RELEASE}" ]; then
+    if [ -z "${FRACTAL_TASKS_GIT}" ]; then
+        # Case 1: no release, no git
+        fractal task collect fractal-tasks-core --package-extras fractal-tasks
+    else
+        # Case 2: only git set   # FIXME: git clone, git checkout, install poetry, poetry build, collect from local wheel file
+        OPT_TASKS_VERSION="--package-version GIT-NOT-IMPLEMENTED"
+    fi
+else
+    if [ -z "${FRACTAL_TASKS_GIT}" ]; then
+        # Case 3: only release set
+        fractal task collect fractal-tasks-core --package-extras fractal-tasks --package-version $FRACTAL_TASKS_RELEASE
+    else
+        # Case 4: both release and git set
+        echo "Error: cannot set both FRACTAL_TASKS_RELEASE and FRACTAL_TASKS_GIT."
+        exit 1
+    fi
+fi
 
 # Wait for task collection to be complete
 while [ "$(fractal task list)" == "[]" ]; do
@@ -71,4 +90,8 @@ if [ $VALIDATION_EXIT_CODE-ne 0 ]; then
 fi
 
 echo "END examples/01 output validation"
+echo
+
+echo "API_EXITCODE=$API_EXITCODE"
+echo "VALIDATION_EXIT_CODE=$VALIDATION_EXIT_CODE"
 echo "END run_all_demos.sh"
