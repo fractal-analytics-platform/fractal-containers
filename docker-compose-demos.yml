@@ -77,7 +77,7 @@ services:
       dockerfile: demos/Dockerfile.demos.step2
     volumes:
       - fractal_share:/home/fractal_share/
-      - ./resources:/home/fractal_share/resources
+      - ./Resources:/home/fractal_share/Resources
     command: bash -c "
       cp -r ./fractal-demos /home/fractal_share/
       && cd /home/fractal_share/fractal-demos/examples

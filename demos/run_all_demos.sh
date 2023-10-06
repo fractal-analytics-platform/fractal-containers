@@ -8,10 +8,9 @@ cp .fractal.env 00_user_setup
 cp .fractal.env 01_cardio_tiny_dataset
 
 
-# FIXME: check this works
 # FIXME: also include another image folder, possibly with DOI in folder names
 mkdir images
-cp -r /home/fractal_share/resources/images images/10.5281_zenodo.8287221
+cp -r /home/fractal_share/Resources/images images/10.5281_zenodo.8287221
 
 # Trigger task collection (FIXME: add logic to handle version)
 fractal task collect fractal-tasks-core --package-version 0.12.0 --package-extras fractal-tasks
