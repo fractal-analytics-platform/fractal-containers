@@ -60,7 +60,7 @@ services:
     image: fractal-web
     build:
       context: .
-      dockerfile: web/Dockerfile.web
+      dockerfile: web/Dockerfile.web.step2
     ports:
       - 5173:5173
     networks:

@@ -1,0 +1,9 @@
+# syntax=docker/dockerfile:1
+
+# selecting node image
+FROM node:20-alpine3.17
+
+# creating a workdir
+WORKDIR /app
+
+RUN apk add bash git
