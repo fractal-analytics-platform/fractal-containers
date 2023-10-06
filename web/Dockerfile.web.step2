@@ -2,8 +2,10 @@
 
 FROM fractal/web-base:1
 
-COPY web/install.sh .
-RUN bash install.sh
+# Get fractal-web
+COPY ./config.env .
+COPY web/get_fractal_web.sh .
+RUN bash get_fractal_web.sh
 
 # moving to repository directory
 WORKDIR /app/fractal-web/
