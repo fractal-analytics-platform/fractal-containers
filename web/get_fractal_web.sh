@@ -7,4 +7,6 @@ if [ ! -z "${FRACTAL_WEB_GIT}" ]; then
     cd fractal-web
     git checkout $FRACTAL_WEB_GIT
     cd ..
+else
+    echo "FRACTAL_WEB_GIT variable is unset, use default branch."
 fi
