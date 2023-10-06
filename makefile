@@ -12,12 +12,12 @@ server-no-cache: server-base
 demos-no-cache:	demos-base
 	docker compose --file docker-compose-demos.yml build demos --no-cache
 
-webclient-no-cache:
-	docker compose --file docker-compose-demos.yml build webclient --no-cache
+web-no-cache:
+	docker compose --file docker-compose-demos.yml build web --no-cache
 
 # End-to-end testing
 
-run-demos: server-no-cache demos-no-cache webclient-no-cache
+run-demos: server-no-cache demos-no-cache web-no-cache
 	docker compose --file docker-compose-demos.yml up
 
 run-demos-github: server-base demos-base
