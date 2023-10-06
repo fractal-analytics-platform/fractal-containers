@@ -5,10 +5,10 @@ FROM fractal/server-base:1
 # setting up DB configuration
 COPY server/server.env ./.fractal_server.env
 
-# Install fractal-server (behavior depends on some environment variables)
+# Install fractal-server
 COPY config.env .
-COPY server/install.sh .
-RUN bash install.sh
+COPY server/install_fractal_server.sh .
+RUN bash install_fractal_server.sh
 
 ENV PIP_DEFAULT_TIMEOUT=100
 
