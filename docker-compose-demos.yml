@@ -43,8 +43,7 @@ services:
     volumes:
       - fractal_share:/home/fractal_share/
     healthcheck:
-      # check if server is up from within the container
-      # (hence the localhost)
+      # check if server is up from within the container (hence the localhost)
       test: curl --fail http://localhost:8000/api/alive/ || exit 1
       interval: 5s
       timeout: 2s
@@ -81,7 +80,7 @@ services:
     command: bash -c "
       cp -r ./fractal-demos /home/fractal_share/
       && cd /home/fractal_share/fractal-demos/examples
-      && . ./run_all_demos.sh"
+      && . ./run_demos.sh"
     networks:
       - fractal
 

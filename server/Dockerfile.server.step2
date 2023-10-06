@@ -6,9 +6,9 @@ FROM fractal/server-base:1
 COPY server/server.env ./.fractal_server.env
 
 # Install fractal-server
-COPY config.env .
-COPY server/install_fractal_server.sh .
-RUN bash install_fractal_server.sh
+ADD config.env .
+COPY server/get_fractal_server.sh .
+RUN bash get_fractal_server.sh
 
 ENV PIP_DEFAULT_TIMEOUT=100
 

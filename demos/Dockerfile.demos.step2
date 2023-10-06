@@ -4,12 +4,13 @@ FROM fractal/demos-base:1
 
 ADD config.env .
 
-COPY demos/install_fractal_client.sh .
-RUN bash install_fractal_client.sh
+COPY demos/get_fractal_client.sh .
+RUN bash get_fractal_client.sh
 
 COPY demos/get_fractal_demos.sh .
 RUN bash get_fractal_demos.sh
 
 ADD config.env ./fractal-demos/examples/config.env
+COPY demos/get_fractal_tasks_core.sh ./fractal-demos/examples/get_fractal_tasks_core.sh
 ADD demos/fractal.env ./fractal-demos/examples/.fractal.env
-ADD demos/run_all_demos.sh ./fractal-demos/examples/run_all_demos.sh
+ADD demos/run_demos.sh ./fractal-demos/examples/run_demos.sh

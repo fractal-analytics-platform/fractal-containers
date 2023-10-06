@@ -3,7 +3,7 @@
 FROM fractal/web-base:1
 
 # Get fractal-web
-COPY ./config.env .
+ADD config.env .
 COPY web/get_fractal_web.sh .
 RUN bash get_fractal_web.sh
 
