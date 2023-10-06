@@ -2,15 +2,15 @@
 
 echo "START run_all_demos.sh"
 
-# FIXME: this is a workaround, for how the run_example.sh scripts are written.
-# Maybe we should fix it in fractal-demos.
+# Due to how fractal-demos scripts are written, we should have a .fractal.env
+# file also in 00_user_setup
 cp .fractal.env 00_user_setup
 cp .fractal.env 01_cardio_tiny_dataset
 
 
 # FIXME: also include another image folder, possibly with DOI in folder names
 mkdir images
-cp -r /home/fractal_share/Resources/images images/10.5281_zenodo.8287221
+cp -r /home/fractal_share/Resources/images/10.5281_zenodo.8287221 images/
 
 # Trigger task collection (FIXME: add logic to handle version)
 fractal task collect fractal-tasks-core --package-version 0.12.0 --package-extras fractal-tasks
