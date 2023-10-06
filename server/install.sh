@@ -5,4 +5,4 @@ echo "FRACTAL_SERVER_GIT: $FRACTAL_SERVER_GIT"
 
 # FIXME add all logic for handling versions
 
-pip install fractal-server[postgres,gunicorn]
+pip install fractal-server[postgres]
