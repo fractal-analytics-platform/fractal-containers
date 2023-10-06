@@ -1,5 +1,11 @@
 # fractal-containers
 
+> Note: this repository is under active development, and the README is most
+> likely not up-to-date.
+
+---
+
+
 `fractal-containers` is a containerized implementation of the
 [Fractal](https://fractal-analytics-platform.github.io) analytics platform for
 image analysis. The goal of this project is to allow rapid local deployment of

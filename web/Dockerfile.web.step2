@@ -1,23 +1,17 @@
 # syntax=docker/dockerfile:1
 
-# selecting node image
-FROM node:20-alpine3.17
+FROM fractal/web-base:1
 
-# creating a workdir
-WORKDIR /app
-
-# installing bash shell
-RUN apk add --no-cache bash
-
-# installing selected program version
-COPY client/install.sh .
-RUN bash install.sh
+# Get fractal-web
+ADD config.env .
+COPY web/get_fractal_web.sh .
+RUN bash get_fractal_web.sh
 
 # moving to repository directory
 WORKDIR /app/fractal-web/
 
 # setting up environment variables
-COPY client/client.env ./.env
+COPY web/web.env ./.env
 
 # Installing dependencies and building
 RUN npm install

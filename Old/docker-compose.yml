@@ -48,14 +48,14 @@ services:
       timeout: 2s
       retries: 5
 
-  client:
-    container_name: fractal-client
+  web:
+    container_name: fractal-web
     depends_on:
       server:
         condition: service_healthy
-    image: fractal-client
+    image: fractal-web
     build:
       context: .
-      dockerfile: client/Dockerfile.client
+      dockerfile: web/Dockerfile.web
     ports:
       - 5173:5173

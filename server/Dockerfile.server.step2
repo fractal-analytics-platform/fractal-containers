@@ -1,0 +1,16 @@
+# syntax=docker/dockerfile:1
+
+FROM fractal/server-base:1
+
+# setting up DB configuration
+COPY server/server.env ./.fractal_server.env
+
+# Install fractal-server
+ADD config.env .
+COPY server/get_fractal_server.sh .
+RUN bash get_fractal_server.sh
+
+ENV PIP_DEFAULT_TIMEOUT=100
+
+# launch command
+CMD fractalctl set-db && fractalctl start --host 0.0.0.0 -p 8000
