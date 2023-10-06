@@ -39,7 +39,7 @@ if [ $API_EXITCODE -ne 0 ]; then
 fi
 
 # Parse temporary file to extract PROJECT_ID and JOB_ID
-PROJECT_ID=$(cat $TMPFILE | grep "JOB_ID" | cut -d '=' -f 2)
+PROJECT_ID=$(cat $TMPFILE | grep "PROJECT_ID" | cut -d '=' -f 2)
 JOB_ID=$(cat $TMPFILE | grep "JOB_ID" | cut -d '=' -f 2)
 echo "PROJECT_ID=$PROJECT_ID"
 echo "JOB_ID=$JOB_ID"

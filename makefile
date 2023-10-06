@@ -3,10 +3,13 @@
 server-base:
 	docker build --file server/Dockerfile.server.step1 --tag fractal/server-base:1 .
 
+demos-base:
+	docker build --file demos/Dockerfile.demos.step1 --tag fractal/demos-base:1 .
+
 server-no-cache: server-base
 	docker compose --file docker-compose-demos.yml build server --no-cache
 
-demos-no-cache:
+demos-no-cache:	demos-base
 	docker compose --file docker-compose-demos.yml build demos --no-cache
 
 webclient-no-cache:
@@ -17,7 +20,7 @@ webclient-no-cache:
 run-demos: server-no-cache demos-no-cache webclient-no-cache
 	docker compose --file docker-compose-demos.yml up
 
-run-demos-github: server-base
+run-demos-github: server-base demos-base
 	docker compose --file docker-compose-demos.yml up demos --abort-on-container-exit
 
 # Auxiliary targets

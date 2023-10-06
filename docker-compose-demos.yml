@@ -74,7 +74,7 @@ services:
     image: fractal-demos
     build:
       context: .
-      dockerfile: demos/Dockerfile.demos
+      dockerfile: demos/Dockerfile.demos.step2
     volumes:
       - fractal_share:/home/fractal_share/
       - ./resources:/home/fractal_share/resources

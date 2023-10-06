@@ -1,0 +1,11 @@
+# syntax=docker/dockerfile:1
+
+FROM python:3.11-slim
+
+RUN apt-get update
+RUN apt-get -y install git
+
+# RUN mkdir fractal_share # FIXME is this needed?
+
+ADD demos/requirements-validation.txt ./requirements-validation.txt
+RUN pip3 install -r requirements-validation.txt
