@@ -64,7 +64,7 @@ VALIDATION_EXIT_CODE=$?
 cat $TMPFILE
 
 # Check exit code
-if [ $VALIDATION_EXIT_CODE-ne 0 ]; then
+if [ $VALIDATION_EXIT_CODE -ne 0 ]; then
     echo "Error: VALIDATION_EXIT_CODE=$VALIDATION_EXIT_CODE"
     exit 1
 fi
