@@ -12,7 +12,7 @@ if [ -z "${FRACTAL_CLIENT_RELEASE}" ]; then
         # Check exit code
         EXIT_CODE=$?
         if [ $EXIT_CODE -ne 0 ]; then
-            echo "Error: EXIT_CODE=$EXIT_CODE"
+            echo "Error: Installing fractal-client@$FRACTAL_CLIENT_GIT (EXIT_CODE=$EXIT_CODE)"
             exit 1
         fi
     fi

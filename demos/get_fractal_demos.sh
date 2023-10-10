@@ -9,7 +9,7 @@ if [ ! -z "${FRACTAL_DEMOS_GIT}" ]; then
     
     EXIT_CODE=$?
     if [ $EXIT_CODE -ne 0 ]; then
-        echo "Error: EXIT_CODE=$EXIT_CODE"
+        check_exit_code "Checking out to fractal-demos@$FRACTAL_DEMOS_GIT (EXIT_CODE=$EXIT_CODE)"
         exit 1
     fi
     
