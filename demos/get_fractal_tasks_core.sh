@@ -26,7 +26,7 @@ if [ -z "${FRACTAL_TASKS_CORE_RELEASE}" ]; then
 
         poetry build
         WHL=`ls dist/*.whl`
-        check_exit_code "File .whl not found`
+        check_exit_code "File .whl not found"
         ABS_WHL="$(pwd)/$WHL"
         
         cd ..
