@@ -20,7 +20,7 @@ if [ -z "${FRACTAL_TASKS_CORE_RELEASE}" ]; then
         git checkout $FRACTAL_TASKS_CORE_GIT
         check_exit_code "Checking out to fractal-tasks-core@$FRACTAL_TASKS_CORE_GIT"
 
-        curl -sSL https://install.python-poetry.org | python3 -
+        curl -sSL https://install.python-poetry.org | python3 -q -
         check_exit_code "Poetry installation"
 
         /root/.local/bin/poetry build
@@ -28,7 +28,7 @@ if [ -z "${FRACTAL_TASKS_CORE_RELEASE}" ]; then
         WHL=`ls dist/*.whl`
         check_exit_code "File .whl not found"
         ABS_WHL="$(pwd)/$WHL"
-        
+
         cd ..
         fractal task collect $ABS_WHL --package-extras fractal-tasks
     fi
