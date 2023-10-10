@@ -6,8 +6,14 @@ if [ -z "${FRACTAL_CLIENT_RELEASE}" ]; then
         # Case 1: no release, no git
         python3 -m pip install fractal-client
     else
-        # Case 2: only git set  # TODO: add git support
-        echo "FRACTAL_CLIENT_GIT not supported" && exit 1
+        # Case 2: only git set
+        python3 -m pip install git+https://github.com/fractal-analytics-platform/fractal-client.git@$FRACTAL_CLIENT_GIT
+        # Check exit code
+        EXIT_CODE=$?
+        if [ $EXIT_CODE -ne 0 ]; then
+            echo "Error: Installing fractal-client@$FRACTAL_CLIENT_GIT (EXIT_CODE=$EXIT_CODE)"
+            exit 1
+        fi
     fi
 else
     if [ -z "${FRACTAL_CLIENT_GIT}" ]; then
