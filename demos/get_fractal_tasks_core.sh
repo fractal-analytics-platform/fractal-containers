@@ -1,7 +1,7 @@
 check_exit_code() {
     EXIT_CODE=$?
     if [ $EXIT_CODE -ne 0 ]; then
-        echo "Error: EXIT_CODE=$EXIT_CODE"
+        echo "Error: $1 (EXIT_CODE=$EXIT_CODE)"
         exit 1
     fi
 }
@@ -18,15 +18,15 @@ if [ -z "${FRACTAL_TASKS_CORE_RELEASE}" ]; then
         git clone https://github.com/fractal-analytics-platform/fractal-tasks-core.git
         cd fractal-tasks-core
         git checkout $FRACTAL_TASKS_CORE_GIT
-        check_exit_code
+        check_exit_code "Checking out to fractal-tasks-core@$FRACTAL_TASKS_CORE_GIT"
 
         curl -sSL https://install.python-poetry.org | python3 -
         which poetry
-        check_exit_code
+        check_exit_code "Poetry installation"
 
         poetry build
         WHL=`ls dist/*.whl`
-        check_exit_code
+        check_exit_code "File .whl not found`
         ABS_WHL="$(pwd)/$WHL"
         
         cd ..
