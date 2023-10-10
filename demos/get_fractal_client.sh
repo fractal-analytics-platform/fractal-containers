@@ -7,7 +7,6 @@ if [ -z "${FRACTAL_CLIENT_RELEASE}" ]; then
         python3 -m pip install fractal-client
     else
         # Case 2: only git set
-        echo "FRACTAL_CLIENT_GIT=$FRACTAL_CLIENT_GIT"
         python3 -m pip install git+https://github.com/fractal-analytics-platform/fractal-client.git@$FRACTAL_CLIENT_GIT
         # Check exit code
         EXIT_CODE=$?
