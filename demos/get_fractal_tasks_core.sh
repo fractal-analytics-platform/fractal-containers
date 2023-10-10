@@ -20,7 +20,7 @@ if [ -z "${FRACTAL_TASKS_CORE_RELEASE}" ]; then
         git checkout $FRACTAL_TASKS_CORE_GIT
         check_exit_code "Checking out to fractal-tasks-core@$FRACTAL_TASKS_CORE_GIT"
 
-        curl -sSL https://install.python-poetry.org | python3 -q -
+        curl -sSL https://install.python-poetry.org | python3 -
         check_exit_code "Poetry installation"
 
         /root/.local/bin/poetry build
