@@ -11,5 +11,3 @@ if [ $EXIT_CODE -ne 0 ]; then
     check_exit_code "Cloning fractal-demos@$FRACTAL_DEMOS_GIT (EXIT_CODE=$EXIT_CODE)"
     exit 1
 fi
-
-echo "Fatto 🚀"
