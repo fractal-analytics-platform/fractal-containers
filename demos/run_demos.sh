@@ -51,7 +51,7 @@ while true; do
     if [[ "$STATUS_LINE" == *done* || "$STATUS_LINE" == *failed* ]]; then
         break
     fi
-    sleep 1
+    sleep 4
 done
 
 # Check job status, once again
@@ -109,7 +109,7 @@ while true; do
     if [[ "$STATUS_LINE" == *done* || "$STATUS_LINE" == *failed* ]]; then
         break
     fi
-    sleep 1
+    sleep 4
 done
 
 # Check job status, once again
