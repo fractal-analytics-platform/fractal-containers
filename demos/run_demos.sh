@@ -1,5 +1,24 @@
 #!/bin/bash
 
+wait_for_job() {
+    THIS_PROJECT_ID=$1
+    THIS_JOB_ID=$2
+    while true; do
+        STATUS_LINE=$(fractal job show $THIS_PROJECT_ID $THIS_JOB_ID | grep "status")
+        EXIT_CODE=$?
+        if [ $EXIT_CODE -ne 0 ]; then
+            echo "Error: (EXIT_CODE=$EXIT_CODE)"
+            exit 1
+        fi
+        echo $STATUS_LINE
+        if [[ "$STATUS_LINE" == *done* || "$STATUS_LINE" == *failed* ]]; then
+            break
+        fi
+        sleep 4
+    done
+}
+
+
 echo "START run_all_demos.sh"
 
 # Due to how fractal-demos scripts are written, we should have a .fractal.env
@@ -45,14 +64,7 @@ echo "PROJECT_ID=$PROJECT_ID"
 echo "JOB_ID=$JOB_ID"
 
 # Wait for job to be done or failed
-while true; do
-    STATUS_LINE=$(fractal job show $PROJECT_ID $JOB_ID | grep "status")
-    echo $STATUS_LINE
-    if [[ "$STATUS_LINE" == *done* || "$STATUS_LINE" == *failed* ]]; then
-        break
-    fi
-    sleep 4
-done
+wait_for_job $PROJECT_ID $JOB_ID
 
 # Check job status, once again
 fractal job show $PROJECT_ID $JOB_ID
@@ -103,14 +115,7 @@ echo "PROJECT_ID=$PROJECT_ID"
 echo "JOB_ID=$JOB_ID"
 
 # Wait for job to be done or failed
-while true; do
-    STATUS_LINE=$(fractal job show $PROJECT_ID $JOB_ID | grep "status")
-    echo $STATUS_LINE
-    if [[ "$STATUS_LINE" == *done* || "$STATUS_LINE" == *failed* ]]; then
-        break
-    fi
-    sleep 4
-done
+wait_for_job $PROJECT_ID $JOB_ID
 
 # Check job status, once again
 fractal job show $PROJECT_ID $JOB_ID
