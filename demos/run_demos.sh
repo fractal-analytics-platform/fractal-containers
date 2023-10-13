@@ -34,7 +34,7 @@ cat $TMPFILE
 
 # Check exit code
 if [ $API_EXITCODE -ne 0 ]; then
-    echo "Error: API_EXITCODE=$API_EXITCODE"
+    echo "Error: examples/01 API_EXITCODE=$API_EXITCODE"
     exit 1
 fi
 
@@ -67,16 +67,16 @@ cat $TMPFILE
 
 # Check exit code
 if [ $VALIDATION_EXIT_CODE -ne 0 ]; then
-    echo "Error: VALIDATION_EXIT_CODE=$VALIDATION_EXIT_CODE"
+    echo "Error: examples/01 VALIDATION_EXIT_CODE=$VALIDATION_EXIT_CODE"
     exit 1
 fi
 
-echo "API_EXITCODE=$API_EXITCODE"
-echo "VALIDATION_EXIT_CODE=$VALIDATION_EXIT_CODE"
+echo "examples/01 API_EXITCODE=$API_EXITCODE"
+echo "examples/01 VALIDATION_EXIT_CODE=$VALIDATION_EXIT_CODE"
 echo "END examples/01 output validation"
-cd ..
-
 echo
+
+cd ..
 
 # Enter 02_cardio_small
 cd 02_cardio_small
@@ -92,7 +92,7 @@ cat $TMPFILE
 
 # Check exit code
 if [ $API_EXITCODE -ne 0 ]; then
-    echo "Error: API_EXITCODE=$API_EXITCODE"
+    echo "Error: examples/02 API_EXITCODE=$API_EXITCODE"
     exit 1
 fi
 
@@ -125,14 +125,13 @@ cat $TMPFILE
 
 # Check exit code
 if [ $VALIDATION_EXIT_CODE -ne 0 ]; then
-    echo "Error: VALIDATION_EXIT_CODE=$VALIDATION_EXIT_CODE"
+    echo "Error: examples/02 VALIDATION_EXIT_CODE=$VALIDATION_EXIT_CODE"
     exit 1
 fi
 
-echo "API_EXITCODE=$API_EXITCODE"
-echo "VALIDATION_EXIT_CODE=$VALIDATION_EXIT_CODE"
+echo "examples/02 API_EXITCODE=$API_EXITCODE"
+echo "examples/02 VALIDATION_EXIT_CODE=$VALIDATION_EXIT_CODE"
 echo "END examples/02 output validation"
-
 echo
 
 echo "END run_all_demos.sh"
