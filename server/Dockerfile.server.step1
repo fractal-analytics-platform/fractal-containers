@@ -10,3 +10,4 @@ RUN apt-get -y install gcc postgresql postgresql-contrib libpq-dev  # required f
 RUN apt-get -y install libaec-dev  # required for fractal-tasks-core
 RUN apt-get -y install curl  # required for healthcheck
 RUN apt-get -y install git  # required for installing server from git
+RUN apt-get -y install freeglut3-dev  # required for napari-workflows?
