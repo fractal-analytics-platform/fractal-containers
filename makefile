@@ -23,7 +23,7 @@ web-no-cache: web-base
 
 # End-to-end runs
 
-run-demos: server-no-cache demos-no-cache web-no-cache
+run-demos: clean server-no-cache demos-no-cache web-no-cache
 	docker compose --file docker-compose-demos.yml up
 
 run-demos-github: server-base demos-base
