@@ -21,16 +21,20 @@ server-no-cache: server-base
 demos-v1-no-cache:	demos-v1-base
 	docker compose --file docker-compose-demos.yml build demos-v1 --no-cache
 
+demos-v2-no-cache:	demos-v2-base
+	docker compose --file docker-compose-demos.yml build demos-v2 --no-cache
+
 web-no-cache: web-base
 	docker compose --file docker-compose-demos.yml build web --no-cache
 
 # End-to-end runs
 
+# run-demos: clean server-no-cache demos-v1-no-cache demos-v2-no-cache web-no-cache
 run-demos: clean server-no-cache demos-v1-no-cache web-no-cache
 	docker compose --file docker-compose-demos.yml up
 
-run-demos-github: server-base demos-v1-base
-	docker compose --file docker-compose-demos.yml up demos-v1 --abort-on-container-exit
+run-demos-github: server-base demos-v1-base #demos-v2-base
+	docker compose --file docker-compose-demos.yml up demos-v1 --abort-on-container-exit  # HOW DOES THIS CHANGE?
 
 # Auxiliary targets
 
