@@ -10,7 +10,7 @@ on:
 
 jobs:
   tests:
-    timeout-minutes: 21
+    timeout-minutes: 20
     runs-on: ubuntu-latest
 
     steps:
