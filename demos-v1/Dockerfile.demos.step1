@@ -8,5 +8,5 @@ RUN apt-get -y install git  # required for installing client/tasks from git
 RUN apt-get -y install curl
 
 # Install requirements for output-validation Python script
-ADD demos/requirements-validation.txt ./requirements-validation.txt
+ADD demos-v1/requirements-validation.txt ./requirements-validation.txt
 RUN python3 -m pip install -r requirements-validation.txt

@@ -65,7 +65,7 @@ services:
     networks:
       - fractal
 
-  demos_v1:
+  demos-v1:
     container_name: fractal-demos-v1
     depends_on:
       server:
@@ -73,7 +73,7 @@ services:
     image: fractal-demos-v1
     build:
       context: .
-      dockerfile: demos_v1/Dockerfile.demos.step2
+      dockerfile: demos-v1/Dockerfile.demos.step2
     volumes:
       - fractal_share:/home/fractal_share/
       - ./Resources:/home/fractal_share/Resources
