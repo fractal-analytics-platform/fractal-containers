@@ -1,17 +1,19 @@
 #!/bin/bash
 
+set -e
+
 wait_for_job() {
     THIS_PROJECT_ID=$1
     THIS_JOB_ID=$2
     DESCRIPTION=$3
     while true; do
-        STATUS_LINE=$(fractal job show $THIS_PROJECT_ID $THIS_JOB_ID | grep "status")
+        STATUS_LINE=$(fractal job show "$THIS_PROJECT_ID" "$THIS_JOB_ID" | grep "status")
         EXIT_CODE=$?
         if [ $EXIT_CODE -ne 0 ]; then
             echo "Error: $DESCRIPTION (EXIT_CODE=$EXIT_CODE)"
             exit 1
         fi
-        echo $DESCRIPTION $STATUS_LINE
+        echo "$DESCRIPTION" "$STATUS_LINE"
         if [[ "$STATUS_LINE" == *done* || "$STATUS_LINE" == *failed* ]]; then
             break
         fi
@@ -65,10 +67,10 @@ echo "PROJECT_ID=$PROJECT_ID"
 echo "JOB_ID=$JOB_ID"
 
 # Wait for job to be done or failed
-wait_for_job $PROJECT_ID $JOB_ID "examples/01"
+wait_for_job "$PROJECT_ID" "$JOB_ID" "examples/01"
 
 # Check job status, once again
-fractal job show $PROJECT_ID $JOB_ID
+fractal job show "$PROJECT_ID" "$JOB_ID"
 echo "END examples/01 API calls"
 
 # Start output validation
@@ -116,10 +118,10 @@ echo "PROJECT_ID=$PROJECT_ID"
 echo "JOB_ID=$JOB_ID"
 
 # Wait for job to be done or failed
-wait_for_job $PROJECT_ID $JOB_ID "examples/02"
+wait_for_job "$PROJECT_ID" "$JOB_ID" "examples/02"
 
 # Check job status, once again
-fractal job show $PROJECT_ID $JOB_ID
+fractal job show "$PROJECT_ID" "$JOB_ID"
 echo "END examples/02 API calls"
 
 # Start output validation
