@@ -35,6 +35,9 @@ mkdir images
 cp -r /home/fractal_share/Resources/images/10.5281_zenodo.8287221 images/
 cp -r /home/fractal_share/Resources/images/10.5281_zenodo.7057076 images/
 
+# Whoami
+fractal user whoami
+
 # Trigger task collection
 bash get_fractal_tasks_core.sh
 
