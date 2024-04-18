@@ -3,6 +3,7 @@ source config.env
 if [ -z "${FRACTAL_DEMOS_V2_GIT}" ]; then
     FRACTAL_DEMOS_V2_GIT=main
 fi
+echo "Using FRACTAL_DEMOS_V2_GIT=$FRACTAL_DEMOS_V2_GIT"
 
 git clone --single-branch --branch $FRACTAL_DEMOS_V2_GIT https://github.com/fractal-analytics-platform/fractal-demos.git
 mv fractal-demos fractal-demos-v2
