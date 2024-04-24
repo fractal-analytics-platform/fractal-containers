@@ -65,24 +65,44 @@ services:
     networks:
       - fractal
 
-  demos:
-    container_name: fractal-demos
+  # demos-v1:
+  #   container_name: fractal-demos-v1
+  #   depends_on:
+  #     server:
+  #       condition: service_healthy
+  #   image: fractal-demos-v1
+  #   build:
+  #     context: .
+  #     dockerfile: demos-v1/Dockerfile.demos.step2
+  #   volumes:
+  #     - fractal_share:/home/fractal_share/
+  #     - ./Resources:/home/fractal_share/Resources
+  #   command: bash -c "
+  #     cp -r ./fractal-demos-v1 /home/fractal_share/
+  #     && cd /home/fractal_share/fractal-demos-v1/examples
+  #     && . ./run_demos.sh"
+  #   networks:
+  #     - fractal
+
+  demos-v2:
+    container_name: fractal-demos-v2
     depends_on:
       server:
         condition: service_healthy
-    image: fractal-demos
+    image: fractal-demos-v2
     build:
       context: .
-      dockerfile: demos/Dockerfile.demos.step2
+      dockerfile: demos-v2/Dockerfile.demos.step2
     volumes:
       - fractal_share:/home/fractal_share/
       - ./Resources:/home/fractal_share/Resources
     command: bash -c "
-      cp -r ./fractal-demos /home/fractal_share/
-      && cd /home/fractal_share/fractal-demos/examples
+      cp -r ./fractal-demos-v2 /home/fractal_share/
+      && cd /home/fractal_share/fractal-demos-v2/examples
       && . ./run_demos.sh"
     networks:
       - fractal
+
 
 volumes:
   fractal_share:
