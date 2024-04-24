@@ -33,7 +33,7 @@ run-demos: clean server-no-cache demos-v2-no-cache web-no-cache
 	docker compose --file docker-compose-demos.yml up
 
 run-demos-github: server-base demos-v1-base demos-v2-base
-	docker compose --file docker-compose-demos.yml up demos-v1 demos-v2 --abort-on-container-exit
+	docker compose --file docker-compose-demos.yml up demos-v2 --abort-on-container-exit
 
 # Auxiliary targets
 
