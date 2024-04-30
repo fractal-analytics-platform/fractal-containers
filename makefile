@@ -42,13 +42,3 @@ clean:
 
 list-share:
 	tree | docker volume inspect --format '{{ .Mountpoint }}' fractal_share
-
-# Old targets
-
-OLD-run:
-	mkdir -p fractal-share/tasks fractal-share/data
-	docker compose up --build --force-recreate
-
-OLD-clean-all:
-	rm -rf fractal-db-data
-	rm -rf fractal-share
