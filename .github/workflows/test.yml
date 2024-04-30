@@ -9,13 +9,25 @@ on:
     - cron: "0 23 * * 2,3,4"
 
 jobs:
-  tests:
+
+  tests-v1:
     timeout-minutes: 20
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Checkout
       uses: actions/checkout@v4
 
     - name: Run demos
-      run: make run-demos-github
+      run: make run-demos-v1-github
+
+  tests-v2:
+    timeout-minutes: 20
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Run demos
+      run: make run-demos-v2-github
