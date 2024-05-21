@@ -1,0 +1,72 @@
+services:
+
+  db:
+    cpus: "1"
+    mem_limit: "1G"
+    container_name: fractal-db
+    image: postgres:15.4-alpine
+    restart: always
+    ports:
+      - 5433:5433
+    command:
+      -p 5433
+    environment:
+      POSTGRES_USER: fractal
+      POSTGRES_PASSWORD: fractal
+      POSTGRES_DB: fractal
+      # required for the check below - otherwise postgresql
+      # will use undefined 'root' user and raise errors
+      PGUSER: fractal
+    healthcheck:
+      # postgresql starts up, stops, and then restarts
+      # => errors if the server connects before the stop
+      # this checks if the system is ready
+      test: pg_isready -p 5433
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+
+  head:
+    hostname: head
+    container_name: head
+    cpus: "2"
+    mem_limit: "2G"
+    depends_on:
+      db:
+        condition: service_healthy
+    build:
+      context: ./head
+      dockerfile: Dockerfile
+    volumes:
+      - /tmp:/tmp:rw
+      - fractal_share:/home/fractal_share/
+    environment:
+      - SLURM_CPUS_ON_NODE=1
+    ports:
+      - 8000:8000
+      - 6817:6817
+
+  node01:
+    container_name: node01
+    hostname: node01
+    cpus: "4"
+    mem_limit: "4G"
+    depends_on:
+      - "head"
+    build:
+      context: ./node
+      dockerfile: Dockerfile
+    volumes:
+      - /tmp:/tmp:rw
+      - fractal_share:/home/fractal_share/
+    environment:
+      - SLURM_NODENAME=slurmnode1
+      - SLURM_CPUS_ON_NODE=1
+    links:
+      - head
+
+volumes:
+  fractal_share:
+    name: fractal_share
+    external: false

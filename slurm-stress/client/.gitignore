@@ -1,0 +1,9 @@
+tmp*
+output*
+task_list
+.fractal.env
+proj*
+workflow.json
+venv
+submit_jobs.sh
+.cache
