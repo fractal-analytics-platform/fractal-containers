@@ -21,5 +21,5 @@ echo "Task collection started"
 ###############################################################################
 
 echo "Now edit the user's properties"
-fractal user edit 1 --new-cache-dir /home/fractal_share/test01-cache/ --new-slurm-user test01
+fractal user edit 1 --new-cache-dir /tmp/fractal-test01-cache/ --new-slurm-user test01
 echo "Done"

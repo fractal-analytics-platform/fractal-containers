@@ -6,7 +6,7 @@ RUN apt-get update
 RUN sudo rm -f /usr/bin/python3
 RUN sudo ln -s /usr/bin/python3.9 /usr/bin/python3
 
-RUN apt-get -y install python3-pip python3.9-venv python3.9-dev git
+RUN apt-get -y install python3-pip python3.9-venv python3.9-dev htop
 RUN apt-get -y install gcc postgresql postgresql-contrib libpq-dev  # required for building psycopg2
 
 COPY slurm.conf /etc/slurm-llnl/
@@ -14,6 +14,7 @@ ADD sudoers /etc/sudoers
 
 COPY slurm_config.json ./
 COPY run_server.sh ./
+COPY monitor_threads.sh ./
 COPY .fractal_server.env ./
 COPY fractal_tasks_mock-0.0.1-py3-none-any.whl ./
 

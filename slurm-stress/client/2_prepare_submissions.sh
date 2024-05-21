@@ -3,15 +3,15 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-NUM_PROJECTS=2
-NUM_IMAGES=10
+NUM_PROJECTS=10
+NUM_IMAGES=2
 
 
 ###############################################################################
 
 LABEL="label-$1"
 
-SUBMIT_SCRIPT=submit_jobs.sh
+SUBMIT_SCRIPT=3_submit_jobs.sh
 echo "#!/bin/bash" > "$SUBMIT_SCRIPT"
 chmod +x "$SUBMIT_SCRIPT"
 
@@ -23,7 +23,6 @@ for PROJECT_INDEX in $(seq 1 $NUM_PROJECTS); do
     PROJECT_NAME="Project $LABEL/$PROJECT_INDEX"
     DS_NAME="Dataset $LABEL/$PROJECT_INDEX"
     WF_NAME="Workflow $LABEL/$PROJECT_INDEX"
-
 
     echo "Now process PROJECT=$PROJECT_NAME"
 

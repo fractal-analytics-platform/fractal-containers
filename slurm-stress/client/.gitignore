@@ -6,4 +6,5 @@ proj*
 workflow.json
 venv
 submit_jobs.sh
+3_submit_jobs.sh
 .cache

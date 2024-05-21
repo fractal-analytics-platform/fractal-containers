@@ -50,7 +50,7 @@ services:
   node1:
     container_name: node1
     hostname: node1
-    cpus: "4"
+    cpus: "3"
     mem_limit: "4G"
     depends_on:
       - "head"
