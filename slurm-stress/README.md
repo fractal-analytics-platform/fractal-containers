@@ -1,10 +1,12 @@
 # Server
 
+
+## Containers
 ```
 docker compose up --build
 ```
 
-On a side
+## Server startup
 
 ```console
 
@@ -38,6 +40,23 @@ INFO  [alembic.runtime.migration] Running upgrade 9fd26a2b0de4 -> 5bf02391cfef, 
 Creation of user admin@fractal.xy failed with IntegrityError (likely due to concurrent attempts from different workers).
 ```
 
+## Monitoring
+
+To monitor the number of active threads:
+```console
+$ ./open_bash_in_head_container.sh 
+
+CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS                   PORTS                                                                                                                      NAMES
+298bd1ef928a   slurm-stress-node1     "/etc/slurm-llnl/doc…"   4 minutes ago   Up 4 minutes             6817-6819/tcp                                                                                                              node1
+7042cf5877df   slurm-stress-head      "/etc/slurm-llnl/doc…"   4 minutes ago   Up 4 minutes             3306/tcp, 0.0.0.0:6817->6817/tcp, :::6817->6817/tcp, 6818-6819/tcp, 50097/tcp, 0.0.0.0:8000->8000/tcp, :::8000->8000/tcp   head
+a4cd4e6cce91   postgres:15.4-alpine   "docker-entrypoint.s…"   4 minutes ago   Up 4 minutes (healthy)   5432/tcp, 0.0.0.0:5433->5433/tcp, :::5433->5433/tcp                                                                        fractal-db
+
+root@head:/home/admin# ./monitor_threads.sh 
+
+[Tue May 21 07:44:49 UTC 2024] Active threads: 46
+[Tue May 21 07:44:50 UTC 2024] Active threads: 46
+...
+```
 
 # Client
 
