@@ -47,9 +47,9 @@ services:
       - 8000:8000
       - 6817:6817
 
-  node01:
-    container_name: node01
-    hostname: node01
+  node1:
+    container_name: node1
+    hostname: node1
     cpus: "4"
     mem_limit: "4G"
     depends_on:
@@ -61,7 +61,7 @@ services:
       - /tmp:/tmp:rw
       - fractal_share:/home/fractal_share/
     environment:
-      - SLURM_NODENAME=slurmnode1
+      - SLURM_NODENAME=node1
       - SLURM_CPUS_ON_NODE=1
     links:
       - head
