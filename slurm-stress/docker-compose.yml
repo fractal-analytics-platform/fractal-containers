@@ -1,7 +1,7 @@
 services:
 
   db:
-    cpus: "1"
+    cpus: 1.0
     mem_limit: "1G"
     container_name: fractal-db
     image: postgres:15.4-alpine
@@ -30,41 +30,42 @@ services:
   head:
     hostname: head
     container_name: head
-    cpus: "2"
+    cpus: 2.0
     mem_limit: "2G"
     depends_on:
       db:
         condition: service_healthy
     build:
-      context: ./head
+      context: ./fractal-slurm
       dockerfile: Dockerfile
     volumes:
       - /tmp:/tmp:rw
-      - fractal_share:/home/fractal_share/
+    #  - fractal_share:/home/fractal_share/
     environment:
       - SLURM_CPUS_ON_NODE=1
     ports:
       - 8000:8000
       - 6817:6817
+      - 6818:6818
 
-  node1:
-    container_name: node1
-    hostname: node1
-    cpus: "3"
-    mem_limit: "4G"
-    depends_on:
-      - "head"
-    build:
-      context: ./node
-      dockerfile: Dockerfile
-    volumes:
-      - /tmp:/tmp:rw
-      - fractal_share:/home/fractal_share/
-    environment:
-      - SLURM_NODENAME=node1
-      - SLURM_CPUS_ON_NODE=1
-    links:
-      - head
+  # node1:
+  #   container_name: node1
+  #   hostname: node1
+  #   cpus: 3.0
+  #   mem_limit: "4G"
+  #   depends_on:
+  #     - "head"
+  #   build:
+  #     context: ./node
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - /tmp:/tmp:rw
+  #     - fractal_share:/home/fractal_share/
+  #   environment:
+  #     - SLURM_NODENAME=node1
+  #     - SLURM_CPUS_ON_NODE=1
+  #   links:
+  #     - head
 
 volumes:
   fractal_share:
