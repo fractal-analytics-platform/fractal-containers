@@ -1,10 +1,5 @@
 #!/bin/bash
 
-: "${SLURM_CONF=/etc/slurm/slurm.conf}"
-
-# Default number of slurm nodes
-: "${SLURM_NUMNODES=3}"
-
 # Default slurm controller
 : "${SLURMCTLD_HOST=$HOSTNAME}"
 : "${SLURMCTLD_ADDR=127.0.0.1}"
@@ -16,7 +11,6 @@
 
 # Default hardware profile
 : "${NODE_HW=CPUs=4}"
-
 
 NODE_NAMES="nd00001"
 NODE_PORTS="6001"
