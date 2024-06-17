@@ -5,7 +5,7 @@ ARG SLURM_ROOT=/opt/slurm-${SLURM_VERSION}
 ARG SLURM_CONFDIR=${SLURM_ROOT}/etc
 
 RUN apt update -y
-RUN apt install -y munge build-essential mariadb-server wget bsdmainutils
+RUN apt install -y munge build-essential mariadb-server wget bsdmainutils curl
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -24,7 +24,6 @@ RUN mkdir -p /var/spool/slurmd    && chown slurm /var/spool/slurmd    && chmod u
 
 
 COPY install_slurm.sh .
-RUN apt install -y curl
 RUN  ./install_slurm.sh ${SLURM_VERSION} ${SLURM_ROOT} ${SLURM_CONFDIR} --enable-multiple-slurmd
 
 COPY slurm.conf.in /etc/slurm/
