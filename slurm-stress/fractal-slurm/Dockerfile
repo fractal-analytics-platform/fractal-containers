@@ -37,12 +37,9 @@ COPY slurm_config.json ./
 COPY run_server.sh ./
 COPY monitor_threads.sh ./
 COPY .fractal_server.env ./
-RUN apt-get -y install gcc postgresql postgresql-contrib libpq-dev
 RUN pip3 install --upgrade pip setuptools wheel
-RUN pip3 install "fractal-server[gunicorn,postgres]==2.0.6"
+RUN pip3 install "fractal-server[gunicorn,postgres-psycopg-binary]==2.2.0a1"
 
-EXPOSE 6817 6818 8000 50097
-
-WORKDIR /home/admin
+EXPOSE 6817 6818 8000
 
 ENTRYPOINT ["/etc/slurm/docker-entrypoint.sh"]

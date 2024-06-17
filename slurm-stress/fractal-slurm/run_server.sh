@@ -9,4 +9,4 @@ gunicorn fractal_server.main:app \
     --access-logfile logs-fractal-server.access \
     --error-logfile logs-fractal-server.error \
     --worker-class uvicorn.workers.UvicornWorker \
-    --logger-class fractal_server.logger.gunicorn_logger.FractalGunicornLogger
+    --logger-class fractal_server.gunicorn_fractal.FractalGunicornLogger
