@@ -19,7 +19,7 @@ Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/b
 # User privilege specification
 root	ALL=(ALL:ALL) ALL
 
-Runas_Alias FRACTAL_IMPERSONATE_USERS = fractal, test01
+Runas_Alias FRACTAL_IMPERSONATE_USERS = test01
 Cmnd_Alias FRACTAL_CMD = /usr/bin/sbatch, /usr/bin/scancel, /usr/bin/cat, /usr/bin/ls, /usr/bin/mkdir, /usr/bin/chmod
 fractal ALL=(FRACTAL_IMPERSONATE_USERS) NOPASSWD:FRACTAL_CMD
 
@@ -32,4 +32,4 @@ fractal ALL=(FRACTAL_IMPERSONATE_USERS) NOPASSWD:FRACTAL_CMD
 # See sudoers(5) for more information on "#include" directives:
 
 #includedir /etc/sudoers.d
-admin     ALL=(ALL) NOPASSWD:ALL
+fractal     ALL=(ALL) NOPASSWD:ALL

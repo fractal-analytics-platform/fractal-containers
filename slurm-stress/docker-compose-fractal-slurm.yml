@@ -29,8 +29,8 @@ services:
   head:
     hostname: head
     container_name: head
-    cpus: 2.0
-    mem_limit: "2G"
+    cpus: 5.0
+    mem_limit: "5G"
     depends_on:
       db:
         condition: service_healthy
