@@ -1,24 +1,13 @@
 FROM ubuntu:22.04
 
-
 ARG DEBIAN_FRONTEND=noninteractive
-
-# !!! Workaround for munge deamon
-RUN mkdir /run/munge
-RUN chmod 777 /run/munge
-RUN chmod +t /run/munge
 
 # Slurm configuration
 RUN apt update -y
-RUN apt install -y munge slurmd slurm-client slurmctld mariadb-server
+RUN apt install -y sudo munge slurmd slurm-client slurmctld mariadb-server
 RUN apt install -y python3 python3-pip
 COPY slurm.conf /etc/slurm/
 COPY cgroup.conf /etc/slurm/
-COPY docker-entrypoint.sh /etc/slurm/
-# !!! Workaround for slurm deamon
-RUN mkdir -p /var/log/slurm
-RUN mkdir -p /var/spool/slurmctld && chown slurm /var/spool/slurmctld && chmod u+rwx /var/spool/slurmctld
-RUN mkdir -p /var/spool/slurmd    && chown slurm /var/spool/slurmd    && chmod u+rwx /var/spool/slurmd
 
 # User configuration
 ADD sudoers /etc/sudoers
@@ -32,7 +21,7 @@ COPY run_server.sh ./
 COPY .fractal_server.env ./
 RUN pip3 install --upgrade pip setuptools wheel
 RUN pip3 install "fractal-server[gunicorn,postgres-psycopg-binary]==2.2.0a1"
-
+COPY docker-entrypoint.sh /etc/slurm/
 EXPOSE 6817 6818 8000
 
 ENTRYPOINT ["/etc/slurm/docker-entrypoint.sh"]
