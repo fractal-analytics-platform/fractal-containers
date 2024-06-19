@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
-
+ARG FRACTAL_VERSION
 # Slurm configuration
 RUN apt update -y
 RUN apt install -y sudo munge slurmd slurm-client slurmctld mariadb-server
@@ -20,7 +20,7 @@ COPY slurm_config.json ./
 COPY run_server.sh ./
 COPY .fractal_server.env ./
 RUN pip3 install --upgrade pip setuptools wheel
-RUN pip3 install "fractal-server[gunicorn,postgres-psycopg-binary]==2.2.0a1"
+RUN pip3 install "fractal-server[gunicorn,postgres-psycopg-binary]==$FRACTAL_VERSION"
 COPY docker-entrypoint.sh /etc/slurm/
 EXPOSE 6817 6818 8000
 

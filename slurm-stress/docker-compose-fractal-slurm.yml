@@ -37,6 +37,8 @@ services:
     build:
       context: ./fractal-slurm
       dockerfile: Dockerfile
+      args:
+        - FRACTAL_VERSION=2.2.0a1
     volumes:
       - /tmp:/tmp:rw
     environment:
