@@ -13,6 +13,6 @@ jobs:
       - name: Login
         run: echo ${{ secrets.MY_GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Build the Docker image
-        run: docker build . --tag ghcr.io/fractal/fractal-slurm:0.1
+        run: cd slurm-stress/fractal-slurm/ && docker build . --tag ghcr.io/fractal-analytics-platform/fractal-slurm:0.1
       - name: Push Docker Image
         run: docker push ghcr.io/fractal/fractal-slurm:0.1
