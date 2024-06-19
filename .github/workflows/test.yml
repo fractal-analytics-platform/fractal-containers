@@ -18,7 +18,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     
-    - name: Update .env file
+    - name: Set FRACTAL_RUNNER_BACKEND to 'local'
       run: sed -i 's/^FRACTAL_RUNNER_BACKEND=local_experimental$/FRACTAL_RUNNER_BACKEND=local/' ./server/server.env
     
     - name: Run demos
