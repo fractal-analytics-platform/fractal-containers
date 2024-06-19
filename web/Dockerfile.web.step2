@@ -18,4 +18,4 @@ RUN npm install
 RUN npm run build
 
 # Running
-CMD ORIGIN=http://localhost:5173 PORT=5173 node build
+CMD ORIGIN=http://localhost:5173 PORT=5173 node --env-file=.env build
