@@ -19,7 +19,7 @@ jobs:
       uses: actions/checkout@v4
     
     - name: Set FRACTAL_RUNNER_BACKEND to 'local'
-      run: sed -i 's/^FRACTAL_RUNNER_BACKEND=local_experimental$/FRACTAL_RUNNER_BACKEND=local/' ./server/server.env
+      run: sed -i 's/local_experimental$/local/' ./server/server.env
     
     - name: Run demos
       run: make run-demos-v1-github
