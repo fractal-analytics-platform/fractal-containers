@@ -11,9 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Login
-        working-directory: ./images
+        #working-directory: ./images
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Build the Docker image
-        run:  docker build ubuntu22-slurm --tag ghcr.io/fractal-analytics-platform/ubuntu22-slurm:0.1
+        run:  docker build images/ubuntu22-slurm --tag ghcr.io/fractal-analytics-platform/ubuntu22-slurm:0.1
       - name: Push Docker Image
         run: docker push ghcr.io/fractal-analytics-platform/ubuntu22-slurm:0.1
