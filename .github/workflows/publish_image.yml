@@ -1,9 +1,7 @@
 name: Build and Publish Docker Image
 
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
+
 
 jobs:
   build:
@@ -24,6 +22,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           run: |
-                docker build . --tag ghcr.io/deselikem/hello-docker-gcr-demo:latest
-                docker run ghcr.io/deselikem/hello-docker-gcr-demo:latest
-                docker push ghcr.io/deselikem/hello-docker-gcr-demo:latest
+                cd slurm-stress/fractal-slurm/
+                docker build . --tag ghcr.io/fractal/fractal-slurm:latest
+                docker run ghcr.io/fractal/fractal-slurm:latest
+                docker push ghcr.io/fractal/fractal-slurm:latest
