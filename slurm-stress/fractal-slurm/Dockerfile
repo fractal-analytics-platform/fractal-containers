@@ -9,19 +9,16 @@ RUN apt install -y python3 python3-pip
 COPY slurm.conf /etc/slurm/
 COPY cgroup.conf /etc/slurm/
 
+# SSH configuration
+RUN apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+
 # User configuration
 ADD sudoers /etc/sudoers
 RUN useradd -m fractal -s /usr/bin/bash -d /home/fractal && echo "fractal:fractal" | chpasswd && adduser fractal sudo && echo "fractal     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 RUN useradd --uid 2001 -m test01 -s /usr/bin/bash -d /home/test01 && echo "test01:test01" | chpasswd
 
-# Fractal configuration
-COPY fractal_tasks_mock-0.0.1-py3-none-any.whl ./
-COPY slurm_config.json ./
-COPY run_server.sh ./
-COPY .fractal_server.env ./
-RUN pip3 install --upgrade pip setuptools wheel
-RUN pip3 install "fractal-server[gunicorn,postgres-psycopg-binary]==$FRACTAL_VERSION"
 COPY docker-entrypoint.sh /etc/slurm/
-EXPOSE 6817 6818 8000
+EXPOSE 22 6817 6818 8000
 
 ENTRYPOINT ["/etc/slurm/docker-entrypoint.sh"]

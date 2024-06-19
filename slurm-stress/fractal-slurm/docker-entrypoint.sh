@@ -11,10 +11,10 @@ echo
 echo "Starting Slurm services..."
 echo
 
-
 service munge start
 service slurmctld start
 slurmd -N $NODE
+service ssh start
 
 echo
 sinfo
