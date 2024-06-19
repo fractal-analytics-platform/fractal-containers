@@ -1,7 +1,6 @@
 FROM ubuntu:22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG FRACTAL_VERSION
 # Slurm configuration
 RUN apt update -y
 RUN apt install -y sudo munge slurmd slurm-client slurmctld mariadb-server
