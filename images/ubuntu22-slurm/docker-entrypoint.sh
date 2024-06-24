@@ -21,4 +21,4 @@ sinfo
 echo
 echo
 
-tail -f /dev/null
+exec "$@"
