@@ -22,7 +22,7 @@ jobs:
       run: sed -i 's/local_experimental$/local/' ./testing/server/server.env
 
     - name: Run demos
-      run: make run-demos-v1-github
+      run: cd testing && make run-demos-v1-github
 
   tests-v2:
     timeout-minutes: 20
@@ -33,4 +33,4 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Run demos
-      run: make run-demos-v2-github
+      run: cd testing && make run-demos-v2-github
