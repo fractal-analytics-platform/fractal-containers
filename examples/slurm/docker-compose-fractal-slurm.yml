@@ -51,7 +51,7 @@ services:
       - 6817:6817
       - 6818:6818
     healthcheck:
-      test: wget http://localhost:8000/api/alive/
+      test: wget http://head:8000/api/alive/
       interval: 5s
       timeout: 2s
       retries: 5
