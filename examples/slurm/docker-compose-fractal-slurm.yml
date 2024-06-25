@@ -25,6 +25,9 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - fractal
+
 
   head:
     hostname: head
@@ -47,3 +50,41 @@ services:
       - 8000:8000
       - 6817:6817
       - 6818:6818
+    healthcheck:
+      test: wget http://localhost:8000/api/alive/
+      interval: 5s
+      timeout: 2s
+      retries: 5
+    networks:
+      - fractal
+
+
+  web:
+    container_name: fractal-web
+    image: fractal-web
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - 5173:5173
+    networks:
+      - fractal
+
+
+  server-config:
+    container_name: server-config
+    image: server_config
+    build:
+      context: ./server-config
+      args:
+        - FRACTAL_CLIENT_VERSION=2.0.0
+    depends_on:
+      head:
+        condition: service_healthy
+    networks:
+      - fractal
+
+
+networks:
+  fractal:
+    driver: bridge
