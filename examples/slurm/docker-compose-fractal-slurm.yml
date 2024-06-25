@@ -61,7 +61,6 @@ services:
 
   web:
     container_name: fractal-web
-    image: fractal-web
     build:
       context: ./web
       dockerfile: Dockerfile
@@ -73,7 +72,6 @@ services:
 
   server-config:
     container_name: server-config
-    image: server_config
     build:
       context: ./server-config
       args:
