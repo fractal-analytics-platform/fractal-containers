@@ -33,7 +33,7 @@ services:
     hostname: head
     container_name: head
     cpus: 5.0
-    mem_limit: "5G"
+    mem_limit: 5g
     build:
       context: .
       dockerfile: Dockerfile
@@ -51,7 +51,7 @@ services:
       - 6817:6817
       - 6818:6818
     healthcheck:
-      test: wget http://head:8000/api/alive/
+      test: wget http://head:8000/api/alive/ > /dev/null 2>&1
       interval: 5s
       timeout: 2s
       retries: 5
