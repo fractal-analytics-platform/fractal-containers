@@ -10,12 +10,19 @@ RUN bash get_fractal_web.sh
 # moving to repository directory
 WORKDIR /app/fractal-web/
 
-# setting up environment variables
-COPY web/web.env ./.env
-
 # Installing dependencies and building
 RUN npm install
 RUN npm run build
 
+# Set env variables
+ENV FRACTAL_SERVER_HOST=http://fractal-server:8000
+ENV PUBLIC_FRACTAL_ADMIN_SUPPORT_EMAIL=
+ENV PUBLIC_OAUTH_CLIENT_NAME=
+ENV AUTH_COOKIE_DOMAIN=
+ENV LOG_FILE=fractal-web.log
+ENV FRACTAL_API_V1_MODE=exclude
+ENV ORIGIN=http://localhost:5173
+ENV PORT=5173
+
 # Running
-CMD ORIGIN=http://localhost:5173 PORT=5173 node build
+CMD node build
