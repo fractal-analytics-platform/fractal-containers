@@ -1,0 +1,91 @@
+services:
+
+  db:
+    cpus: 1.0
+    mem_limit: "1G"
+    container_name: fractal-db
+    image: postgres:15.4-alpine
+    restart: always
+    ports:
+      - 5433:5433
+    command:
+      -p 5433
+    environment:
+      POSTGRES_USER: fractal
+      POSTGRES_PASSWORD: fractal
+      POSTGRES_DB: fractal
+      # required for the check below - otherwise postgresql
+      # will use undefined 'root' user and raise errors
+      PGUSER: fractal
+    healthcheck:
+      # postgresql starts up, stops, and then restarts
+      # => errors if the server connects before the stop
+      # this checks if the system is ready
+      test: pg_isready -p 5433
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - fractal
+
+
+  head:
+    hostname: head
+    container_name: head
+    cpus: 5.0
+    mem_limit: 5g
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - FRACTAL_SERVER_VERSION=2.2.0
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - /tmp:/tmp:rw
+    environment:
+      - SLURM_CPUS_ON_NODE=1
+    ports:
+      - 8000:8000
+      - 6817:6817
+      - 6818:6818
+    healthcheck:
+      test: wget http://head:8000/api/alive/ > /dev/null 2>&1
+      interval: 5s
+      timeout: 2s
+      retries: 5
+    networks:
+      - fractal
+
+
+  web:
+    container_name: fractal-web
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    depends_on:
+      head:
+        condition: service_healthy
+    ports:
+      - 5173:5173
+    networks:
+      - fractal
+
+
+  server-config:
+    container_name: server-config
+    build:
+      context: ./server-config
+      args:
+        - FRACTAL_CLIENT_VERSION=2.0.0
+    depends_on:
+      head:
+        condition: service_healthy
+    networks:
+      - fractal
+
+
+networks:
+  fractal:
+    driver: bridge
