@@ -2,7 +2,7 @@ FROM node:20-alpine3.17
 
 
 ENV NODE_MAJOR_VERSION=20
-ENV FRACTAL_WEB_VERSION=1.2.0
+ENV FRACTAL_WEB_VERSION=1.3.0
 
 RUN wget -qO- "https://github.com/fractal-analytics-platform/fractal-web/releases/download/v${FRACTAL_WEB_VERSION}/node-${NODE_MAJOR_VERSION}-fractal-web-v${FRACTAL_WEB_VERSION}.tar.gz" | tar -xz
 

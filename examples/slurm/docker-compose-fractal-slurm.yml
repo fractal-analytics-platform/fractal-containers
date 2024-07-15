@@ -38,7 +38,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - FRACTAL_SERVER_VERSION=2.2.0
+        - FRACTAL_SERVER_VERSION=2.3.0
     depends_on:
       db:
         condition: service_healthy
@@ -78,7 +78,7 @@ services:
     build:
       context: ./server-config
       args:
-        - FRACTAL_CLIENT_VERSION=2.0.0
+        - FRACTAL_CLIENT_VERSION=2.0.1
     depends_on:
       head:
         condition: service_healthy
