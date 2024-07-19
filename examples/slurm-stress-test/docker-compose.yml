@@ -25,23 +25,20 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    networks:
-      - fractal
-
 
   slurm:
     hostname: slurm
     container_name: slurm
     cpus: 5.0
-    mem_limit: 5g
-    build:
-      context: ../fractal-slurm
-      dockerfile: Dockerfile
-      args:
-        - FRACTAL_SERVER_VERSION=2.3.3
+    mem_limit: "5G"
     depends_on:
       db:
         condition: service_healthy
+    build:
+      context: ../slurm-common
+      dockerfile: Dockerfile
+      args:
+        - FRACTAL_SERVER_VERSION=2.3.3
     volumes:
       - /tmp:/tmp:rw
     environment:
@@ -50,42 +47,3 @@ services:
       - 8000:8000
       - 6817:6817
       - 6818:6818
-    healthcheck:
-      test: wget http://slurm:8000/api/alive/ > /dev/null 2>&1
-      interval: 5s
-      timeout: 2s
-      retries: 5
-    networks:
-      - fractal
-
-
-  web:
-    container_name: fractal-web
-    build:
-      context: ./web
-      dockerfile: Dockerfile
-    depends_on:
-      slurm:
-        condition: service_healthy
-    ports:
-      - 5173:5173
-    networks:
-      - fractal
-
-
-  server-config:
-    container_name: server-config
-    build:
-      context: ./server-config
-      args:
-        - FRACTAL_CLIENT_VERSION=2.0.1
-    depends_on:
-      slurm:
-        condition: service_healthy
-    networks:
-      - fractal
-
-
-networks:
-  fractal:
-    driver: bridge
