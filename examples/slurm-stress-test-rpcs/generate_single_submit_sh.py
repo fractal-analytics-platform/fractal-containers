@@ -2,7 +2,7 @@ preamble = """#!/bin/sh
 #SBATCH --partition=main
 #SBATCH --ntasks=4
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=2100M
+#SBATCH --mem=900M
 #SBATCH --nodes=1
 #SBATCH --err=slurm_%j.out
 #SBATCH --out=slurm_%j.err
@@ -14,7 +14,7 @@ num_sruns = 100
 srun_lines = [
     (
         "srun --ntasks=1 --cpus-per-task=$SLURM_CPUS_PER_TASK "
-        f"--mem=500M ./task.sh $1 {ind} &"
+        f"--mem=200M ./task.sh $1 {ind} &"
     )
     for ind in range(num_sruns)
 ]
