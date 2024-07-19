@@ -1,7 +1,6 @@
 tmp*
 output*
 task_list
-.fractal.env
 proj*
 workflow.json
 venv

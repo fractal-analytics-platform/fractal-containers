@@ -1,4 +1,7 @@
-# Server
+# How to use this folder
+
+##
+The `examples` folder has a complete Fractal deployment into the 
 
 ## Containers
 
