@@ -29,16 +29,16 @@ services:
       - fractal
 
 
-  head:
-    hostname: head
-    container_name: head
+  slurm:
+    hostname: slurm
+    container_name: slurm
     cpus: 5.0
     mem_limit: 5g
     build:
-      context: .
+      context: ../fractal-slurm
       dockerfile: Dockerfile
       args:
-        - FRACTAL_SERVER_VERSION=2.3.1
+        - FRACTAL_SERVER_VERSION=2.3.3
     depends_on:
       db:
         condition: service_healthy
@@ -51,7 +51,7 @@ services:
       - 6817:6817
       - 6818:6818
     healthcheck:
-      test: wget http://head:8000/api/alive/ > /dev/null 2>&1
+      test: wget http://slurm:8000/api/alive/ > /dev/null 2>&1
       interval: 5s
       timeout: 2s
       retries: 5
@@ -65,7 +65,7 @@ services:
       context: ./web
       dockerfile: Dockerfile
     depends_on:
-      head:
+      slurm:
         condition: service_healthy
     ports:
       - 5173:5173
@@ -80,7 +80,7 @@ services:
       args:
         - FRACTAL_CLIENT_VERSION=2.0.1
     depends_on:
-      head:
+      slurm:
         condition: service_healthy
     networks:
       - fractal
