@@ -1,8 +1,8 @@
 services:
 
-  head:
-    hostname: head
-    container_name: head
+  slurm:
+    hostname: slurm
+    container_name: slurm
     cpus: 5.0
     mem_limit: 5g
     build:
