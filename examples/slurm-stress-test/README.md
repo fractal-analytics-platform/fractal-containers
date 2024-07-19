@@ -1,9 +1,10 @@
 # How to use this folder
 
-##
-The `examples` folder has a complete Fractal deployment into the 
+The `examples` folder has a complete Fractal deployment into the `full-stack` folder, an essential deployment just for slurm testing task into the `slurm-stress-test` folder and a common configuration services folder called `slurm-common` with the `Dockerfile` and other scripts to setup properly fractal-server and slurm.
 
-## Containers
+## Compose usage
+
+Choose one of the two folders (`slurm-stress-test` or `full-stack`) and:
 
 ```console
 docker compose up --build
