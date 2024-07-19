@@ -35,7 +35,7 @@ services:
     cpus: 5.0
     mem_limit: 5g
     build:
-      context: ../fractal-slurm
+      context: ../slurm-common
       dockerfile: Dockerfile
       args:
         - FRACTAL_SERVER_VERSION=2.3.3
