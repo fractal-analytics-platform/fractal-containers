@@ -14,7 +14,7 @@ fi
 
 ###############################################################################
 
-WHEEL_PATH=/home/admin/fractal_tasks_mock-0.0.1-py3-none-any.whl
+WHEEL_PATH=/fractal_tasks_mock-0.0.1-py3-none-any.whl
 fractal task collect $WHEEL_PATH
 echo "Task collection started"
 
