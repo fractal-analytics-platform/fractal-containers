@@ -102,6 +102,7 @@ services:
     command: bash -c "
       cp -r ./fractal-demos-v1 /home/fractal_share/
       && cd /home/fractal_share/fractal-demos-v1/examples
+      && source fractal-tasks-venv/bin/activate
       && . ./run_demos.sh"
     networks:
       - fractal
@@ -127,6 +128,7 @@ services:
     command: bash -c "
       cp -r ./fractal-demos-v2 /home/fractal_share/
       && cd /home/fractal_share/fractal-demos-v2/examples
+      && source fractal-tasks-venv/bin/activate
       && . ./run_demos.sh"
     networks:
       - fractal
