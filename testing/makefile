@@ -39,7 +39,7 @@ run-demos-v1-github: server-base demos-v1-base
 	docker compose --file docker-compose-demos.yml up demos-v1 --abort-on-container-exit
 
 new-run-demos:
-	docker compose --file docker-compose-demos.yml
+	docker compose --file docker-compose-demos.yml up
 
 # Auxiliary targets
 
