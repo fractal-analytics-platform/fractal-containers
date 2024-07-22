@@ -1,6 +1,4 @@
-# syntax=docker/dockerfile:1
-
-FROM fractal/demos-v1-base:1
+FROM ghcr.io/fractal-analytics-platform/ubuntu22-slurm-tasks-core:0.1
 
 ADD config.env .
 

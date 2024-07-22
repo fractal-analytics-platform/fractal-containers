@@ -2,6 +2,8 @@
 
 FROM fractal/web-base:1
 
+ARG FRACTAL_SERVER_HOST
+
 # Get fractal-web
 ADD config.env .
 COPY web/get_fractal_web.sh .
@@ -15,7 +17,7 @@ RUN npm install
 RUN npm run build
 
 # Set env variables
-ENV FRACTAL_SERVER_HOST=http://fractal-server:8000
+ENV FRACTAL_SERVER_HOST=${FRACTAL_SERVER_HOST}
 ENV PUBLIC_FRACTAL_ADMIN_SUPPORT_EMAIL=
 ENV PUBLIC_OAUTH_CLIENT_NAME=
 ENV AUTH_COOKIE_DOMAIN=
