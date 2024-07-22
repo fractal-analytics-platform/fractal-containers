@@ -10,5 +10,5 @@ RUN python3 -m venv fractal-tasks-venv
 RUN fractal-tasks-venv/bin/python -m pip install fractal-tasks-core[fractal-tasks]
 
 # Install requirements for output-validation Python script
-ADD demos-v1/requirements-validation.txt ./requirements-validation.txt
+ADD requirements-validation.txt ./requirements-validation.txt
 RUN fractal-tasks-venv/bin/python -m pip install -r requirements-validation.txt
