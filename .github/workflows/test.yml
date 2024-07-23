@@ -31,7 +31,7 @@ jobs:
 
     - name: Update SLURM Docker Image Cache if cache miss
       if: steps.cache-docker-ubuntu22-slurm-tasks-core.outputs.cache-hit != 'true'
-      run: docker pull ghcr.io/fractal-analytics-platform/ubuntu22-slurm-tasks-core:0.1 && mkdir -p ci/cache/docker/ubuntu22-slurm-tasks-core && docker image save ghcr.io/fractal-analytics-platform/ubuntu22-ubuntu22-slurm-tasks-core:0.1 --output ./ci/cache/docker/ubuntu22-slurm-tasks-core/ubuntu22-slurm-tasks-core.tar
+      run: docker pull ghcr.io/fractal-analytics-platform/ubuntu22-slurm-tasks-core:0.1 && mkdir -p ci/cache/docker/ubuntu22-slurm-tasks-core && docker image save ghcr.io/fractal-analytics-platform/ubuntu22-slurm-tasks-core:0.1 --output ./ci/cache/docker/ubuntu22-slurm-tasks-core/ubuntu22-slurm-tasks-core.tar
 
     - name: Set FRACTAL_RUNNER_BACKEND to 'slurm'
       run: sed -i 's/local_experimental$/local/' ./testing/server/server.env
@@ -60,7 +60,7 @@ jobs:
 
     - name: Update SLURM Docker Image Cache if cache miss
       if: steps.cache-docker-ubuntu22-slurm-tasks-core.outputs.cache-hit != 'true'
-      run: docker pull ghcr.io/fractal-analytics-platform/ubuntu22-slurm-tasks-core:0.1 && mkdir -p ci/cache/docker/ubuntu22-slurm-tasks-core && docker image save ghcr.io/fractal-analytics-platform/ubuntu22-ubuntu22-slurm-tasks-core:0.1 --output ./ci/cache/docker/ubuntu22-slurm-tasks-core/ubuntu22-slurm-tasks-core.tar
+      run: docker pull ghcr.io/fractal-analytics-platform/ubuntu22-slurm-tasks-core:0.1 && mkdir -p ci/cache/docker/ubuntu22-slurm-tasks-core && docker image save ghcr.io/fractal-analytics-platform/ubuntu22-slurm-tasks-core:0.1 --output ./ci/cache/docker/ubuntu22-slurm-tasks-core/ubuntu22-slurm-tasks-core.tar
 
     - name: Run demos
       run: cd testing && make run-demos-v2-github
