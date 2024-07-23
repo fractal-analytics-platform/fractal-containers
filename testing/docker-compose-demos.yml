@@ -131,7 +131,7 @@ services:
       timeout: 2s
       retries: 5
     command: bash -c "
-     ./run_server
+      ./run_server
       cp -r ./fractal-demos-v2 /home/fractal_share/
       && source fractal-tasks-venv/bin/activate
       && cd /home/fractal_share/fractal-demos-v2/examples
