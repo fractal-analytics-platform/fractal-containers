@@ -17,7 +17,7 @@ ADD demos-v2/run_demos.sh ./fractal-demos-v2/examples/run_demos.sh
 
 RUN fractal-tasks-venv/bin/python -m pip install fractal-server[gunicorn,postgres-psycopg-binary]==${FRACTAL_SERVER_VERSION}
 
-COPY run_server.sh ./
-COPY .fractal_server.env ./
-COPY slurm_config.json ./
+COPY demos-v2/run_server.sh ./
+COPY demos-v2/.fractal_server.env ./
+COPY demos-v2/slurm_config.json ./
 
