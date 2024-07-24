@@ -25,119 +25,114 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - fractal
+      - fractal-v2
 
-  # server:
-  #   container_name: fractal-server
+  fractal-server:
+    container_name: fractal-server
+    hostname: slurm
+    depends_on:
+      db:
+        condition: service_healthy
+    image: fractal-server
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - fractal_share:/home/fractal_share/
+    healthcheck:
+      # check if server is up from within the container (hence the localhost)
+      test: curl --fail http://localhost:8000/api/alive/ || exit 1
+      interval: 5s
+      timeout: 2s
+      retries: 5
+    networks:
+      - fractal-v2
+      
+
+  # fractal-web-v1:
+  #   container_name: fractal-web-v1
   #   depends_on:
-  #     db:
+  #     fractal-demos-v1:
   #       condition: service_healthy
-  #   image: fractal-server
+  #   image: fractal-web
   #   build:
   #     context: .
-  #     dockerfile: server/Dockerfile.server.step2
+  #     dockerfile: web/Dockerfile.web.step2
+  #     args:
+  #       - FRACTAL_SERVER_HOST=http://localhost:8000
+  #   ports:
+  #     - 5173:5173
+  #   networks:
+  #     - fractal-v1
+
+  fractal-web-v2:
+    container_name: fractal-web-v2
+    depends_on:
+      fractal-server:
+        condition: service_healthy
+    image: fractal-web
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+      args:
+        - FRACTAL_SERVER_HOST=http://fractal-server:8000
+    ports:
+      - 5173:5173
+    networks:
+      - fractal-v2
+
+  # fractal-demos-v1:
+  #   container_name: fractal-demos-v1
+  #   hostname: slurm
+  #   image: fractal-demos-v1
+  #   build:
+  #     context: .
+  #     dockerfile: demos-v1/Dockerfile
+  #     args:
+  #       - FRACTAL_SERVER_VERSION=2.3.3
   #   ports:
   #     - 8000:8000
   #   volumes:
   #     - fractal_share:/home/fractal_share/
+  #     - ./Resources:/home/fractal_share/Resources
   #   healthcheck:
   #     # check if server is up from within the container (hence the localhost)
   #     test: curl --fail http://localhost:8000/api/alive/ || exit 1
   #     interval: 5s
   #     timeout: 2s
   #     retries: 5
+  #   command: bash -c "
+  #     source fractal-tasks-venv/bin/activate
+  #     && ./run_server.sh
+  #     && cp -r ./fractal-demos-v2 /home/fractal_share/
+  #     && cd /home/fractal_share/fractal-demos-v2/examples
+  #     && . ./run_demos.sh"
   #   networks:
-  #     - fractal
-
-  fractal-web-v1:
-    container_name: fractal-web-v1
-    depends_on:
-      fractal-demos-v1:
-        condition: service_healthy
-    image: fractal-web
-    build:
-      context: .
-      dockerfile: web/Dockerfile.web.step2
-      args:
-        - FRACTAL_SERVER_HOST=http://localhost:8000
-    ports:
-      - 5173:5173
-    networks:
-      - fractal
-
-  fractal-web-v2:
-    container_name: fractal-web-v2
-    depends_on:
-      fractal-demos-v2:
-        condition: service_healthy
-    image: fractal-web
-    build:
-      context: .
-      dockerfile: web/Dockerfile.web.step2
-      args:
-        - FRACTAL_SERVER_HOST=http://localhost:8001
-    ports:
-      - 5173:5173
-    networks:
-      - fractal
-
-  fractal-demos-v1:
-    container_name: fractal-demos-v1
-    hostname: slurm
-    image: fractal-demos-v1
-    build:
-      context: .
-      dockerfile: demos-v1/Dockerfile
-      args:
-        - FRACTAL_SERVER_VERSION=2.3.3
-    ports:
-      - 8000:8000
-    volumes:
-      - fractal_share:/home/fractal_share/
-      - ./Resources:/home/fractal_share/Resources
-    healthcheck:
-      # check if server is up from within the container (hence the localhost)
-      test: curl --fail http://localhost:8000/api/alive/ || exit 1
-      interval: 5s
-      timeout: 2s
-      retries: 5
-    command: bash -c "
-      ./run_server
-      cp -r ./fractal-demos-v1 /home/fractal_share/
-      && source fractal-tasks-venv/bin/activate
-      && cd /home/fractal_share/fractal-demos-v1/examples
-      && . ./run_demos.sh"
-    networks:
-      - fractal
+  #     - fractal-v1
 
   fractal-demos-v2:
     container_name: fractal-demos-v2
+    depends_on:
+      fractal-server:
+        condition: service_healthy
     hostname: slurm
     image: fractal-demos-v2
     build:
       context: .
       dockerfile: demos-v2/Dockerfile
-      args:
-        - FRACTAL_SERVER_VERSION=2.3.3
     ports:
-      - 8000:8001
+      - 6817:6817
     volumes:
       - fractal_share:/home/fractal_share/
       - ./Resources:/home/fractal_share/Resources
-    healthcheck:
-      # check if server is up from within the container (hence the localhost)
-      test: curl --fail http://localhost:8000/api/alive/ || exit 1
-      interval: 5s
-      timeout: 2s
-      retries: 5
     command: bash -c "
-      ./run_server
       cp -r ./fractal-demos-v2 /home/fractal_share/
-      && source fractal-tasks-venv/bin/activate
       && cd /home/fractal_share/fractal-demos-v2/examples
       && . ./run_demos.sh"
     networks:
-      - fractal
+      - fractal-v2
 
 
 volumes:
@@ -149,5 +144,7 @@ volumes:
     external: false
 
 networks:
-  fractal:
+  fractal-v1:
+    driver: bridge
+  fractal-v2:
     driver: bridge
