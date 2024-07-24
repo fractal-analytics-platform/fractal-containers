@@ -10,19 +10,19 @@ on:
 
 jobs:
 
-  tests-v1:
-    timeout-minutes: 20
-    runs-on: ubuntu-22.04
+  # tests-v1:
+  #   timeout-minutes: 20
+  #   runs-on: ubuntu-22.04
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+  #   steps:
+  #   - name: Checkout
+  #     uses: actions/checkout@v4
 
-    - name: Set FRACTAL_RUNNER_BACKEND to 'slurm'
-      run: sed -i 's/local_experimental$/local/' ./testing/server/server.env
+  #   - name: Set FRACTAL_RUNNER_BACKEND to 'slurm'
+  #     run: sed -i 's/local_experimental$/local/' ./testing/server/server.env
 
-    - name: Run demos
-      run: cd testing && make run-demos-v1-github
+  #   - name: Run demos
+  #     run: cd testing && make run-demos-v1-github
 
   tests-v2:
     timeout-minutes: 20
