@@ -38,7 +38,7 @@ run-demos-v2-github:
 
 # server-base demos-v1-base
 run-demos-v1-github: 
-	docker compose --file docker-compose-demos.yml up fractal-demos-v1 --abort-on-container-exit
+	docker compose --file docker-compose-demos.yml up fractal-server fractal-demos-v1 --abort-on-container-exit
 
 
 # Auxiliary targets
