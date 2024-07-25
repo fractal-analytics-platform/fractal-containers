@@ -52,8 +52,8 @@ services:
       
 
 
-  fractal-web-v2:
-    container_name: fractal-web-v2
+  fractal-web:
+    container_name: fractal-web
     depends_on:
       fractal-server:
         condition: service_healthy
