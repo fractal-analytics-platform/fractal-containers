@@ -1,0 +1,6 @@
+For logs, see `/var/log/slurm/`.
+
+
+TODO:
+1. Set up different slurm configuration file, so that many jobs can run at a time.
+2. Record relevant information from `sdiag`.
