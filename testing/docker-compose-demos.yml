@@ -56,7 +56,7 @@ services:
   fractal-web-v1:
     container_name: fractal-web-v1
     depends_on:
-      fractal-demos-v1:
+      fractal-server:
         condition: service_healthy
     image: fractal-web
     build:
