@@ -81,7 +81,7 @@ echo "$VERSION END examples/01 API calls"
 # Start output validation
 echo "$VERSION START examples/01 output validation"
 TMPFILE="tmp_01_validation.txt"
-fractal-tasks-venv/bin/python validate_results.py >> $TMPFILE 2>&1
+python validate_results.py >> $TMPFILE 2>&1
 VALIDATION_EXIT_CODE=$?
 cat $TMPFILE
 
@@ -132,7 +132,7 @@ echo "$VERSION END examples/02 API calls"
 # Start output validation
 echo "$VERSION START examples/02 output validation"
 TMPFILE="tmp_02_validation.txt"
-fractal-tasks-venv/bin/python validate_results.py >> $TMPFILE 2>&1
+python validate_results.py >> $TMPFILE 2>&1
 VALIDATION_EXIT_CODE=$?
 cat $TMPFILE
 
