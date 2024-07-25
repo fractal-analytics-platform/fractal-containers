@@ -1,6 +1,13 @@
-FROM ghcr.io/fractal-analytics-platform/ubuntu22-slurm-tasks-core:0.1
+FROM python:3.11-slim
 
-ARG FRACTAL_SERVER_VERSION
+# Install system libraries
+RUN apt-get update
+RUN apt-get -y install git  # required for installing client/tasks from git
+RUN apt-get -y install curl
+
+# Install requirements for output-validation Python script
+ADD demos-v2/requirements-validation.txt ./requirements-validation.txt
+RUN python3 -m pip install -r requirements-validation.txt
 
 ADD config.env .
 
@@ -15,9 +22,4 @@ COPY demos-v1/get_fractal_tasks_core.sh ./fractal-demos-v1/examples/get_fractal_
 ADD demos-v1/fractal.env ./fractal-demos-v1/examples/.fractal.env
 ADD demos-v1/run_demos.sh ./fractal-demos-v1/examples/run_demos.sh
 
-RUN fractal-tasks-venv/bin/python -m pip install fractal-server[gunicorn,postgres-psycopg-binary]==${FRACTAL_SERVER_VERSION}
-
-COPY demos-v1/run_server.sh .
-COPY demos-v1/.fractal_server.env .
-COPY demos-v1/slurm_config.json .
 
