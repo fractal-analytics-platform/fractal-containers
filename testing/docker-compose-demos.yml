@@ -51,8 +51,24 @@ services:
       - fractal
       
 
-  fractal-web:
-    container_name: fractal-web
+  fractal-web-v1:
+    container_name: fractal-web-v1
+    depends_on:
+      fractal-server:
+        condition: service_healthy
+    image: fractal-web
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+      args:
+        - FRACTAL_SERVER_HOST=http://localhost:8000
+    ports:
+      - 5173:5174
+    networks:
+      - fractal-v1
+
+  fractal-web-v2:
+    container_name: fractal-web-v2
     depends_on:
       fractal-server:
         condition: service_healthy
@@ -122,4 +138,6 @@ volumes:
 
 networks:
   fractal:
+    driver: bridge
+  fractal-v2:
     driver: bridge
