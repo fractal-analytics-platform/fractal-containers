@@ -1,4 +1,8 @@
-FROM ghcr.io/fractal-analytics-platform/ubuntu22-slurm-tasks-core:0.1
+FROM ghcr.io/fractal-analytics-platform/ubuntu22-slurm:0.1
+
+RUN apt install -y git
+RUN apt-get -y install curl
+RUN apt-get -y install libgles2 
 
 # setting up DB configuration
 COPY server/server.env ./.fractal_server.env
