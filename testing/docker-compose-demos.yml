@@ -25,8 +25,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - fractal-v1
-      - fractal-v2
+      - fractal
 
   fractal-server:
     container_name: fractal-server
@@ -49,28 +48,11 @@ services:
       timeout: 2s
       retries: 5
     networks:
-      - fractal-v1
-      - fractal-v2
+      - fractal
       
 
-  fractal-web-v1:
-    container_name: fractal-web-v1
-    depends_on:
-      fractal-demos-v1:
-        condition: service_healthy
-    image: fractal-web
-    build:
-      context: .
-      dockerfile: web/Dockerfile
-      args:
-        - FRACTAL_SERVER_HOST=http://localhost:8000
-    ports:
-      - 5173:5174
-    networks:
-      - fractal-v1
-
-  fractal-web-v2:
-    container_name: fractal-web-v2
+  fractal-web:
+    container_name: fractal-web
     depends_on:
       fractal-server:
         condition: service_healthy
@@ -83,7 +65,7 @@ services:
     ports:
       - 5173:5173
     networks:
-      - fractal-v2
+      - fractal
 
   fractal-demos-v1:
     container_name: fractal-demos-v1
@@ -105,7 +87,7 @@ services:
       && cd /home/fractal_share/fractal-demos-v1/examples
       && . ./run_demos.sh"
     networks:
-      - fractal-v1
+      - fractal
 
   fractal-demos-v2:
     container_name: fractal-demos-v2
@@ -127,7 +109,7 @@ services:
       && cd /home/fractal_share/fractal-demos-v2/examples
       && . ./run_demos.sh"
     networks:
-      - fractal-v2
+      - fractal
 
 
 volumes:
@@ -139,7 +121,5 @@ volumes:
     external: false
 
 networks:
-  fractal-v1:
-    driver: bridge
-  fractal-v2:
+  fractal:
     driver: bridge
