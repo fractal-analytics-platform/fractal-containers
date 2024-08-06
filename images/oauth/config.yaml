@@ -18,6 +18,12 @@ staticClients:
     redirectURIs:
       - http://localhost:8001/auth/dexidp/callback/
 
+  - name: TestWebClient
+    id: client_test_web_id
+    secret: client_test_web_secret
+    redirectURIs:
+      - http://localhost:5173/auth/login/oauth2/
+
 connectors:
 # mockCallback connector always returns the user 'kilgore@kilgore.trout'.
 - type: mockCallback
