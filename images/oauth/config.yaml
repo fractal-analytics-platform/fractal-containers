@@ -1,0 +1,31 @@
+# Documentation: https://dexidp.io/docs
+
+issuer: http://127.0.0.1:5556/dex
+
+storage:
+  type: memory
+
+web:
+  http: 0.0.0.0:5556
+
+oauth2:
+  skipApprovalScreen: true
+
+staticClients:
+  - name: TestClient
+    id: client_test_id
+    secret: client_test_secret
+    redirectURIs:
+      - http://localhost:8001/auth/dexidp/callback/
+
+  - name: TestWebClient
+    id: client_test_web_id
+    secret: client_test_web_secret
+    redirectURIs:
+      - http://localhost:5173/auth/login/oauth2/
+
+connectors:
+# mockCallback connector always returns the user 'kilgore@kilgore.trout'.
+- type: mockCallback
+  id: mock
+  name: Mock

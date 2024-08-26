@@ -32,11 +32,13 @@ web-no-cache: web-base
 run-demos: clean server-no-cache demos-v1-no-cache demos-v2-no-cache web-no-cache
 	docker compose --file docker-compose-demos.yml up
 
-run-demos-v2-github: server-base demos-v2-base
-	docker compose --file docker-compose-demos.yml up demos-v2 --abort-on-container-exit
+# server-base demos-v2-base
+run-demos-v2-github: 
+	docker compose --file docker-compose-demos.yml up fractal-server fractal-demos-v2 --abort-on-container-exit
 
-run-demos-v1-github: server-base demos-v1-base
-	docker compose --file docker-compose-demos.yml up demos-v1 --abort-on-container-exit
+# server-base demos-v1-base
+run-demos-v1-github: 
+	docker compose --file docker-compose-demos.yml up fractal-server fractal-demos-v1 --abort-on-container-exit
 
 
 # Auxiliary targets

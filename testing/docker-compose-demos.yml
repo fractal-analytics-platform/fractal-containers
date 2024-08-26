@@ -27,15 +27,16 @@ services:
     networks:
       - fractal
 
-  server:
+  fractal-server:
     container_name: fractal-server
+    hostname: slurm
     depends_on:
       db:
         condition: service_healthy
     image: fractal-server
     build:
       context: .
-      dockerfile: server/Dockerfile.server.step2
+      dockerfile: server/Dockerfile
     ports:
       - 8000:8000
     volumes:
@@ -48,30 +49,37 @@ services:
       retries: 5
     networks:
       - fractal
+      
 
-  web:
+
+  fractal-web:
     container_name: fractal-web
     depends_on:
-      server:
+      fractal-server:
         condition: service_healthy
     image: fractal-web
     build:
       context: .
-      dockerfile: web/Dockerfile.web.step2
+      dockerfile: web/Dockerfile
+      args:
+        - FRACTAL_SERVER_HOST=http://fractal-server:8000
     ports:
       - 5173:5173
     networks:
       - fractal
 
-  demos-v1:
+  fractal-demos-v1:
     container_name: fractal-demos-v1
     depends_on:
-      server:
+      fractal-server:
         condition: service_healthy
+    hostname: slurm
     image: fractal-demos-v1
     build:
       context: .
-      dockerfile: demos-v1/Dockerfile.demos.step2
+      dockerfile: demos-v1/Dockerfile
+    ports:
+      - 6817:6818
     volumes:
       - fractal_share:/home/fractal_share/
       - ./Resources:/home/fractal_share/Resources
@@ -82,15 +90,18 @@ services:
     networks:
       - fractal
 
-  demos-v2:
+  fractal-demos-v2:
     container_name: fractal-demos-v2
     depends_on:
-      server:
+      fractal-server:
         condition: service_healthy
+    hostname: slurm
     image: fractal-demos-v2
     build:
       context: .
-      dockerfile: demos-v2/Dockerfile.demos.step2
+      dockerfile: demos-v2/Dockerfile
+    ports:
+      - 6817:6817
     volumes:
       - fractal_share:/home/fractal_share/
       - ./Resources:/home/fractal_share/Resources
