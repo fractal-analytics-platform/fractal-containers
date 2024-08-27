@@ -10,3 +10,5 @@ RUN wget https://github.com/fractal-analytics-platform/fractal-server/raw/main/t
 COPY run_server.sh ./
 COPY .fractal_server.env ./
 COPY slurm_config.json ./
+
+ENTRYPOINT ["bash", "run_server.sh"]
