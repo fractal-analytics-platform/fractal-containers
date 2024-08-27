@@ -10,8 +10,6 @@ services:
       dockerfile: Dockerfile
     volumes:
       - /tmp:/tmp:rw
-    environment:
-      - SLURM_CPUS_ON_NODE=1
     ports:
       - 6817:6817
       - 6818:6818
