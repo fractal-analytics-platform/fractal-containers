@@ -2,7 +2,7 @@ Makefile targets `run-demos-v2-github` and `run-demos-v1-github` are used within
 
 To run v2 demos locally, and with a webclient, use
 ```bash
-make run-demos-v2-github
+make run-demos-v2
 ```
 This will startup a database, a webclient, a SLURM cluster, and a
 fractal-server backend. Then it will trigger task collection for
