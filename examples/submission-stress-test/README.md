@@ -1,3 +1,5 @@
+This example shows how to submit an arbitrary number of mock jobs, each one iterating over an arbitrary number of images.
+
 # Instructions
 
 1. After running
@@ -7,7 +9,7 @@ docker compose up
 ```
 you have a `fractal-server` service on http://localhost:8000 and a fractal-web client at http://localhost:5173 (credentials: admin@fractal.xy/1234).
 
-2. From the `client` subfolder:
+2. From the `client` subfolder (on the host machine):
 ```bash
 ./0_setup_venv.sh
 ./1_setup_user_and_tasks.
