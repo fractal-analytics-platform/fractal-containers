@@ -3,6 +3,7 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+
 ###############################################################################
 # IMPORTANT: This defines the location of input & output data
 # Set cache path and remove any previous file from there
@@ -14,9 +15,11 @@ fi
 
 ###############################################################################
 
+source venv/bin/activate
+
 WHEEL_PATH=/fractal_tasks_mock-0.0.1-py3-none-any.whl
+echo "Now start task collection"
 fractal task collect $WHEEL_PATH
-echo "Task collection started"
 
 ###############################################################################
 

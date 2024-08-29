@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Activate SLURM, by running the entrypoint of the base image
+/etc/slurm/docker-entrypoint.sh
+
 fractalctl set-db
 
 gunicorn fractal_server.main:app \
