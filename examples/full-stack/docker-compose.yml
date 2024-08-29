@@ -38,7 +38,7 @@ services:
       context: ../slurm-common
       dockerfile: Dockerfile
       args:
-        - FRACTAL_SERVER_VERSION=2.3.3
+        - FRACTAL_SERVER_VERSION=2.3.10
     depends_on:
       db:
         condition: service_healthy

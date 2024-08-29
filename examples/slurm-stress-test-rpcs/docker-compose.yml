@@ -1,0 +1,15 @@
+services:
+
+  slurm:
+    hostname: slurm
+    container_name: slurm
+    cpus: 5.0
+    mem_limit: 5g
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /tmp:/tmp:rw
+    ports:
+      - 6817:6817
+      - 6818:6818
