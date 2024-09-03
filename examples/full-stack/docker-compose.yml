@@ -1,5 +1,4 @@
 services:
-
   db:
     cpus: 1.0
     mem_limit: "1G"
@@ -8,8 +7,7 @@ services:
     restart: always
     ports:
       - 5433:5433
-    command:
-      -p 5433
+    command: -p 5433
     environment:
       POSTGRES_USER: fractal
       POSTGRES_PASSWORD: fractal
@@ -27,7 +25,6 @@ services:
       retries: 5
     networks:
       - fractal
-
 
   slurm:
     hostname: slurm
@@ -58,7 +55,6 @@ services:
     networks:
       - fractal
 
-
   web:
     container_name: fractal-web
     build:
@@ -72,7 +68,6 @@ services:
     networks:
       - fractal
 
-
   server-config:
     container_name: server-config
     build:
@@ -85,6 +80,19 @@ services:
     networks:
       - fractal
 
+  fractal-filebrowser:
+    container_name: fractal-filebrowser
+    build:
+      context: ./filebrowser
+    ports:
+      - 8080:80
+    networks:
+      - fractal
+    volumes:
+      - data_fs:/srv
+
+volumes:
+  data_fs:
 
 networks:
   fractal:
