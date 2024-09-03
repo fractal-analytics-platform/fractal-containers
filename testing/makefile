@@ -9,6 +9,9 @@ run-demos-v1-github:
 
 # Auxiliary targets
 
+build:
+	docker compose -f docker-compose-demos.yml build
+
 clean:
 	docker compose -f docker-compose-demos.yml down -v --timeout 2
 
