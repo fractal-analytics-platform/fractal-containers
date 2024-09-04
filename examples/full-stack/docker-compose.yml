@@ -89,7 +89,7 @@ services:
     networks:
       - fractal
     volumes:
-      - data:/srv
+      - data:/data
 
   vizarr:
     container_name: vizarr
