@@ -96,7 +96,7 @@ services:
     build:
       context: ./vizarr
     environment:
-      - ZARR_DATA_BASE_PATH=/zarr-files
+      - ZARR_DATA_BASE_PATH=/data/zarrs
       - FRACTAL_SERVER_URL=http://slurm:8000
       - ALLOWED_USERS=/allowed_users.txt
     ports:
@@ -104,7 +104,7 @@ services:
     networks:
       - fractal
     volumes:
-      - data:/zarr-files:ro
+      - data:/data:ro
 volumes:
   data:
 
