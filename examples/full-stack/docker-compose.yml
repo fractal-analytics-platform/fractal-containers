@@ -89,7 +89,7 @@ services:
     networks:
       - fractal
     volumes:
-      - data_fs:/srv
+      - data:/srv
 
   vizarr:
     container_name: vizarr
@@ -104,9 +104,9 @@ services:
     networks:
       - fractal
     volumes:
-      - data_fs:/zarr-files:ro
+      - data:/zarr-files:ro
 volumes:
-  data_fs:
+  data:
 
 networks:
   fractal:

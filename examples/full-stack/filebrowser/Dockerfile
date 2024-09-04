@@ -8,4 +8,4 @@ RUN unzip /srv/20200812-CardiomyocyteDifferentiation14-Cycle1_mip.zarr.zip -d /s
 RUN rm /srv/20200812-CardiomyocyteDifferentiation14-Cycle1_mip.zarr.zip 
 RUN rm -r /srv/__MACOSX
 RUN /filebrowser config set --auth.method=noauth  
-
+RUN /filebrowser users update 1 --perm.admin=false
