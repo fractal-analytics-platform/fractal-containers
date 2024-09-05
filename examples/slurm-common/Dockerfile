@@ -11,4 +11,7 @@ COPY run_server.sh ./
 COPY .fractal_server.env ./
 COPY slurm_config.json ./
 
+RUN mkdir -p /data/app/Tasks
+RUN mkdir -p /data/app/Artifacts
+
 ENTRYPOINT ["bash", "run_server.sh"]
