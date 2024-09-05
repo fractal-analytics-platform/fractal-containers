@@ -8,7 +8,8 @@
             "window":{
                 "start": 110,
                 "end": 800
-            }
+            },
+            "active": true
         },
         {
             "color": "FF00FF",
@@ -17,13 +18,15 @@
             "window": {
                 "start": 110,
                 "end": 290
-            }
+            },
+            "active": true
         },
         {
             "color": "FFFF00",
             "wavelength_id": "A02_C03",
             "label": "Lamin B1",
-            "window": {"start": 110, "end": 1600}
+            "window": {"start": 110, "end": 1600},
+            "active": true
         }
     ],
     "coarsening_xy": 2,

@@ -3,7 +3,7 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-LABEL="cardiac-test-partial-3"
+LABEL="cardiac-test"
 
 PROJECT_NAME="proj-$LABEL"
 DS_NAME="ds-$LABEL"
@@ -24,5 +24,5 @@ WF_ID=$(fractal --batch workflow new "$WF_NAME" "$PROJECT_ID")
 echo "WF_ID=$WF_ID created"
 
 # Add tasks to workflow
-fractal --batch workflow add-task "$PROJECT_ID" "$WF_ID" --task-name "Convert Cellvoyager to OME-Zarr" --args-non-parallel args_cellvoyager_to_ome_zarr_init.json
-fractal --batch workflow add-task "$PROJECT_ID" "$WF_ID" --task-name "Project Image (HCS Plate)" --args-non-parallel args_copy_ome_zarr.json
+fractal --batch workflow add-task "$PROJECT_ID" "$WF_ID" --task-name "Convert Cellvoyager to OME-Zarr" --args-non-parallel args_cellvoyager_to_ome_zarr_init.json --meta-non-parallel task_meta.json --meta-parallel task_meta.json
+fractal --batch workflow add-task "$PROJECT_ID" "$WF_ID" --task-name "Project Image (HCS Plate)" --args-non-parallel args_copy_ome_zarr.json --meta-non-parallel task_meta.json --meta-parallel task_meta.json
