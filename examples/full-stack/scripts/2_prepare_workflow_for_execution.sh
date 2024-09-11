@@ -11,6 +11,14 @@ WF_NAME="Workflow $LABEL"
 ZARR_DIR=/data/zarrs/${LABEL}
 
 
+# Set cache path to the local directory, remove it if it exists
+FRACTAL_CACHE_PATH=$(pwd)/".cache"
+export FRACTAL_CACHE_PATH="$FRACTAL_CACHE_PATH"
+if [ -d "$FRACTAL_CACHE_PATH" ]; then
+    rm -rv "$FRACTAL_CACHE_PATH"  2> /dev/null
+fi
+
+
 # Create project
 PROJECT_ID=$(fractal --batch project new "$PROJECT_NAME")
 echo "PROJECT_ID=$PROJECT_ID created"
