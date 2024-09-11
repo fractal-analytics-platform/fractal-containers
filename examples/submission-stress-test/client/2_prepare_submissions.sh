@@ -12,7 +12,7 @@ source venv/bin/activate
 ###############################################################################
 
 LABEL=$(date +%s)
-WORKFLOW_JSON_FILE=/tmp/${LABEL}.json
+WORKFLOW_JSON_FILE=tmp_${LABEL}.json
 
 SUBMIT_SCRIPT=3_submit_jobs.sh
 echo "#!/bin/bash" > "$SUBMIT_SCRIPT"
@@ -23,7 +23,7 @@ echo "{ \"image_dir\": \"/invalid\", \"num_images\": $NUM_IMAGES }" > tmp_args_c
 
 for PROJECT_INDEX in $(seq 1 $NUM_PROJECTS); do
 
-    ZARR_DIR=/tmp/zarr_dirs/output_${LABEL}_${PROJECT_INDEX}
+    ZARR_DIR=/data/zarrs/output_${LABEL}_${PROJECT_INDEX}
     PROJECT_NAME="Project $LABEL/$PROJECT_INDEX"
     DS_NAME="Dataset $LABEL/$PROJECT_INDEX"
     WORKFLOW_NAME="Workflow $LABEL/$PROJECT_INDEX"

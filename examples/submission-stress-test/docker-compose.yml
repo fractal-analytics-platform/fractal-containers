@@ -25,6 +25,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
     networks:
       - fractal
 
@@ -45,7 +47,7 @@ services:
       db:
         condition: service_healthy
     volumes:
-      - /tmp:/tmp:rw
+      - data:/data
     environment:
       - SLURM_CPUS_ON_NODE=1
     ports:
@@ -67,7 +69,7 @@ services:
       context: ./web
       dockerfile: Dockerfile
       args:
-        - FRACTAL_WEB_VERSION=1.4.2
+        - FRACTAL_WEB_VERSION=1.4.3
     depends_on:
       slurm:
         condition: service_healthy
@@ -76,6 +78,11 @@ services:
     networks:
       - fractal
 
+
 networks:
   fractal:
     driver: bridge
+
+volumes:
+  data:
+  postgres_db:
