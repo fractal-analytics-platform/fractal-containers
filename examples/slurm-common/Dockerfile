@@ -4,6 +4,7 @@ ARG FRACTAL_SERVER_VERSION
 ARG SLURM_CPUS
 ARG SLURM_MEMORY
 
+RUN echo "Install fractal-server ${FRACTAL_SERVER_VERSION}"
 RUN pip3 install fractal-server[gunicorn,postgres-psycopg-binary]==${FRACTAL_SERVER_VERSION}
 
 # RUN apt install wget -y
