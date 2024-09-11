@@ -31,7 +31,7 @@ services:
   slurm:
     hostname: slurm
     container_name: slurm
-    cpus: 5.0
+    cpus: 3.0
     mem_limit: 5g
     build:
       context: ../slurm-common
