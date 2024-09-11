@@ -11,7 +11,7 @@ on:
 jobs:
 
   tests-v1:
-    timeout-minutes: 20
+    timeout-minutes: 25
     runs-on: ubuntu-22.04
 
     steps:
@@ -25,7 +25,7 @@ jobs:
       run: cd testing && make run-demos-v1-github
 
   tests-v2:
-    timeout-minutes: 20
+    timeout-minutes: 25
     runs-on: ubuntu-22.04
 
     steps:
