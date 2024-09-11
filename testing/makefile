@@ -15,5 +15,8 @@ build:
 clean:
 	docker compose -f docker-compose-demos.yml down -v --timeout 2
 
+clean-with-volumes:
+	docker compose -f docker-compose-demos.yml down --volumes -v --timeout 2
+
 list-share:
 	tree | docker volume inspect --format '{{ .Mountpoint }}' fractal_share
