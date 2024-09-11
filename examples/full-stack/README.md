@@ -1,9 +1,12 @@
 This example includes a full-fledged Fractal deployment, useful for demo's and onboarding sessions.
 
-> ⚠️⚠️⚠️ WARNING: This example is not suitable for any production use! ⚠️⚠️⚠️
+> ⚠️⚠️⚠️ WARNING: This example is not suitable for production use! ⚠️⚠️⚠️
+>
 > The reason is that this example includes a few assumptions/workarounds (mostly
 > related to data access) that are meant to make a demo session as smooth as
-> possible.
+> possible. Moreover, the Docker-volume data are persistent across container
+> restarts, but we need to better document how to clean them up (as in
+> `docker compose down --volumes`).
 
 # List of Fractal services in this example
 
