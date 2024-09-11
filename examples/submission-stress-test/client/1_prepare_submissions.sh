@@ -11,10 +11,20 @@ source venv/bin/activate
 
 ###############################################################################
 
-LABEL=$(date +%s)
-WORKFLOW_JSON_FILE=tmp_${LABEL}.json
+# Set cache path and remove any previous file from there
+FRACTAL_CACHE_PATH=$(pwd)/".cache"
+export FRACTAL_CACHE_PATH="$FRACTAL_CACHE_PATH"
+if [ -d "$FRACTAL_CACHE_PATH" ]; then
+    rm -rv "$FRACTAL_CACHE_PATH"  2> /dev/null
+fi
 
-SUBMIT_SCRIPT=3_submit_jobs.sh
+
+###############################################################################
+
+LABEL=$(date +%s)
+WORKFLOW_JSON_FILE=/tmp/workflow_${LABEL}.json
+
+SUBMIT_SCRIPT=2_submit_jobs.sh
 echo "#!/bin/bash" > "$SUBMIT_SCRIPT"
 echo "source venv/bin/activate" >> "$SUBMIT_SCRIPT"
 chmod +x "$SUBMIT_SCRIPT"

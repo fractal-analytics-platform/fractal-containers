@@ -78,6 +78,20 @@ services:
     networks:
       - fractal
 
+  server-config:
+    container_name: server-config
+    build:
+      context: ./server-config
+      args:
+        - FRACTAL_CLIENT_VERSION=2.0.3
+    depends_on:
+      slurm:
+        condition: service_healthy
+    volumes:
+      - data:/data
+    networks:
+      - fractal
+
 
 networks:
   fractal:
