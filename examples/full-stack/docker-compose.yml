@@ -104,7 +104,7 @@ services:
     environment:
       - ZARR_DATA_BASE_PATH=/data/zarrs
       - FRACTAL_SERVER_URL=http://slurm:8000
-      - ALLOWED_USERS=/allowed_users.txt
+      - AUTHORIZATION_SCHEME=none
     ports:
       - 3000:3000
     networks:
