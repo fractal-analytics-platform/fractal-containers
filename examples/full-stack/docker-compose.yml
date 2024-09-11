@@ -37,7 +37,7 @@ services:
       context: ../slurm-common
       dockerfile: Dockerfile
       args:
-        - FRACTAL_SERVER_VERSION=2.4.0a2
+        - FRACTAL_SERVER_VERSION=2.4.0
         - SLURM_CPUS=3
         - SLURM_MEMORY=3000
     depends_on:
