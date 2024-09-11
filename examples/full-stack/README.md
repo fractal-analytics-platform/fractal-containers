@@ -2,7 +2,7 @@ This example includes a full-fledged Fractal deployment, useful for demo's and o
 
 > ⚠️⚠️⚠️ WARNING: This example is not suitable for production use! ⚠️⚠️⚠️
 >
-> Reasons:
+> Main reasons:
 > 1. This example includes a few assumptions/workarounds (mostly related to data access) that are meant to make a demo session as smooth as possible.
 > 2. The persistence of Docker-volume data across container may be counterintuitive, and we should better document how to clean them up (e.g. as in `docker compose down --volumes`).
 > 3. The SLURM cluster is created with limited resources, so that the demo can run on small machines as well, and this is currently not configurable.
