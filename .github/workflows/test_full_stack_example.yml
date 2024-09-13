@@ -1,0 +1,22 @@
+name: Test
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    - cron: "0 23 * * 2,3,4"
+
+jobs:
+
+  test-full-stack-example:
+    timeout-minutes: 10
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Test `docker compose up`
+      run: ./scripts/test_docker_compose_up_for_full_stack_example.sh
