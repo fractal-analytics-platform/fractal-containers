@@ -7,7 +7,7 @@ set -e
 echo "Run docker compose up"
 docker compose --file examples/full-stack/docker-compose.yml up --detach
 
-SLEEPTIME=240
+SLEEPTIME=120
 
 echo "Now sleep $SLEEPTIME seconds"
 echo
