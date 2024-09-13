@@ -101,7 +101,7 @@ services:
 
   vizarr:
     container_name: vizarr
-    image: ghcr.io/fractal-analytics-platform/fractal-vizarr-viewer:dev
+    image: ghcr.io/fractal-analytics-platform/fractal-vizarr-viewer:stable
     environment:
       - ZARR_DATA_BASE_PATH=/data/zarrs
       - FRACTAL_SERVER_URL=http://slurm:8000
