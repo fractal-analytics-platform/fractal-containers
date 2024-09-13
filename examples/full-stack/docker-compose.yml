@@ -37,7 +37,7 @@ services:
       context: ../slurm-common
       dockerfile: Dockerfile
       args:
-        - FRACTAL_SERVER_VERSION=2.4.0
+        - FRACTAL_SERVER_VERSION=2.5.0a0
         - SLURM_CPUS=3
         - SLURM_MEMORY=3000
     depends_on:
@@ -65,7 +65,7 @@ services:
       context: ./web
       dockerfile: Dockerfile
       args:
-        - FRACTAL_WEB_VERSION=1.4.3
+        - FRACTAL_WEB_VERSION=1.5.0
     depends_on:
       slurm:
         condition: service_healthy
@@ -79,7 +79,7 @@ services:
     build:
       context: ./server-config
       args:
-        - FRACTAL_CLIENT_VERSION=2.0.3
+        - FRACTAL_CLIENT_VERSION=2.1.0
     depends_on:
       slurm:
         condition: service_healthy
@@ -101,7 +101,7 @@ services:
 
   vizarr:
     container_name: vizarr
-    image: ghcr.io/fractal-analytics-platform/fractal-vizarr-viewer:dev
+    image: ghcr.io/fractal-analytics-platform/fractal-vizarr-viewer:stable
     environment:
       - ZARR_DATA_BASE_PATH=/data/zarrs
       - FRACTAL_SERVER_URL=http://slurm:8000
