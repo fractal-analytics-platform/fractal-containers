@@ -38,7 +38,8 @@ cp -r /home/fractal_share/Resources/images/10.5281_zenodo.8287221 images/
 cp -r /home/fractal_share/Resources/images/10.5281_zenodo.7057076 images/
 
 # Pre-populate `zarr_dir` folders for both examples, so that we can make
-# them broadly accessible
+# them broadly accessible (note: we include both ZARRDIR02 and ZARRDIR03
+# as it's unclear which one is correct - at the moment)
 ZARRDIR01=./01_cardio_tiny_dataset/output_cardiac-tiny
 ZARRDIR02=./02_cardio_small/output-cardio-2x2-zenodo
 ZARRDIR03=./02_cardio_small/output-cardio-2x2-zenodo-3
