@@ -37,6 +37,9 @@ services:
     build:
       context: .
       dockerfile: server/Dockerfile
+      args:
+        - SLURM_CPUS=2
+        - SLURM_MEMORY=2000
     ports:
       - 8000:8000
     volumes:
