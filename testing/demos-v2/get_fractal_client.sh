@@ -18,7 +18,7 @@ if [ -z "${FRACTAL_CLIENT_V2_RELEASE}" ]; then
 else
     if [ -z "${FRACTAL_CLIENT_V2_GIT}" ]; then
         # Case 3: only release set
-        python3 -m pip install fractal-client==$FRACTAL_CLIENT_V2_RELEASE
+        python3 -m pip install "fractal-client==$FRACTAL_CLIENT_V2_RELEASE"
     else
         # Case 4: both release and git set
         echo "Error: cannot set both FRACTAL_CLIENT_V2_RELEASE and FRACTAL_CLIENT_V2_GIT." && exit 1
