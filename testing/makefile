@@ -17,10 +17,10 @@ build-afresh:
 	docker compose build --pull --no-cache
 
 clean:
-	docker compose down -v --timeout 2
+	docker compose down -v --timeout 1
 
 clean-with-volumes:
-	docker compose down --volumes -v --timeout 2
+	docker compose down --volumes -v --timeout 1
 
 list-share:
 	tree | docker volume inspect --format '{{ .Mountpoint }}' fractal_share
