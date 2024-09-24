@@ -1,5 +1,11 @@
 FROM ghcr.io/fractal-analytics-platform/ubuntu22-slurm:0.1
 
+# User specific cpu count and memory for slurm configuration
+ARG SLURM_CPUS
+ARG SLURM_MEMORY
+RUN sed -i "s/CPUs=[0-9]*/CPUs=${SLURM_CPUS}/g" /etc/slurm/slurm.conf
+RUN sed -i "s/RealMemory=[0-9]*/RealMemory=${SLURM_MEMORY}/g" /etc/slurm/slurm.conf
+
 RUN apt update && apt install -y git curl
 RUN apt install -y libgles2
 
@@ -12,7 +18,10 @@ ADD config.env .
 COPY server/get_fractal_server.sh .
 RUN bash get_fractal_server.sh
 
-ENV PIP_DEFAULT_TIMEOUT=100
+ENV PIP_DEFAULT_TIMEOUT=
+
+RUN mkdir -p /home/fractal_share/
+RUN chmod -R 777 /home/fractal_share/
 
 # Launch command
 CMD fractalctl set-db && \
