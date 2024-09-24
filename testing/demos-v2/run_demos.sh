@@ -38,19 +38,13 @@ cp -r /home/fractal_share/Resources/images/10.5281_zenodo.8287221 images/
 cp -r /home/fractal_share/Resources/images/10.5281_zenodo.7057076 images/
 
 # Pre-populate `zarr_dir` folders for both examples, so that we can make
-# them broadly accessible (note: we include both ZARRDIR02 and ZARRDIR03
-# as it's unclear which one is correct - at the moment)
+# them broadly accessible
 ZARRDIR01=./01_cardio_tiny_dataset/output_cardiac-tiny
-ZARRDIR02=./02_cardio_small/output-cardio-2x2-zenodo
-ZARRDIR03=./02_cardio_small/output-cardio-2x2-zenodo-3
-for ZARRDIR in "$ZARRDIR01" "$ZARRDIR02" "$ZARRDIR03"; do
+ZARRDIR02=./02_cardio_small/02_cardio_small/output-cardio-2x2-zenodo-subset
+for ZARRDIR in "$ZARRDIR01" "$ZARRDIR02"; do
     mkdir -p "$ZARRDIR"
     chmod -R 777 "$ZARRDIR"
 done
-
-# Overwrite meta JSON files used in demos, to avoid requesting resources
-echo "{\"cpus_per_task\": 4, \"mem\": 4000}" > ./01_cardio_tiny_dataset/Parameters/example_meta.json
-echo "{\"cpus_per_task\": 4, \"mem\": 4000}" > ./02_cardio_small/Parameters/meta_cellpose.json
 
 # Whoami
 fractal user whoami
