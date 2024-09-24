@@ -17,7 +17,7 @@ if [ -z "${FRACTAL_TASKS_CORE_V2_RELEASE}" ]; then
         # Case 2: only git set
         git clone https://github.com/fractal-analytics-platform/fractal-tasks-core.git
         cd fractal-tasks-core
-        git checkout $FRACTAL_TASKS_CORE_V2_GIT
+        git checkout "$FRACTAL_TASKS_CORE_V2_GIT"
         check_exit_code "Checking out to fractal-tasks-core@$FRACTAL_TASKS_CORE_V2_GIT"
 
         curl -sSL https://install.python-poetry.org | python3 -
@@ -25,12 +25,12 @@ if [ -z "${FRACTAL_TASKS_CORE_V2_RELEASE}" ]; then
 
         /root/.local/bin/poetry build
 
-        WHL=`ls dist/*.whl`
+        WHL=$(ls dist/*.whl)
         check_exit_code "File .whl not found"
         ABS_WHL="$(pwd)/$WHL"
 
         cd ..
-        fractal task collect $ABS_WHL --package-extras fractal-tasks
+        fractal task collect "$ABS_WHL" --package-extras fractal-tasks
     fi
 else
     if [ -z "${FRACTAL_TASKS_CORE_V2_GIT}" ]; then

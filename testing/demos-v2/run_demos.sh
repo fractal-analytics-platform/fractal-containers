@@ -41,7 +41,7 @@ cp -r /home/fractal_share/Resources/images/10.5281_zenodo.7057076 images/
 fractal user whoami
 FRACTAL_USER_ID=$(fractal --batch user whoami )
 
-fractal user edit $FRACTAL_USER_ID --new-cache-dir /home/test01 --new-slurm-user test01
+fractal user edit "$FRACTAL_USER_ID" --new-cache-dir /home/test01 --new-slurm-user test01
 # Trigger task collection
 bash get_fractal_tasks_core.sh
 
