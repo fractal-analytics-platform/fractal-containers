@@ -9,8 +9,12 @@ run-demos-v1-github:
 
 # Auxiliary targets
 
+
 build:
 	docker compose build
+
+build-afresh:
+	docker compose build --pull --no-cache
 
 clean:
 	docker compose down -v --timeout 2
