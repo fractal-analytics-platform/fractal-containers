@@ -13,8 +13,8 @@ run-demos-v1-github:
 build:
 	docker compose build
 
-build-afresh:
-	docker compose build --pull --no-cache
+build-no-cache:
+	docker compose build --no-cache
 
 clean:
 	docker compose down -v --timeout 1
