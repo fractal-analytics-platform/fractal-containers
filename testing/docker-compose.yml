@@ -39,7 +39,7 @@ services:
       dockerfile: server/Dockerfile
       args:
         - SLURM_CPUS=4
-        - SLURM_MEMORY=16000
+        - SLURM_MEMORY=12000
     ports:
       - 8000:8000
     volumes:
