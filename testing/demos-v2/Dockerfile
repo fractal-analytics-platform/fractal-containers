@@ -1,9 +1,7 @@
 FROM python:3.11-slim
 
 # Install system libraries
-RUN apt-get update
-RUN apt-get -y install git  # required for installing client/tasks from git
-RUN apt-get -y install curl
+RUN apt update && apt install -y git curl
 
 # Install requirements for output-validation Python script
 ADD demos-v2/requirements-validation.txt ./requirements-validation.txt
