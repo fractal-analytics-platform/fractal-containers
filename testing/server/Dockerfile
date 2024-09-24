@@ -5,6 +5,7 @@ RUN apt install -y libgles2
 
 # setting up DB configuration
 COPY server/server.env ./.fractal_server.env
+COPY server/slurm_config.json ./
 
 # Install fractal-server
 ADD config.env .
@@ -13,7 +14,7 @@ RUN bash get_fractal_server.sh
 
 ENV PIP_DEFAULT_TIMEOUT=100
 
-# launch command
+# Launch command
 CMD fractalctl set-db && \
     gunicorn fractal_server.main:app \
     --workers 2 \
