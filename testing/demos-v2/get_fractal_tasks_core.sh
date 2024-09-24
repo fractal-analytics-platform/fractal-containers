@@ -28,6 +28,7 @@ if [ -z "${FRACTAL_TASKS_CORE_V2_RELEASE}" ]; then
         WHL=$(ls dist/*.whl)
         check_exit_code "File .whl not found"
         ABS_WHL="$(pwd)/$WHL"
+        chmod 777 "$ABS_WHL"
 
         cd ..
         fractal task collect "$ABS_WHL" --package-extras fractal-tasks
