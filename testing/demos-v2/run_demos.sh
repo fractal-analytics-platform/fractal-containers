@@ -54,6 +54,9 @@ done
 # Enter 01_cardio_tiny_dataset folder
 cd 01_cardio_tiny_dataset
 
+# Overwrite example_meta.json file, to avoid requiring 4G of memory
+echo "{\"cpus_per_task\": 1, \"mem\": 1000}" > Parameters/example_meta.json
+
 # Run example 01 and capture exit code
 echo "$VERSION START examples/01 API calls"
 TMPFILE="tmp_01_api.txt"
