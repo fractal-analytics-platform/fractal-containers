@@ -7,9 +7,9 @@
   "gpu_slurm_config": {},
   "batching_config": {
       "target_cpus_per_job": 1,
-      "max_cpus_per_job": 2,
+      "max_cpus_per_job": 4,
       "target_mem_per_job": 200,
-      "max_mem_per_job": 4000,
+      "max_mem_per_job": 16000,
       "target_num_jobs": 2,
       "max_num_jobs": 100
   }
