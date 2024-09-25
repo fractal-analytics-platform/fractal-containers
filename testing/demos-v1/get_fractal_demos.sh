@@ -4,7 +4,7 @@ if [ -z "${FRACTAL_DEMOS_V1_GIT}" ]; then
     FRACTAL_DEMOS_V1_GIT=main
 fi
 
-git clone --single-branch --branch $FRACTAL_DEMOS_V1_GIT https://github.com/fractal-analytics-platform/fractal-demos.git
+git clone --single-branch --branch "$FRACTAL_DEMOS_V1_GIT" https://github.com/fractal-analytics-platform/fractal-demos.git
 mv fractal-demos fractal-demos-v1
 
 EXIT_CODE=$?
