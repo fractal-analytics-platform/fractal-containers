@@ -4,9 +4,6 @@ run-demos-v2: clean
 run-demos-v2-github:
 	docker compose up fractal-server fractal-demos-v2 --abort-on-container-exit
 
-run-demos-v1-github:
-	docker compose up fractal-server fractal-demos-v1 --abort-on-container-exit
-
 # Auxiliary targets
 
 
