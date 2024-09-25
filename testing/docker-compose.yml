@@ -71,28 +71,6 @@ services:
     networks:
       - fractal
 
-  fractal-demos-v1:
-    container_name: fractal-demos-v1
-    depends_on:
-      fractal-server:
-        condition: service_healthy
-    hostname: slurm
-    image: fractal-demos-v1
-    build:
-      context: .
-      dockerfile: demos-v1/Dockerfile
-    ports:
-      - 6817:6818
-    volumes:
-      - fractal_share:/home/fractal_share/
-      - ./Resources:/home/fractal_share/Resources
-    command: bash -c "
-      cp -r ./fractal-demos-v1 /home/fractal_share/
-      && cd /home/fractal_share/fractal-demos-v1/examples
-      && . ./run_demos.sh"
-    networks:
-      - fractal
-
   fractal-demos-v2:
     container_name: fractal-demos-v2
     depends_on:
