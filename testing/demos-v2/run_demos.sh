@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+# set -e
 
 VERSION="[v2]"
 
@@ -41,9 +41,12 @@ cp -r /home/fractal_share/Resources/images/10.5281_zenodo.7057076 images/
 # them broadly accessible
 ZARRDIR01=./01_cardio_tiny_dataset/output_cardiac-tiny
 ZARRDIR02=./02_cardio_small/output-cardio-2x2-zenodo-subset
-for ZARRDIR in "$ZARRDIR01" "$ZARRDIR02"; do
-    mkdir -p "$ZARRDIR"
-    chmod -R 777 "$ZARRDIR"
+PARAMETERSDIR01=./01_cardio_tiny_dataset/Parameters
+PARAMETERSDIR02=./02_cardio_small/Parameters
+
+for THISDIR in "$ZARRDIR01" "$ZARRDIR02" "$PARAMETERSDIR01" "$PARAMETERSDIR02"; do
+    mkdir -p "$THISDIR"
+    chmod -R 777 "$THISDIR"
 done
 
 # Whoami
