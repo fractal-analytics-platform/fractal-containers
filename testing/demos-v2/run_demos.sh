@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# set -e
+set -e
 
 VERSION="[v2]"
 
