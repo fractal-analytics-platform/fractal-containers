@@ -18,5 +18,6 @@ ENV FRACTAL_API_V1_MODE=exclude
 ENV ORIGIN=http://localhost:5173
 ENV PORT=5173
 ENV LOG_LEVEL_CONSOLE=trace
+ENV FRACTAL_RUNNER_BACKEND=slurm
 # Running
 CMD ["node", "build"]
