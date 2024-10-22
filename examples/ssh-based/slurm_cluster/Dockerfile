@@ -1,11 +1,17 @@
 FROM ghcr.io/fractal-analytics-platform/ubuntu22-slurm:0.1
 
-ARG FRACTAL_SERVER_VERSION
+RUN apt update
+RUN apt install -y git
+
+ARG FRACTAL_SERVER_RELEASE
+ARG FRACTAL_SERVER_GIT
 ARG SLURM_CPUS
 ARG SLURM_MEMORY
 
-RUN echo "Install fractal-server ${FRACTAL_SERVER_VERSION}"
-RUN pip3 install fractal-server[gunicorn,postgres-psycopg-binary]==${FRACTAL_SERVER_VERSION}
+RUN echo "Install fractal-server ${FRACTAL_SERVER_RELEASE} or ${FRACTAL_SERVER_GIT}"
+COPY get_fractal_server.sh ./
+RUN chmod +x ./get_fractal_server.sh
+RUN ./get_fractal_server.sh
 
 RUN sed -i "s/CPUs=[0-9]*/CPUs=${SLURM_CPUS}/g" /etc/slurm/slurm.conf
 RUN sed -i "s/RealMemory=[0-9]*/RealMemory=${SLURM_MEMORY}/g" /etc/slurm/slurm.conf

@@ -38,7 +38,8 @@ services:
       context: ./slurm_cluster
       dockerfile: Dockerfile
       args:
-        - FRACTAL_SERVER_VERSION=2.7.0a9
+        - FRACTAL_SERVER_GIT=main
+        - FRACTAL_SERVER_RELEASE=
         - SLURM_CPUS=3
         - SLURM_MEMORY=3000
     volumes:
@@ -64,7 +65,8 @@ services:
       context: ./server
       dockerfile: Dockerfile
       args:
-        - FRACTAL_SERVER_VERSION=2.7.0a9
+        - FRACTAL_SERVER_GIT=main
+        - FRACTAL_SERVER_RELEASE=
     depends_on:
       db:
         condition: service_healthy
