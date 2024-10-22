@@ -2,11 +2,21 @@
 
 SSH_HOST=$(nslookup slurm | grep Address | tail -n 1 | cut -d' ' -f2)
 SSH_USER="test01"
-SSH_KEY_FILE="/ssh_key_test01.key"
+SSH_PRIVATE_KEY_FILE="/ssh_key_test01.key"
+
+SETTINGS_FILE=./ssh-settings.json
+echo "{" > "$SETTINGS_FILE"
+echo " \"ssh_host\": \"${SSH_HOST}\"," >> "$SETTINGS_FILE"
+echo " \"ssh_username\": \"${SSH_USER}\"," >> "$SETTINGS_FILE"
+echo " \"ssh_private_key_path\": \"${SSH_PRIVATE_KEY_FILE}\"," >> "$SETTINGS_FILE"
+echo " \"ssh_tasks_dir\": \"/data/remote/tasks/\"," >> "$SETTINGS_FILE"
+echo " \"ssh_jobs_dir\": \"/data/remote/jobs/\"" >> "$SETTINGS_FILE"
+echo "}" >> "$SETTINGS_FILE"
+cat "$SETTINGS_FILE"
 
 # Update user
-# FRACTAL_USER_ID=$(fractal --batch user whoami)
-# fractal user edit "$FRACTAL_USER_ID" --new-ssh-settings-json
+FRACTAL_USER_ID=$(fractal --batch user whoami)
+fractal user edit "$FRACTAL_USER_ID" --new-ssh-settings-json "$SETTINGS_FILE"
 
 # Download test zarr data
 mkdir -p /data/zarrs

@@ -10,6 +10,11 @@ RUN pip3 install fractal-server[gunicorn,postgres-psycopg-binary]==${FRACTAL_SER
 RUN sed -i "s/CPUs=[0-9]*/CPUs=${SLURM_CPUS}/g" /etc/slurm/slurm.conf
 RUN sed -i "s/RealMemory=[0-9]*/RealMemory=${SLURM_MEMORY}/g" /etc/slurm/slurm.conf
 
+RUN mkdir -p /data/remote/tasks/
+RUN mkdir -p /data/remote/jobs/
+RUN chown test01:test01 /data/remote/tasks/
+RUN chown test01:test01 /data/remote/jobs/
+
 # Append a `tail -f` command to the entrypoint, to make it hang
 RUN echo "tail -f" >> "/etc/slurm/docker-entrypoint.sh"
 
