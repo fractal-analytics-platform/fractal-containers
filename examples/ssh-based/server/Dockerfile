@@ -3,7 +3,9 @@ FROM python:3.10-slim
 RUN apt update
 RUN apt install -y wget ssh sshpass git
 
-ARG FRACTAL_SERVER_VERSION
+
+ARG FRACTAL_SERVER_RELEASE
+ARG FRACTAL_SERVER_GIT
 
 RUN echo "Install fractal-server ${FRACTAL_SERVER_RELEASE} or ${FRACTAL_SERVER_GIT}"
 COPY get_fractal_server.sh ./

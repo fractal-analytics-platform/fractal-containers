@@ -2,6 +2,7 @@
 
 echo "FRACTAL_SERVER_RELEASE=$FRACTAL_SERVER_RELEASE"
 echo "FRACTAL_SERVER_GIT=$FRACTAL_SERVER_GIT"
+
 if [ -z "${FRACTAL_SERVER_RELEASE}" ]; then
     if [ -z "${FRACTAL_SERVER_GIT}" ]; then
         # Case 1: no release, no git
