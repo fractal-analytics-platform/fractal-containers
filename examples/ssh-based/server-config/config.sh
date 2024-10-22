@@ -18,6 +18,10 @@ cat "$SETTINGS_FILE"
 FRACTAL_USER_ID=$(fractal --batch user whoami)
 fractal user edit "$FRACTAL_USER_ID" --new-ssh-settings-json "$SETTINGS_FILE"
 
+# Trigger collection of fractal-tasks-core
+fractal task collect fractal-tasks-core --package-extras fractal-tasks
+
+
 # Download test zarr data
 mkdir -p /data/zarrs
 cd /data/zarrs/
