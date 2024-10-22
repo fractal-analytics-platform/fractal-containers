@@ -10,7 +10,7 @@ if [ -d "$FRACTAL_CACHE_PATH" ]; then
     rm -rv "$FRACTAL_CACHE_PATH"  2> /dev/null
 fi
 
-SUBMIT_SCRIPT=3_submit_jobs.sh
+SUBMIT_SCRIPT=2_submit_jobs.sh
 echo "#!/bin/bash"> "$SUBMIT_SCRIPT"
 chmod +x "$SUBMIT_SCRIPT"
 for INDEX in {1..20}; do
