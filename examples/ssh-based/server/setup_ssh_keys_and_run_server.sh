@@ -1,15 +1,18 @@
 #!/bin/bash
 
-SSH_HOST=$(nslookup slurm | grep Address | tail -n 1 | cut -d' ' -f2)
+SSH_HOST=slurm
 SSH_USER="test01"
 SSH_PRIVATE_KEY_FILE="/ssh_key_test01.key"
 SSH_PUBLIC_KEY_FILE="/ssh_key_test01.key.pub"
-echo "pre-keygen"
+
+# Add 'slurm' host to known ones
+ssh-keyscan slurm >> ~/.ssh/known_hosts
+
+# Generate key pair and copy ID to 'slurm'
 ssh-keygen -t rsa -f "$SSH_PRIVATE_KEY_FILE" -N ""
-echo test01 > pwd.txt
-echo "pre-ssh-copy-id"
-echo sshpass -f pwd.txt ssh-copy-id -f -i "$SSH_PUBLIC_KEY_FILE" "${SSH_USER}@${SSH_HOST}"
-echo "pre-whoami"
+sshpass -v -p test01 ssh-copy-id -f -i "$SSH_PUBLIC_KEY_FILE" "${SSH_USER}@${SSH_HOST}"
+
+# Run a simple command
 ssh -i "$SSH_PRIVATE_KEY_FILE" "${SSH_USER}@${SSH_HOST}" whoami
 
 fractalctl set-db

@@ -1,7 +1,7 @@
 FROM python:3.10-slim
 
 RUN apt update
-RUN apt install -y wget ssh dnsutils sshpass
+RUN apt install -y wget ssh sshpass
 
 ARG FRACTAL_SERVER_VERSION
 

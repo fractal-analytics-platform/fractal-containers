@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SSH_HOST=$(nslookup slurm | grep Address | tail -n 1 | cut -d' ' -f2)
+SSH_HOST="slurm"
 SSH_USER="test01"
 SSH_PRIVATE_KEY_FILE="/ssh_key_test01.key"
 
