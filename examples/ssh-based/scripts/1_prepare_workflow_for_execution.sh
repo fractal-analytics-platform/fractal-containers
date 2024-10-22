@@ -13,9 +13,11 @@ fi
 SUBMIT_SCRIPT=2_submit_jobs.sh
 echo "#!/bin/bash"> "$SUBMIT_SCRIPT"
 chmod +x "$SUBMIT_SCRIPT"
+BASE_LABEL=$(date +%s)
+
 for INDEX in {1..20}; do
 
-    LABEL="${INDEX}"
+    LABEL="${BASE_LABEL}-${INDEX}"
     PROJECT_NAME="proj-$LABEL"
     DS_NAME="ds-$LABEL"
     WF_NAME="wf-$LABEL"
