@@ -13,3 +13,6 @@ clean:
 
 clean-with-volumes:
 	docker compose down --volumes -v --timeout 1
+
+list-volumes:
+	tree | docker volume inspect --format '{{ .Mountpoint }}' fractal_share
