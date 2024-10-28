@@ -22,6 +22,7 @@
               "start": 110,
               "end": 800
             },
+            "active": true,
             "color": "00FFFF"
           },
           {
@@ -31,6 +32,7 @@
               "start": 110,
               "end": 290
             },
+            "active": true,
             "color": "FF00FF"
           },
           {
@@ -40,6 +42,7 @@
               "start": 110,
               "end": 1600
             },
+            "active": true,
             "color": "FFFF00"
           }
         ],
