@@ -3,7 +3,7 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-LABEL="cardiac1"
+LABEL="cardiac"
 
 PROJECT_NAME="proj-$LABEL"
 DS_NAME="ds-$LABEL"
