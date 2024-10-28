@@ -3,7 +3,7 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-LABEL="cardiac-test"
+LABEL="cardiac"
 
 PROJECT_NAME="proj-$LABEL"
 DS_NAME="ds-$LABEL"
@@ -27,10 +27,6 @@ echo "PROJECT_ID=$PROJECT_ID created"
 DS_ID=$(fractal --batch project add-dataset "$PROJECT_ID" "$DS_NAME" "$ZARR_DIR")
 echo "DS_IN_ID=$DS_ID created"
 
-# Create workflow
-WF_ID=$(fractal --batch workflow new "$WF_NAME" "$PROJECT_ID")
+# Import workflow
+WF_ID=$(fractal --batch workflow import --project-id "$PROJECT_ID" --json-file workflow.json --workflow-name "$WF_NAME")
 echo "WF_ID=$WF_ID created"
-
-# Add tasks to workflow
-fractal --batch workflow add-task "$PROJECT_ID" "$WF_ID" --task-name "Convert Cellvoyager to OME-Zarr" --args-non-parallel args_cellvoyager_to_ome_zarr_init.json --meta-non-parallel task_meta.json --meta-parallel task_meta.json
-fractal --batch workflow add-task "$PROJECT_ID" "$WF_ID" --task-name "Project Image (HCS Plate)" --args-non-parallel args_copy_ome_zarr.json --meta-non-parallel task_meta.json --meta-parallel task_meta.json
