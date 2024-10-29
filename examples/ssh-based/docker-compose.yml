@@ -38,7 +38,7 @@ services:
       context: ./slurm_cluster
       dockerfile: Dockerfile
       args:
-        - FRACTAL_SERVER_GIT=debug-ssh-locks
+        - FRACTAL_SERVER_GIT=main
         - FRACTAL_SERVER_RELEASE=
         - SLURM_CPUS=3
         - SLURM_MEMORY=3000
@@ -65,7 +65,7 @@ services:
       context: ./server
       dockerfile: Dockerfile
       args:
-        - FRACTAL_SERVER_GIT=debug-ssh-locks
+        - FRACTAL_SERVER_GIT=main
         - FRACTAL_SERVER_RELEASE=
     depends_on:
       db:
