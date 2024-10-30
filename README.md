@@ -1,5 +1,9 @@
 # fractal-containers
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/4e356dd6-a9ba-422c-a8dc-8eb86eff0ad8" alt="Fractal containers" width="400">
+</p>
+
 This repository contains several resources to configure/execute [Fractal](https://fractal-analytics-platform.github.io) services in a containerized environment.
 This currently serves three scopes:
 1. The `images` folder and the related `publish_*.yml` GitHub Action workflows are used to publish a set of relevant images (see https://github.com/orgs/fractal-analytics-platform/packages?repo_name=fractal-containers).
