@@ -12,7 +12,7 @@ This example includes a full-fledged Fractal deployment, useful for demo's and o
 
 * The `fractal-server` backend, available on port 8000 (e.g <http://localhost:8000/docs>).
 * The `fractal-web` web client, available on port 5173 (see <http://localhost:5173>, with credentials: `admin@fractal.xy`/`1234`).
-* The `fractal-vizarr-viewer` service to view OME-Zarrs in the broweser, available on port 3000 (see an example OME-Zarr at <http://localhost:3000/vizarr/?source=http://localhost:3000/vizarr/data/20200812-CardiomyocyteDifferentiation14-Cycle1_mip.zarr/B/03/0>).
+* The `fractal-vizarr-viewer` service to view OME-Zarrs in the broweser, available on port 3000 (see an example OME-Zarr at <http://localhost:3000/vizarr/?source=http://localhost:3000/vizarr/data/data/zarrs/20200812-CardiomyocyteDifferentiation14-Cycle1_mip.zarr/B/03/0>).
 * A `filebrowser` service, available on port 8080, see <http://localhost:8080>. This is especially useful if you want to "download" zarr files to your host machine, or if you want to "upload" new input images.
 
 Note that some _fake_ image-processing tasks (which just mimick the actual ones from `fractal-tasks-core`) are already available. This may change in the future, depending on how we expose this demo folder.
