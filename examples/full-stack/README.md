@@ -10,12 +10,10 @@ This example includes a full-fledged Fractal deployment, useful for demo's and o
 
 # List of Fractal services in this example
 
-* The `fractal-server` backend, available on port 8000 (e.g <http://localhost:8000/docs>).
-* The `fractal-web` web client, available on port 5173 (see <http://localhost:5173>, with credentials: `admin@fractal.xy`/`1234`).
-* The `fractal-vizarr-viewer` service to view OME-Zarrs in the broweser, available on port 3000 (see an example OME-Zarr at <http://localhost:3000/vizarr/?source=http://localhost:3000/vizarr/data/data/zarrs/20200812-CardiomyocyteDifferentiation14-Cycle1_mip.zarr/B/03/0>).
-* A `filebrowser` service, available on port 8080, see <http://localhost:8080>. This is especially useful if you want to "download" zarr files to your host machine, or if you want to "upload" new input images.
-
-Note that some _fake_ image-processing tasks (which just mimick the actual ones from `fractal-tasks-core`) are already available. This may change in the future, depending on how we expose this demo folder.
+* The `fractal-server` backend, available on port 8000 (e.g http://localhost:8000/docs).
+* The `fractal-web` web client, available on port 5173 (see http://localhost:5173, with credentials: `admin@fractal.xy`/`1234`).
+* The `fractal-vizarr-viewer` service to view OME-Zarrs in the broweser, available on port 3000 (see an example OME-Zarr at http://localhost:3000/vizarr/?source=http://localhost:3000/vizarr/data/data/zarrs/20200812-CardiomyocyteDifferentiation14-Cycle1_mip.zarr/B/03/0).
+* A `filebrowser` service, available on port 8080, see http://localhost:8080. This is especially useful if you want to "download" zarr files to your host machine, or if you want to "upload" new input images.
 
 # Steps to run an end-to-end demo
 
@@ -28,7 +26,7 @@ git clone https://github.com/fractal-analytics-platform/fractal-containers.git
 cd fractal-containers/examples/full-stack
 ```
 
-2. Startup services with `docker compose up` (this can take a while, e.g. a couple minutes with a poor network connection).
+2. Startup services with `docker compose up`. This can take a while, e.g. a couple minutes with a poor network connection. Verify that all is OK e.g. by browsing to http://localhost:5173 and logging in with default credentials (email `admin@fractal.xy` and password `1234`).
 
 3. Collect `fractal-tasks-core` tasks with `fractal-task` extra. This can be either done from the webclient (at <http://localhost:5173/v2/tasks>, by setting Package to `fractal-tasks-core` and Package Extras to `fractal-tasks`) or from the command line (see below). In both cases, it may take a few minutes and it will use a sizeable amount of disk space (e.g. 5 GB), mostly due to installing `pytorch` in a Python virtual environment.
 
@@ -43,7 +41,7 @@ python -m pip install fractal-client
 # wait a few minutes, and check whether new tasks appear in http://localhost:5173/v2/tasks.
 ```
 
-5. After task collection is over (that is, you see the new tasks in <http://localhost:5173/v2/tasks>), prepare a new project, dataset and workflow. The command-line version of this operation is as follows:
+5. After task collection is over (that is, you see the new tasks in http://localhost:5173/v2/tasks), prepare a new project, dataset and workflow. The command-line version of this operation is as follows:
 
 ```
 cd scripts
