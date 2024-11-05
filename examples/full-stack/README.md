@@ -12,7 +12,7 @@ This example includes a full-fledged Fractal deployment, useful for demo's and o
 
 * The `fractal-server` backend, available on port 8000 (e.g http://localhost:8000/docs).
 * The `fractal-web` web client, available on port 5173 (see http://localhost:5173, with credentials: `admin@fractal.xy`/`1234`).
-* The `fractal-vizarr-viewer` service to view OME-Zarrs in the broweser, available on port 3000 (see an example OME-Zarr at http://localhost:3000/vizarr/?source=http://localhost:3000/vizarr/data/data/zarrs/20200812-CardiomyocyteDifferentiation14-Cycle1_mip.zarr/B/03/0).
+* The `fractal-vizarr-viewer` service to view OME-Zarrs in the browser, available on port 3000 (see an example OME-Zarr at http://localhost:3000/vizarr/?source=http://localhost:3000/vizarr/data/data/zarrs/20200812-CardiomyocyteDifferentiation14-Cycle1_mip.zarr/B/03/0).
 * A `filebrowser` service, available on port 8080, see http://localhost:8080. This is especially useful if you want to "download" zarr files to your host machine, or if you want to "upload" new input images.
 
 # Steps to run an end-to-end demo
@@ -54,5 +54,3 @@ source venv/bin/activate
 7. Wait for the job to end (e.g. by monitoring <http://localhost:5173/v2/jobs>).
 
 8. After the job is over, the dataset page in the webclient will also display a link to the image viewer (which will be <http://localhost:3000/vizarr/?source=http://localhost:3000/vizarr/data/data/zarrs/cardiac-test/20200812-CardiomyocyteDifferentiation14-Cycle1.zarr/B/03/0>). By opening this link, you will view the generated OME-Zarr in your browser.
-
-9. To make accessible the files uploaded/created in the `/data` dir, we add a service called `monitord` into the `fractal-filebrowser` container which uses `inotifywait` tool to check when a new file or dir is created into the `/data` folder and modify its permission from 0644 to 0666.
