@@ -27,7 +27,7 @@ for INDEX in {1..20}; do
     # Create project and dataset
     PROJECT_ID=$(fractal --batch project new "$PROJECT_NAME")
     echo "PROJECT_ID=$PROJECT_ID created"
-    DS_ID=$(fractal --batch project add-dataset "$PROJECT_ID" "$DS_NAME" "$ZARR_DIR")
+    DS_ID=$(fractal --batch project add-dataset "$PROJECT_ID" "$DS_NAME" --zarr-dirr "$ZARR_DIR")
     echo "DS_IN_ID=$DS_ID created"
     # Import workflow
     OUT=$(fractal --batch workflow import --project-id "$PROJECT_ID" --json-file "$WF_JSON_FILE" --workflow-name "$WF_NAME")
