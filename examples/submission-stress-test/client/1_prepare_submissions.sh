@@ -42,7 +42,7 @@ for PROJECT_INDEX in $(seq 1 $NUM_PROJECTS); do
 
     # Create project and dataset
     PROJECT_ID=$(fractal --batch project new "$PROJECT_NAME")
-    DS_ID=$(fractal --batch project add-dataset "$PROJECT_ID" "$DS_NAME" --zarr-dirr "$ZARR_DIR")
+    DS_ID=$(fractal --batch project add-dataset "$PROJECT_ID" "$DS_NAME" --zarr-dir "$ZARR_DIR")
 
     # Create or import workflow
     if [[ "$PROJECT_INDEX" == "1" ]]; then
