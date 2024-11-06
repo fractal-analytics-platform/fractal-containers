@@ -90,7 +90,7 @@ services:
       context: ./web
       dockerfile: Dockerfile
       args:
-        - FRACTAL_WEB_VERSION=1.9.0-a4
+        - FRACTAL_WEB_VERSION=1.10.0
     ports:
       - 5173:5173
     networks:
@@ -101,7 +101,7 @@ services:
     build:
       context: ./server-config
       args:
-        - FRACTAL_CLIENT_VERSION=2.3.0a1
+        - FRACTAL_CLIENT_VERSION=2.4.0
     depends_on:
       server:
         condition: service_healthy

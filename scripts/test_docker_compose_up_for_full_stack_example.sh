@@ -7,17 +7,22 @@ set -e
 echo "Run docker compose up"
 docker compose --file examples/full-stack/docker-compose.yml up --detach
 
-SLEEPTIME=40
+SLEEPTIME=15
 
-echo "Now sleep $SLEEPTIME seconds"
-echo
-sleep "$SLEEPTIME"
+for DUMMY in {1..5}; do
+
+    echo "Now sleep $SLEEPTIME seconds"
+    echo
+    sleep "$SLEEPTIME"
 
 
-echo "Current docker ps"
-echo
-docker ps
-echo
+    echo "Current docker ps"
+    echo
+    docker ps
+    echo
+
+done
+
 
 echo "Start checks"
 echo

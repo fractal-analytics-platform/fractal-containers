@@ -1,7 +1,7 @@
 # fractal-containers
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/4e356dd6-a9ba-422c-a8dc-8eb86eff0ad8" alt="Fractal containers" width="400">
+  <img src="https://raw.githubusercontent.com/fractal-analytics-platform/fractal-logos/refs/heads/main/projects/fractal_containers.png" alt="Fractal containers" width="400">
 </p>
 
 This repository contains several resources to configure/execute [Fractal](https://fractal-analytics-platform.github.io) services in a containerized environment.
