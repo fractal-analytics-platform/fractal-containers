@@ -17,7 +17,7 @@ ssh -i "$SSH_PRIVATE_KEY_FILE" "${SSH_USER}@${SSH_HOST}" whoami
 
 fractalctl set-db
 gunicorn fractal_server.main:app \
-    --workers 4 \
+    --workers 1 \
     --timeout 100 \
     --bind 0.0.0.0:8000 \
     --access-logfile logs-fractal-server.access \
