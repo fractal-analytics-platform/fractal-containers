@@ -65,7 +65,7 @@ services:
       context: ./web
       dockerfile: Dockerfile
       args:
-        - FRACTAL_WEB_VERSION=1.11.0a0
+        - FRACTAL_WEB_VERSION=1.11.0-a0
     depends_on:
       slurm:
         condition: service_healthy
