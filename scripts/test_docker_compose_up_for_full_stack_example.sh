@@ -9,39 +9,30 @@ docker compose --file examples/full-stack/docker-compose.yml up --detach
 
 SLEEPTIME=15
 
-for DUMMY in {1..5}; do
+echo "Now sleep $SLEEPTIME seconds"
+echo
+sleep "$SLEEPTIME"
 
-    echo "Now sleep $SLEEPTIME seconds"
-    echo
-    sleep "$SLEEPTIME"
-
-
-    echo "Current docker ps"
-    echo
-    docker ps
-    echo
-
-done
+echo "Current docker ps"
+echo
+docker ps
+echo
 
 
 echo "Start checks"
 echo
 
-# Count "running" Docker services
-RUNNING_SERVICES=$(docker ps --filter 'status=running' --quiet | wc -l)
-if [ "$RUNNING_SERVICES" = "5" ]; then
-    echo "Number of running services is as expected."
-else
-    echo "Unexpected number of running services ($RUNNING_SERVICES), exit 1."
-    exit 1
-fi
+FRACTAL_SERVER_ALIVE_ENDPOINT="http://localhost:8000/api/alive/"
+FRACTAL_SERVER_ALIVE_RESPONSE_FILE=response.json
+curl --silent --show-error --output "$FRACTAL_SERVER_ALIVE_RESPONSE_FILE" "$FRACTAL_SERVER_ALIVE_ENDPOINT"
 
-# Count "exited" Docker services
-EXITED_SERVICES=$(docker ps --filter 'status=exited' --quiet | wc -l)
-if [ "$EXITED_SERVICES" = "1" ]; then
-    echo "Number of exited services is as expected."
-  echo "All good up to here"
+if grep "\"alive\":true" "$FRACTAL_SERVER_ALIVE_RESPONSE_FILE" > /dev/null; then
+    echo "All good"
+    cat "$FRACTAL_SERVER_ALIVE_RESPONSE_FILE"
+    echo
 else
-    echo "Unexpected number of exited services ($EXITED_SERVICES), exit 2."
-    exit 2
+    echo "Unexpected response from $FRACTAL_SERVER_ALIVE_ENDPOINT:"
+    cat "$FRACTAL_SERVER_ALIVE_RESPONSE_FILE"
+    echo
+    exit 1
 fi

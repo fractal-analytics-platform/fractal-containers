@@ -12,7 +12,7 @@ if [ -z "${FRACTAL_SERVER_RELEASE}" ]; then
         python3 -m pip install "fractal-server @ git+https://github.com/fractal-analytics-platform/fractal-server.git@${FRACTAL_SERVER_GIT}"
         EXIT_CODE=$?
         if [ $EXIT_CODE -ne 0 ]; then
-            echo "Error: Installing fractal-server@$FRACTAL_SERVER_GIT with postgres-psycopg-binary (EXIT_CODE=$EXIT_CODE)"
+            echo "Error: Installing fractal-server@$FRACTAL_SERVER_GIT (EXIT_CODE=$EXIT_CODE)"
             exit 1
         fi
     fi
