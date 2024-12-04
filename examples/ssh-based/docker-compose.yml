@@ -90,7 +90,7 @@ services:
       context: ./web
       dockerfile: Dockerfile
       args:
-        - FRACTAL_WEB_VERSION=1.11.1
+        - FRACTAL_WEB_VERSION=1.11.2
     ports:
       - 5173:5173
     networks:
