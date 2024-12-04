@@ -66,7 +66,7 @@ services:
       dockerfile: Dockerfile
       args:
         - FRACTAL_SERVER_GIT=
-        - FRACTAL_SERVER_RELEASE=2.9.0
+        - FRACTAL_SERVER_RELEASE=2.9.2
     depends_on:
       db:
         condition: service_healthy
@@ -90,7 +90,7 @@ services:
       context: ./web
       dockerfile: Dockerfile
       args:
-        - FRACTAL_WEB_VERSION=1.11.0
+        - FRACTAL_WEB_VERSION=1.11.1
     ports:
       - 5173:5173
     networks:
@@ -101,7 +101,7 @@ services:
     build:
       context: ./server-config
       args:
-        - FRACTAL_CLIENT_VERSION=2.5.0
+        - FRACTAL_CLIENT_VERSION=2.5.1
     depends_on:
       server:
         condition: service_healthy

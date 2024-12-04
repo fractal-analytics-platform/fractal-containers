@@ -52,7 +52,7 @@ done
 fractal user whoami
 FRACTAL_USER_ID=$(fractal --batch user whoami )
 
-fractal user edit "$FRACTAL_USER_ID" --new-cache-dir /home/test01 --new-slurm-user test01
+fractal user edit "$FRACTAL_USER_ID" --new-project-dir /home/test01 --new-slurm-user test01
 # Trigger task collection
 bash get_fractal_tasks_core.sh
 
