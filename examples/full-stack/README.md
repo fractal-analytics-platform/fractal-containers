@@ -10,10 +10,14 @@ This example includes a full-fledged Fractal deployment, useful for demo's and o
 
 # List of Fractal services in this example
 
-* The `fractal-server` backend, available on port 8000 (e.g http://localhost:8000/docs).
+* The `fractal-server` backend, available on port 8000 (e.g http://localhost:8000/docs). 
 * The `fractal-web` web client, available on port 5173 (see http://localhost:5173, with credentials: `admin@fractal.xy`/`1234`).
 * The `fractal-vizarr-viewer` service to view OME-Zarrs in the browser, available on port 3000 (see an example OME-Zarr at http://localhost:3000/vizarr/?source=http://localhost:3000/vizarr/data/data/zarrs/20200812-CardiomyocyteDifferentiation14-Cycle1_mip.zarr/B/03/0).
 * A `filebrowser` service, available on port 8080, see http://localhost:8080. This is especially useful if you want to "download" zarr files to your host machine, or if you want to "upload" new input images.
+
+Additional containers being run:
+* The slurm container that runs the fractal server also runs a tiny slurm cluster with access to the same data as the web viewer in the containers.
+* The fractal-db container runs a postgres database on port 5433 that is used by fractal-server
 
 # Steps to run an end-to-end demo
 
@@ -49,11 +53,11 @@ source venv/bin/activate
 ./2_prepare_workflow_for_execution.sh
 ```
 
-6. Head to <http://localhost:5173>, select your project and workflow, and submit it via the "Run workflow" button.
+5. Head to <http://localhost:5173>, select your project and workflow, and submit it via the "Run workflow" button.
 
-7. Wait for the job to end (e.g. by monitoring <http://localhost:5173/v2/jobs>).
+6. Wait for the job to end (e.g. by monitoring <http://localhost:5173/v2/jobs>).
 
-8. After the job is over, the dataset page in the webclient will also display a link to the image viewer (which will be <http://localhost:3000/vizarr/?source=http://localhost:3000/vizarr/data/data/zarrs/cardiac/20200812-CardiomyocyteDifferentiation14-Cycle1_mip.zarr/B/03/0>). By opening this link, you will view the generated OME-Zarr in your browser.
+7. After the job is over, the dataset page in the webclient will also display a link to the image viewer (which will be <http://localhost:3000/vizarr/?source=http://localhost:3000/vizarr/data/data/zarrs/cardiac/20200812-CardiomyocyteDifferentiation14-Cycle1_mip.zarr/B/03/0>). By opening this link, you will view the generated OME-Zarr in your browser.
 
 # FAQs
 
