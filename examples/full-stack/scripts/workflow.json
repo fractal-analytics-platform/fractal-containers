@@ -90,7 +90,7 @@
       },
       "args_non_parallel": null,
       "args_parallel": {
-        "level": 0,
+        "level": 2,
         "channel": {
           "label": "DAPI",
           "normalize": {

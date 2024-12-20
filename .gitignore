@@ -8,3 +8,5 @@ advanced/fractal-db-data/
 advanced/fractal-slurm-data/
 
 *.swp
+
+.DS_Store
