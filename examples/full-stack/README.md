@@ -53,7 +53,7 @@ source venv/bin/activate
 
 7. Wait for the job to end (e.g. by monitoring <http://localhost:5173/v2/jobs>).
 
-8. After the job is over, the dataset page in the webclient will also display a link to the image viewer (which will be <http://localhost:3000/vizarr/?source=http://localhost:3000/vizarr/data/data/zarrs/cardiac-test/20200812-CardiomyocyteDifferentiation14-Cycle1.zarr/B/03/0>). By opening this link, you will view the generated OME-Zarr in your browser.
+8. After the job is over, the dataset page in the webclient will also display a link to the image viewer (which will be <http://localhost:3000/vizarr/?source=http://localhost:3000/vizarr/data/data/zarrs/cardiac/20200812-CardiomyocyteDifferentiation14-Cycle1_mip.zarr/B/03/0>). By opening this link, you will view the generated OME-Zarr in your browser.
 
 # FAQs
 
