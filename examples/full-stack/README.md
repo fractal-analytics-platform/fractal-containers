@@ -3,9 +3,9 @@ This example includes a full-fledged Fractal deployment, useful for demo's and o
 > ⚠️⚠️⚠️ WARNING: This example is not suitable for production use! ⚠️⚠️⚠️
 >
 > Main reasons:
-> 1. This example includes a few assumptions/workarounds (mostly related to data access) that are meant to make a demo session as smooth as possible.
+> 1. This example includes a few assumptions/workarounds (mostly related to data access) that are meant to make a demo session as smooth as possible. We don't provide any documentation on how to access data outside of the Fractal containers at this point.
 > 2. The persistence of Docker-volume data across container may be counterintuitive, and we should better document how to clean them up (e.g. as in `docker compose down --volumes`).
-> 3. The SLURM cluster is created with limited resources, so that the demo can run on small machines as well, and this is currently not configurable.
+> 3. The SLURM cluster is created with limited resources, so that the demo can run on small machines as well. You would have to change the `slurm` config in the `docker-compose.yml` to adjust that.
 
 
 # List of Fractal services in this example
@@ -17,8 +17,6 @@ This example includes a full-fledged Fractal deployment, useful for demo's and o
 
 # Steps to run an end-to-end demo
 
-(note that this is not the only possible demo approach, but it is one that should work)
-
 1. Clone the repository and browse to the current folder
 
 ```bash
@@ -28,9 +26,11 @@ cd fractal-containers/examples/full-stack
 
 2. Startup services with `docker compose up`. This can take a while, e.g. a couple minutes with a poor network connection. Verify that all is OK e.g. by browsing to http://localhost:5173 and logging in with default credentials (email `admin@fractal.xy` and password `1234`).
 
-3. Collect `fractal-tasks-core` tasks with `fractal-task` extra. This can be either done from the webclient (at <http://localhost:5173/v2/tasks>, by setting Package to `fractal-tasks-core` and Package Extras to `fractal-tasks`) or from the command line (see below). In both cases, it may take a few minutes and it will use a sizeable amount of disk space (e.g. 5 GB), mostly due to installing `pytorch` in a Python virtual environment.
+3. Collect `fractal-tasks-core` tasks with `fractal-task` extra. This can be done from the web client or the command line. In both cases, it may take a few minutes and it will use a sizeable amount of disk space (e.g. 5 GB), mostly due to installing `pytorch` in a Python virtual environment.
 
-4. The command-line version of point 3 is e.g. as follows
+a) Collecting tasks can be done from the webclient at <http://localhost:5173/v2/tasks/management> by setting Package to `fractal-tasks-core` and Package Extras to `fractal-tasks`.
+
+b) The command-line version of point 3 is e.g. as follows
 
 ```
 cd scripts
@@ -41,7 +41,7 @@ python -m pip install fractal-client
 # wait a few minutes, and check whether new tasks appear in http://localhost:5173/v2/tasks.
 ```
 
-5. After task collection is over (that is, you see the new tasks in http://localhost:5173/v2/tasks), prepare a new project, dataset and workflow. The command-line version of this operation is as follows:
+4. After task collection is over (that is, you see the new tasks in http://localhost:5173/v2/tasks), prepare a new project, dataset and workflow. You can interactively do this from the command line by using the `scripts/workflow.json` file as the workflow you import. The command-line version of this operation is as follows:
 
 ```
 cd scripts
@@ -54,3 +54,23 @@ source venv/bin/activate
 7. Wait for the job to end (e.g. by monitoring <http://localhost:5173/v2/jobs>).
 
 8. After the job is over, the dataset page in the webclient will also display a link to the image viewer (which will be <http://localhost:3000/vizarr/?source=http://localhost:3000/vizarr/data/data/zarrs/cardiac-test/20200812-CardiomyocyteDifferentiation14-Cycle1.zarr/B/03/0>). By opening this link, you will view the generated OME-Zarr in your browser.
+
+# FAQs
+
+1. How do I reset the content of the volumes (e.g. delete the database, any files you uploaded etc):
+
+```
+docker compose down --volumes
+```
+
+2. How do I connect to the docker containers on the terminal, e.g. for data access? Connect to the slurm container the following way (because the slurm container has full data access):
+
+```
+docker exec -it slurm bash
+```
+
+3. How do I force containers to be rebuilt after changing the docker-compose configuration?
+
+```
+docker compose up --build 
+```
