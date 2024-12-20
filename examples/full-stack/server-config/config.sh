@@ -2,7 +2,7 @@
 
 # Update user
 FRACTAL_USER_ID=$(fractal --batch user whoami)
-fractal user edit "$FRACTAL_USER_ID" --new-project-dir /home/test01 --new-slurm-user test01
+fractal user edit "$FRACTAL_USER_ID" --new-project-dir /data/zarrs/test01 --new-slurm-user test01
 
 # Assuming that group 1 is the ALL
 ALL_GROUP_ID=1
