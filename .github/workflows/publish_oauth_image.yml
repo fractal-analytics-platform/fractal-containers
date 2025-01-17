@@ -13,7 +13,9 @@ jobs:
           persist-credentials: false
 
       - name: Login
-        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        env:
+            GITHUB_ACTOR: ${{ github.actor }}
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u "${GITHUB_ACTOR}" --password-stdin
 
       - name: Build the Docker image OAuth
         run:  docker build images/oauth --tag ghcr.io/fractal-analytics-platform/oauth:0.1
