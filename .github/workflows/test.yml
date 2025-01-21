@@ -15,8 +15,9 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
 
     - name: Run demos
       run: cd testing && make run-demos-v2-github

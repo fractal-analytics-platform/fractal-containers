@@ -15,8 +15,9 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
 
     - name: Test `docker compose up`
       run: ./scripts/test_docker_compose_up_for_full_stack_example.sh
