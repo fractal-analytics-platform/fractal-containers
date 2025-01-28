@@ -29,7 +29,6 @@ fractal group update "$ALL_GROUP_ID" --new-viewer-paths /data
 # Trigger collection of fractal-tasks-core
 fractal task collect fractal-tasks-core --package-extras fractal-tasks
 
-
 # Download test zarr data
 mkdir -p /data/zarrs
 cd /data/zarrs/
@@ -45,6 +44,7 @@ wget --quiet https://zenodo.org/api/records/8287221/files-archive
 mv files-archive files-archive.zip
 unzip -q files-archive.zip
 rm files-archive.zip
+
 
 # Change permissions
 chmod 777 /data/images/ --recursive
