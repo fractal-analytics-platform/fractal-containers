@@ -38,8 +38,8 @@ services:
       context: ./slurm_cluster
       dockerfile: Dockerfile
       args:
-        - FRACTAL_SERVER_GIT=2218-change-concurrency-model-for-job-execution
-        - FRACTAL_SERVER_RELEASE=
+        - FRACTAL_SERVER_GIT=
+        - FRACTAL_SERVER_RELEASE=2.11.0a9
         - SLURM_CPUS=3
         - SLURM_MEMORY=3000
     volumes:
@@ -65,8 +65,8 @@ services:
       context: ./server
       dockerfile: Dockerfile
       args:
-        - FRACTAL_SERVER_GIT=2218-change-concurrency-model-for-job-execution
-        - FRACTAL_SERVER_RELEASE=
+        - FRACTAL_SERVER_GIT=
+        - FRACTAL_SERVER_RELEASE=2.11.0a9
     depends_on:
       db:
         condition: service_healthy
