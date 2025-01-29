@@ -39,7 +39,7 @@ services:
       dockerfile: Dockerfile
       args:
         - FRACTAL_SERVER_GIT=
-        - FRACTAL_SERVER_RELEASE=2.11.0a9
+        - FRACTAL_SERVER_RELEASE=2.11.0a10
         - SLURM_CPUS=3
         - SLURM_MEMORY=3000
     volumes:
@@ -66,7 +66,7 @@ services:
       dockerfile: Dockerfile
       args:
         - FRACTAL_SERVER_GIT=
-        - FRACTAL_SERVER_RELEASE=2.11.0a9
+        - FRACTAL_SERVER_RELEASE=2.11.0a10
     depends_on:
       db:
         condition: service_healthy
