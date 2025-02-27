@@ -1,0 +1,115 @@
+services:
+  db:
+    cpus: 1.0
+    mem_limit: "1G"
+    container_name: fractal-db
+    image: postgres:15.4-alpine
+    restart: always
+    ports:
+      - 5433:5433
+    command: -p 5433
+    environment:
+      POSTGRES_USER: fractal
+      POSTGRES_PASSWORD: fractal
+      POSTGRES_DB: fractal
+      # required for the check below - otherwise postgresql
+      # will use undefined 'root' user and raise errors
+      PGUSER: fractal
+    healthcheck:
+      # postgresql starts up, stops, and then restarts
+      # => errors if the server connects before the stop
+      # this checks if the system is ready
+      test: pg_isready -p 5433
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
+    networks:
+      - fractal
+
+  server:
+    hostname: server
+    container_name: server
+    cpus: 3.0
+    mem_limit: 5g
+    build:
+      context: server
+      dockerfile: Dockerfile
+      args:
+        - FRACTAL_SERVER_VERSION=2.14.0a0
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - data:/data
+    ports:
+      - 8000:8000
+    healthcheck:
+      test: wget http://server:8000/api/alive/ > /dev/null 2>&1
+      interval: 5s
+      timeout: 2s
+      retries: 5
+    networks:
+      - fractal
+
+  web:
+    container_name: fractal-web
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+      args:
+        - FRACTAL_WEB_VERSION=1.17.0-a0
+    depends_on:
+      server:
+        condition: service_healthy
+    ports:
+      - 5173:5173
+    networks:
+      - fractal
+
+  server-config:
+    container_name: server-config
+    build:
+      context: ./server-config
+      args:
+        - FRACTAL_CLIENT_VERSION=2.7.1
+    depends_on:
+      server:
+        condition: service_healthy
+    volumes:
+      - data:/data
+    networks:
+      - fractal
+
+  fractal-filebrowser:
+    container_name: fractal-filebrowser
+    build:
+      context: ./filebrowser
+    ports:
+      - 8080:80
+    networks:
+      - fractal
+    volumes:
+      - data:/data
+
+  vizarr:
+    container_name: vizarr
+    image: ghcr.io/fractal-analytics-platform/fractal-vizarr-viewer:stable
+    environment:
+      - FRACTAL_SERVER_URL=http://server:8000
+      - AUTHORIZATION_SCHEME=fractal-server
+    ports:
+      - 3000:3000
+    networks:
+      - fractal
+    volumes:
+      - data:/data:ro
+
+volumes:
+  data:
+  postgres_db:
+
+networks:
+  fractal:
+    driver: bridge

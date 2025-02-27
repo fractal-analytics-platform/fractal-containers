@@ -1,0 +1,7 @@
+#!/sbin/openrc-run
+
+name="Monitor data dir and change Permissions"
+description="Monitor data and change permissions for newly created files"
+command="/usr/check_file.sh"
+command_background=true
+pidfile="/run/monitord.pid"
