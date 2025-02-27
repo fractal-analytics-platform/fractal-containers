@@ -1,0 +1,138 @@
+{
+  "name": "Demo",
+  "task_list": [
+    {
+      "meta_non_parallel": {
+        "cpus_per_task": 1,
+        "mem": 1000
+      },
+      "meta_parallel": {
+        "cpus_per_task": 1,
+        "mem": 1000
+      },
+      "args_non_parallel": {
+        "image_dirs": [
+            "/data/images/10.5281_zenodo.8287221/"
+        ],
+        "allowed_channels": [
+          {
+            "wavelength_id": "A01_C01",
+            "label": "DAPI",
+            "window": {
+              "start": 110,
+              "end": 800
+            },
+            "active": true,
+            "color": "00FFFF"
+          },
+          {
+            "wavelength_id": "A01_C02",
+            "label": "nanog",
+            "window": {
+              "start": 110,
+              "end": 290
+            },
+            "active": true,
+            "color": "FF00FF"
+          },
+          {
+            "wavelength_id": "A02_C03",
+            "label": "Lamin B1",
+            "window": {
+              "start": 110,
+              "end": 1600
+            },
+            "active": true,
+            "color": "FFFF00"
+          }
+        ],
+        "num_levels": 5,
+        "coarsening_xy": 2,
+        "image_extension": "png",
+        "overwrite": true
+      },
+      "args_parallel": null,
+      "input_filters": {
+        "attributes": {},
+        "types": {}
+      },
+      "task": {
+        "pkg_name": "fractal-tasks-core",
+        "name": "Convert Cellvoyager to OME-Zarr"
+      }
+    },
+    {
+      "meta_non_parallel": {
+        "cpus_per_task": 1,
+        "mem": 1000
+      },
+      "meta_parallel": {
+        "cpus_per_task": 1,
+        "mem": 1000
+      },
+      "args_non_parallel": null,
+      "args_parallel": null,
+      "input_filters": {
+        "attributes": {},
+        "types": {}
+      },
+      "task": {
+        "pkg_name": "fractal-tasks-core",
+        "name": "Project Image (HCS Plate)"
+      }
+    },
+    {
+      "meta_non_parallel": null,
+      "meta_parallel": {
+        "cpus_per_task": 1,
+        "mem": 1000,
+        "needs_gpu": true
+      },
+      "args_non_parallel": null,
+      "args_parallel": {
+        "level": 2,
+        "channel": {
+          "label": "DAPI",
+          "normalize": {
+            "type": "default"
+          }
+        },
+        "channel2": {
+          "normalize": {
+            "type": "default"
+          }
+        },
+        "input_ROI_table": "FOV_ROI_table",
+        "output_label_name": "nuclei",
+        "diameter_level0": 60,
+        "model_type": "cyto2",
+        "relabeling": true,
+        "use_masks": true,
+        "advanced_cellpose_model_params": {
+          "cellprob_threshold": 0,
+          "flow_threshold": 0.4,
+          "min_size": 15,
+          "augment": false,
+          "net_avg": false,
+          "use_gpu": true,
+          "batch_size": 8,
+          "invert": false,
+          "tile": true,
+          "tile_overlap": 0.1,
+          "resample": true,
+          "interp": true,
+          "stitch_threshold": 0
+        },
+        "overwrite": true
+      },
+      "input_filters": {
+        "attributes": {},
+        "types": {}
+      },
+      "task": {
+        "pkg_name": "fractal-tasks-core",
+        "name": "Cellpose Segmentation"
+      }
+    }
+  ]
+}
