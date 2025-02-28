@@ -1,10 +1,11 @@
 #!/bin/bash
+set -e
 
 fractalctl set-db
 
 gunicorn fractal_server.main:app \
-    --workers 3 \
-    --timeout 60 \
+    --workers 2 \
+    --timeout 20 \
     --bind 0.0.0.0:8000 \
     --access-logfile - \
     --error-logfile - \

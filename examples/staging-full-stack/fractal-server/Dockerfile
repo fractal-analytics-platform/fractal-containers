@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 RUN apt update -y
-RUN apt install -y vim less python3 python3-pip python3-venv
+RUN apt install -y wget vim less python3 python3-pip python3-venv
 
 ARG FRACTAL_SERVER_VERSION
 RUN pip3 install fractal-server==${FRACTAL_SERVER_VERSION}

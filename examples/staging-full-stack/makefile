@@ -1,5 +1,3 @@
-# Auxiliary targets
-
 up:
 	docker compose up
 
@@ -14,3 +12,7 @@ clean:
 
 clean-with-volumes:
 	docker compose down --volumes -v --timeout 1
+
+
+all-from-scratch: clean-with-volumes build-no-cache
+	docker compose up
