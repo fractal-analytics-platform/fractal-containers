@@ -7,7 +7,7 @@ ENV NODE_MAJOR_VERSION=20
 
 RUN wget -qO- "https://github.com/fractal-analytics-platform/fractal-web/releases/download/v${FRACTAL_WEB_VERSION}/node-${NODE_MAJOR_VERSION}-fractal-web-v${FRACTAL_WEB_VERSION}.tar.gz" | tar -xz
 
-ENV FRACTAL_SERVER_HOST=http://server:8000
+ENV FRACTAL_SERVER_HOST=http://backend:8000
 ENV PUBLIC_FRACTAL_VIZARR_VIEWER_URL=http://localhost:3000/vizarr
 ENV PUBLIC_FRACTAL_ADMIN_SUPPORT_EMAIL=
 ENV PUBLIC_OAUTH_CLIENT_NAME=

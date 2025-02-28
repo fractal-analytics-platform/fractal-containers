@@ -28,13 +28,13 @@ services:
     networks:
       - fractal
 
-  server:
-    hostname: server
-    container_name: server
+  backend:
+    hostname: backend
+    container_name: backend
     cpus: 3.0
     mem_limit: 5g
     build:
-      context: server
+      context: backend
       dockerfile: Dockerfile
       args:
         - FRACTAL_SERVER_VERSION=2.14.0a0
@@ -46,7 +46,7 @@ services:
     ports:
       - 8000:8000
     healthcheck:
-      test: wget http://server:8000/api/alive/ > /dev/null 2>&1
+      test: wget http://backend:8000/api/alive/ > /dev/null 2>&1
       interval: 5s
       timeout: 2s
       retries: 5
@@ -61,7 +61,7 @@ services:
       args:
         - FRACTAL_WEB_VERSION=1.17.0-a0
     depends_on:
-      server:
+      backend:
         condition: service_healthy
     ports:
       - 5173:5173
@@ -75,7 +75,7 @@ services:
       args:
         - FRACTAL_CLIENT_VERSION=2.7.1
     depends_on:
-      server:
+      backend:
         condition: service_healthy
     volumes:
       - data:/data
@@ -97,7 +97,7 @@ services:
     container_name: vizarr
     image: ghcr.io/fractal-analytics-platform/fractal-vizarr-viewer:stable
     environment:
-      - FRACTAL_SERVER_URL=http://server:8000
+      - FRACTAL_SERVER_URL=http://backend:8000
       - AUTHORIZATION_SCHEME=fractal-server
     ports:
       - 3000:3000

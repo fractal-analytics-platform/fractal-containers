@@ -1,8 +1,9 @@
-FROM ghcr.io/fractal-analytics-platform/ubuntu22-slurm:0.1
+FROM ubuntu:22.04
+
+RUN apt update -y
+RUN apt install -y vim less python3 python3-pip python3-venv
 
 ARG FRACTAL_SERVER_VERSION
-
-RUN echo "Install fractal-server ${FRACTAL_SERVER_VERSION}"
 RUN pip3 install fractal-server==${FRACTAL_SERVER_VERSION}
 
 COPY run_server.sh ./
