@@ -60,7 +60,7 @@ services:
       context: ./fractal-web
       dockerfile: Dockerfile
       args:
-        - FRACTAL_WEB_VERSION=1.17.0-a4
+        - FRACTAL_WEB_VERSION=1.17.0-a6
     depends_on:
       fractal-server:
         condition: service_healthy
