@@ -1,4 +1,4 @@
-FROM ghcr.io/fractal-analytics-platform/ubuntu22-slurm:0.1
+FROM ghcr.io/fractal-analytics-platform/ubuntu22-slurm-multipy:0.1
 
 # User specific cpu count and memory for slurm configuration
 ARG SLURM_CPUS
