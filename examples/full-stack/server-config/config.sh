@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./venv-client/bin/activate
+
 # Update user
 FRACTAL_USER_ID=$(fractal --batch user whoami)
 fractal user edit "$FRACTAL_USER_ID" --new-project-dir /data/zarrs/test01 --new-slurm-user test01

@@ -1,14 +1,12 @@
-FROM ghcr.io/fractal-analytics-platform/ubuntu22-slurm:0.1
+FROM ghcr.io/fractal-analytics-platform/ubuntu22-slurm-multipy:0.1
 
 ARG FRACTAL_SERVER_VERSION
 ARG SLURM_CPUS
 ARG SLURM_MEMORY
 
 RUN echo "Install fractal-server ${FRACTAL_SERVER_VERSION}"
-RUN pip3 install fractal-server==${FRACTAL_SERVER_VERSION}
-
-# RUN apt install wget -y
-RUN wget https://github.com/fractal-analytics-platform/fractal-server/raw/main/tests/v2/fractal_tasks_mock/dist/fractal_tasks_mock-0.0.1-py3-none-any.whl
+RUN python3 -m venv /venv-server
+RUN /venv-server/bin/python3 -m pip install fractal-server==${FRACTAL_SERVER_VERSION}
 
 COPY run_server.sh ./
 COPY .fractal_server.env ./

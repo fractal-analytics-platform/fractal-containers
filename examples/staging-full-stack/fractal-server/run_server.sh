@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 
-fractalctl set-db
+./venv/bin/fractalctl set-db
 
-gunicorn fractal_server.main:app \
+./venv/bin/gunicorn fractal_server.main:app \
     --workers 2 \
     --timeout 20 \
     --bind 0.0.0.0:8000 \
