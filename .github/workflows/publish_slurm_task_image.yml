@@ -3,7 +3,6 @@ name: Build and Publish Docker Ubuntu22 Slurm Task Image
 on:
   workflow_dispatch:
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
