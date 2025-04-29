@@ -1,4 +1,4 @@
-FROM ghcr.io/fractal-analytics-platform/ubuntu22-slurm:0.1
+FROM ghcr.io/fractal-analytics-platform/ubuntu24-slurm:0.1
 
 RUN apt update
 RUN apt install -y git

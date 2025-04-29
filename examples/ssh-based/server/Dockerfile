@@ -1,8 +1,7 @@
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 RUN apt update
 RUN apt install -y wget ssh sshpass git
-
 
 ARG FRACTAL_SERVER_RELEASE
 ARG FRACTAL_SERVER_GIT
