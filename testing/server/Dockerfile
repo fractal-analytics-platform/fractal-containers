@@ -25,8 +25,8 @@ RUN mkdir -p /home/fractal_share/
 RUN chmod -R 777 /home/fractal_share/
 
 # Launch command
-CMD fractalctl set-db && \
-    gunicorn fractal_server.main:app \
+CMD /fractal-server-venv-py3.12/bin/fractalctl set-db && \
+    /fractal-server-venv-py3.12/bin/gunicorn fractal_server.main:app \
     --workers 2 \
     --timeout 20 \
     --bind 0.0.0.0:8000 \
