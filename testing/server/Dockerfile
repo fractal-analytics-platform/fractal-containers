@@ -16,6 +16,7 @@ COPY server/slurm_config.json ./
 # Install fractal-server
 ADD config.env .
 COPY server/get_fractal_server.sh .
+RUN python3.12 -m venv /fractal-server-venv-py3.12
 RUN bash get_fractal_server.sh
 
 ENV PIP_DEFAULT_TIMEOUT=
