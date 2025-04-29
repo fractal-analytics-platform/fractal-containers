@@ -1,5 +1,5 @@
 run-demos-v2: clean
-	docker compose up fractal-server fractal-demos-v2 fractal-web
+	docker compose --progress plain up fractal-server fractal-demos-v2 fractal-web
 
 run-demos-v2-github:
 	docker compose up fractal-server fractal-demos-v2 --abort-on-container-exit
