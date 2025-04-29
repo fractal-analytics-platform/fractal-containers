@@ -8,7 +8,7 @@ RUN add-apt-repository ppa:deadsnakes/ppa
 
 # Install non-standard Python versions
 RUN apt install -y python3.10 python3.11-venv
-RUN apt install -y python3.12 python3.12-venv
+RUN apt install -y python3.11 python3.11-venv
 
 # Create a venv for each Python version
 RUN python3.10 -m venv /.venv3.10
