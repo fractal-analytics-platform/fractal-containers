@@ -14,7 +14,8 @@ echo
 service munge start
 service slurmdbd start
 service mariadb start
-service slurmctld start
+service slurmctld restart
+service slurmd start
 slurmd -N $NODE
 service ssh start
 
