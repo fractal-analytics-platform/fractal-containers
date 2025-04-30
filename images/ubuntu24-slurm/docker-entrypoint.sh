@@ -17,6 +17,8 @@ slurmd -N $NODE
 service ssh start
 
 echo
+squeue --version
+echo
 sinfo
 echo
 echo
