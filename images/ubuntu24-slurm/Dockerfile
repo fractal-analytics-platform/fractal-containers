@@ -9,6 +9,7 @@ RUN apt install -y vim less
 RUN apt install -y python3 python3-pip python3-venv
 COPY slurm.conf /etc/slurm/
 COPY cgroup.conf /etc/slurm/
+COPY slurmdbd.conf /etc/slurm/
 
 # SSH configuration
 RUN apt-get install -y openssh-server
