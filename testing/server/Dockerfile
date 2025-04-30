@@ -24,6 +24,8 @@ ENV PIP_DEFAULT_TIMEOUT=
 RUN mkdir -p /home/fractal_share/
 RUN chmod -R 777 /home/fractal_share/
 
+RUN squeue --version
+
 # Launch command
 CMD /fractal-server-venv-py3.12/bin/fractalctl set-db && \
     /fractal-server-venv-py3.12/bin/gunicorn fractal_server.main:app \
