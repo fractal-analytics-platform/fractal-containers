@@ -4,7 +4,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Slurm configuration
 RUN apt update -y
-RUN apt install -y sudo munge slurmd slurm-client slurmctld mariadb-server
+RUN apt install -y sudo munge slurmd slurm-client slurmctld mariadb-server slurmdbd
 RUN apt install -y vim less
 RUN apt install -y python3 python3-pip python3-venv
 COPY slurm.conf /etc/slurm/
