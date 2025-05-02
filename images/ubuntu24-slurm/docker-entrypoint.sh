@@ -11,13 +11,13 @@ echo
 echo "Starting Slurm services..."
 echo
 
+service ssh start
 service munge start
 service slurmdbd start
 service mariadb start
 service slurmctld restart
 service slurmd start
 slurmd -N $NODE
-service ssh start
 
 echo
 squeue --version
