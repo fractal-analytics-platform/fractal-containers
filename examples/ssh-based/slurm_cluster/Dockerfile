@@ -1,4 +1,4 @@
-FROM ghcr.io/fractal-analytics-platform/ubuntu22-slurm:0.1
+FROM ghcr.io/fractal-analytics-platform/ubuntu24-slurm:0.1
 
 RUN apt update
 RUN apt install -y git
@@ -11,6 +11,7 @@ ARG SLURM_MEMORY
 RUN echo "Install fractal-server ${FRACTAL_SERVER_RELEASE} or ${FRACTAL_SERVER_GIT}"
 COPY get_fractal_server.sh ./
 RUN chmod +x ./get_fractal_server.sh
+RUN python3 -m venv /fractal-server-venv
 RUN ./get_fractal_server.sh
 
 RUN sed -i "s/CPUs=[0-9]*/CPUs=${SLURM_CPUS}/g" /etc/slurm/slurm.conf

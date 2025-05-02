@@ -1,4 +1,4 @@
-FROM ghcr.io/fractal-analytics-platform/ubuntu22-slurm-multipy:0.1
+FROM ghcr.io/fractal-analytics-platform/ubuntu24-slurm-multipy:0.1
 
 ARG FRACTAL_SERVER_VERSION
 ARG SLURM_CPUS

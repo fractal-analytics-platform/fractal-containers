@@ -1,4 +1,4 @@
-FROM ghcr.io/fractal-analytics-platform/ubuntu22-slurm-multipy:0.1
+FROM ghcr.io/fractal-analytics-platform/ubuntu24-slurm-multipy:0.1
 
 # User specific cpu count and memory for slurm configuration
 ARG SLURM_CPUS
@@ -16,6 +16,7 @@ COPY server/slurm_config.json ./
 # Install fractal-server
 ADD config.env .
 COPY server/get_fractal_server.sh .
+RUN python3.12 -m venv /fractal-server-venv-py3.12
 RUN bash get_fractal_server.sh
 
 ENV PIP_DEFAULT_TIMEOUT=
@@ -24,8 +25,8 @@ RUN mkdir -p /home/fractal_share/
 RUN chmod -R 777 /home/fractal_share/
 
 # Launch command
-CMD fractalctl set-db && \
-    gunicorn fractal_server.main:app \
+CMD /fractal-server-venv-py3.12/bin/fractalctl set-db && \
+    /fractal-server-venv-py3.12/bin/gunicorn fractal_server.main:app \
     --workers 2 \
     --timeout 20 \
     --bind 0.0.0.0:8000 \
