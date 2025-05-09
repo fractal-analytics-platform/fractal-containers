@@ -20,7 +20,7 @@ gunicorn fractal_server.main:app \
     --workers 4 \
     --timeout 100 \
     --bind 0.0.0.0:8000 \
-    --access-logfile logs-fractal-server.access \
-    --error-logfile logs-fractal-server.error \
+    --access-logfile - \
+    --error-logfile - \
     --worker-class uvicorn.workers.UvicornWorker \
     --logger-class fractal_server.gunicorn_fractal.FractalGunicornLogger
