@@ -12,10 +12,12 @@ echo "Starting Slurm services..."
 echo
 
 service ssh start
+service mariadb start
 service munge start
 service slurmdbd start
-service mariadb start
-service slurmctld restart
+service slurmctld start
+service slurmctld stop
+service slurmctld start
 service slurmd start
 slurmd -N $NODE
 
