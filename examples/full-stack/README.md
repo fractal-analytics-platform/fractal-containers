@@ -83,3 +83,7 @@ docker compose up --build
 ```
 docker compose build --no-cache
 ```
+
+5. I'm running this on a Mac with Apple Silicon, using the x86 containers. When using tasks with polars (e.g. the projection task in the example), I get a `Missing required CPU features.` warning and then the task crashes. How do I fix that?
+
+This is related to polars running via rosetta. The default polars doesn't handle this well. But you can install polars-lts-cpu (e.g. version 1.30.0) in the package by adding this as a pinned package during task collection. After that, your task should run again. See [this issue for details](https://github.com/fractal-analytics-platform/fractal-server/issues/2584#issuecomment-2916540203).
