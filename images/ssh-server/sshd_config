@@ -1,0 +1,5 @@
+Port 22
+PermitRootLogin yes
+MaxStartups 100:30:200
+MaxSessions 100
+Banner /etc/banner
