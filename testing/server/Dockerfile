@@ -12,6 +12,7 @@ RUN apt install -y libgles2
 # setting up DB configuration
 COPY server/server.env ./.fractal_server.env
 COPY server/slurm_config.json ./
+COPY server/pixi_config.json ./
 
 # Install fractal-server
 ADD config.env .
@@ -19,9 +20,15 @@ COPY server/get_fractal_server.sh .
 RUN python3.12 -m venv /fractal-server-venv-py3.12
 RUN bash get_fractal_server.sh
 
+RUN mkdir -p /home/fractal_share/
+RUN chmod -R 777 /home/fractal_share/
+
+# Install pixi on a shared folder
+COPY server/get_pixi.sh .
+RUN bash get_pixi.sh
+
 ENV PIP_DEFAULT_TIMEOUT=
 
-RUN mkdir -p /home/fractal_share/
 RUN chmod -R 777 /home/fractal_share/
 
 # Launch command
