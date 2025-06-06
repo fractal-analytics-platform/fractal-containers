@@ -17,9 +17,9 @@ RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 
 # Install pixi
-COPY install_pixi.sh /pixi/install_pixi.sh
 RUN mkdir /pixi
-run bash /pixi/install_pixi.sh
+COPY install_pixi.sh /pixi/install_pixi.sh
+RUN bash /pixi/install_pixi.sh
 
 # User configuration
 ADD sudoers /etc/sudoers
