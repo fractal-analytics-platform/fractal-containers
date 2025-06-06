@@ -16,6 +16,11 @@ RUN chmod 600 /etc/slurm/slurmdbd.conf
 RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 
+# Install pixi
+COPY install_pixi.sh /pixi/install_pixi.sh
+RUN mkdir /pixi
+run bash /pixi/install_pixi.sh
+
 # User configuration
 ADD sudoers /etc/sudoers
 RUN useradd -m fractal -s /usr/bin/bash -d /home/fractal && echo "fractal:fractal" | chpasswd && adduser fractal sudo && echo "fractal     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
