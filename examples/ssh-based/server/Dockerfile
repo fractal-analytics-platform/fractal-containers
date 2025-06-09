@@ -17,6 +17,7 @@ RUN wget https://github.com/fractal-analytics-platform/fractal-server/raw/main/t
 COPY setup_ssh_keys_and_run_server.sh ./
 COPY .fractal_server.env ./
 COPY slurm_config.json ./
+COPY pixi_config.json ./
 
 RUN mkdir -p /data/app/Tasks
 RUN mkdir -p /data/app/Artifacts
