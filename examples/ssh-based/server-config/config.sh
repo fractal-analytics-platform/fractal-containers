@@ -47,8 +47,7 @@ rm files-archive.zip
 
 
 # Change permissions
-echo "START - change permissions for /data/images, /data/zarrs/ and /pixi/"
+echo "START - change permissions for /data/images and /data/zarrs/"
 chmod 777 /data/images/ --recursive
 chmod 777 /data/zarrs/ --recursive
-chmod 777 /pixi/ --recursive
-echo "END   - change permissions for /data/images, /data/zarrs/ and /pixi/"
+echo "END   - change permissions for /data/images and /data/zarrs/"
