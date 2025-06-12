@@ -21,6 +21,7 @@ RUN mkdir -p /data/remote/tasks/
 RUN mkdir -p /data/remote/jobs/
 RUN chown test01:test01 /data/remote/tasks/
 RUN chown test01:test01 /data/remote/jobs/
+RUN chmod 777 /pixi/ --recursive
 
 # Append a `tail -f` command to the entrypoint, to make it hang
 RUN echo "tail -f" >> "/etc/slurm/docker-entrypoint.sh"

@@ -11,6 +11,7 @@ RUN /venv-server/bin/python3 -m pip install fractal-server==${FRACTAL_SERVER_VER
 COPY run_server.sh ./
 COPY .fractal_server.env ./
 COPY slurm_config.json ./
+COPY pixi_config.json ./
 
 RUN mkdir -p /data/app/Tasks
 RUN mkdir -p /data/app/Artifacts

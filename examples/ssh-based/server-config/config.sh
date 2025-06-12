@@ -16,7 +16,7 @@ cat "$SETTINGS_FILE"
 
 # Update user
 FRACTAL_USER_ID=$(fractal --batch user whoami)
-fractal user edit "$FRACTAL_USER_ID" --new-ssh-settings-json "$SETTINGS_FILE"
+fractal user edit "$FRACTAL_USER_ID" --new-ssh-settings-json "$SETTINGS_FILE" --new-project-dir /data/zarrs/test01
 
 # Assuming that group 1 is the ALL
 ALL_GROUP_ID=1
@@ -25,6 +25,7 @@ if [ $(fractal group get "$ALL_GROUP_ID" | grep name | grep All) != "0" ]; then
     exit 1
 fi
 fractal group update "$ALL_GROUP_ID" --new-viewer-paths /data
+
 
 # Trigger collection of fractal-tasks-core
 fractal task collect fractal-tasks-core --package-extras fractal-tasks
@@ -47,5 +48,7 @@ rm files-archive.zip
 
 
 # Change permissions
+echo "START - change permissions for /data/images and /data/zarrs/"
 chmod 777 /data/images/ --recursive
 chmod 777 /data/zarrs/ --recursive
+echo "END   - change permissions for /data/images and /data/zarrs/"
