@@ -1,4 +1,4 @@
-FROM filebrowser/filebrowser:v2
+FROM filebrowser/filebrowser:v2.32.3
 RUN apk update
 RUN apk add inotify-tools openrc
 COPY check_file.sh /usr/check_file.sh
