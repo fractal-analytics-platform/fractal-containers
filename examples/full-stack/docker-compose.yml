@@ -65,7 +65,7 @@ services:
       context: ./web
       dockerfile: Dockerfile
       args:
-        - FRACTAL_WEB_VERSION=1.19.0-a0
+        - FRACTAL_WEB_VERSION=1.19.1
     depends_on:
       slurm:
         condition: service_healthy
@@ -99,9 +99,9 @@ services:
     volumes:
       - data:/data
 
-  vizarr:
-    container_name: vizarr
-    image: ghcr.io/fractal-analytics-platform/fractal-vizarr-viewer:stable
+  fractal-data:
+    container_name: fractal-data
+    image: ghcr.io/fractal-analytics-platform/fractal-data:stable
     environment:
       - FRACTAL_SERVER_URL=http://slurm:8000
       - AUTHORIZATION_SCHEME=fractal-server
