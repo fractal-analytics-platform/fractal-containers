@@ -1,0 +1,4 @@
+deployment_type = "production"
+fractal_frontend_url = "http://localhost:5173"
+fractal_backend_url = "http://slurm:8000"
+fractal_data_url = "http://localhost:3000/data"

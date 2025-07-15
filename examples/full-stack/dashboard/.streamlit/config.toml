@@ -1,0 +1,24 @@
+[theme]
+primaryColor = "#0099ff"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F0F2F6"
+textColor = "#31333F"
+font = "sans serif"
+
+[logger]
+level = "info"
+messageFormat = "%(asctime)s - %(levelname)s - [%(name)s:%(lineno)d] - %(message)s"
+
+[server]
+headless = true
+runOnSave = false
+enableCORS = true
+enableXsrfProtection = true
+fileWatcherType = "none"
+
+[browser]
+serverAddress = "localhost"
+gatherUsageStats = false
+
+[client]
+toolbarMode = "minimal"

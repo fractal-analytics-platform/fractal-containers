@@ -112,6 +112,18 @@ services:
     volumes:
       - data:/data:ro
 
+
+  fractal-feature-explorer:
+    container_name: fractal-feature-explorer
+    build:
+      context: ./dashboard
+      args:
+        - FRACTAL_FEATURE_EXPLORER_VERSION=0.1.9
+    ports:
+      - 8501:8501
+    networks:
+      - fractal
+
 volumes:
   data:
   postgres_db:
