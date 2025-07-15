@@ -119,6 +119,9 @@ services:
       context: ./dashboard
       args:
         - FRACTAL_FEATURE_EXPLORER_VERSION=0.1.9
+    depends_on:
+      slurm:
+        condition: service_healthy
     ports:
       - 8501:8501
     networks:
