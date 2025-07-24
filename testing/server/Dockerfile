@@ -30,7 +30,7 @@ CMD /fractal-server-venv-py3.12/bin/fractalctl set-db && \
     --workers 2 \
     --timeout 20 \
     --bind 0.0.0.0:8000 \
-    --access-logfile logs-fractal-server.access \
-    --error-logfile logs-fractal-server.error \
+    --access-logfile - \
+    --error-logfile - \
     --worker-class fractal_server.gunicorn_fractal.FractalWorker \
     --logger-class fractal_server.gunicorn_fractal.FractalGunicornLogger
