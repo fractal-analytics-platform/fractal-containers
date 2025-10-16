@@ -14,7 +14,7 @@ echo "#!/bin/bash"> "$SUBMIT_SCRIPT"
 chmod +x "$SUBMIT_SCRIPT"
 BASE_LABEL=$(date +%s)
 
-for INDEX in {1..20}; do
+for INDEX in {1..10}; do
 
     LABEL="${BASE_LABEL}-${INDEX}"
     PROJECT_NAME="proj-$LABEL"
