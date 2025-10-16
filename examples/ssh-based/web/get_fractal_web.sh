@@ -10,7 +10,6 @@ if [ -z "${FRACTAL_WEB_RELEASE}" ]; then
         echo "Error: must set one of FRACTAL_WEB_RELEASE or FRACTAL_WEB_GIT." && exit 1
     else
         # Case 2: only git set
-        apk add git
         git clone -b "$FRACTAL_WEB_GIT" https://github.com/fractal-analytics-platform/fractal-web.git
         cd fractal-web
         npm install

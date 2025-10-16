@@ -1,5 +1,7 @@
 FROM node:20-alpine3.17
 
+RUN apk add git
+
 ARG FRACTAL_WEB_GIT
 
 ENV NODE_MAJOR_VERSION=20
