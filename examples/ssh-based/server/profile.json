@@ -3,6 +3,6 @@
   "resource_type": "slurm_ssh",
   "username": "test01",
   "ssh_key_path": "/ssh_key_test01.key",
-  "jobs_remote_dir": "/data/remote/job/",
+  "jobs_remote_dir": "/data/remote/jobs/",
   "tasks_remote_dir": "/data/remote/tasks/"
 }
