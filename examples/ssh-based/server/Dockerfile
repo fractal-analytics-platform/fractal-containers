@@ -11,13 +11,10 @@ COPY get_fractal_server.sh ./
 RUN chmod +x ./get_fractal_server.sh
 RUN ./get_fractal_server.sh
 
-# RUN apt install wget -y
-RUN wget https://github.com/fractal-analytics-platform/fractal-server/raw/main/tests/v2/fractal_tasks_mock/dist/fractal_tasks_mock-0.0.1-py3-none-any.whl
-
 COPY setup_ssh_keys_and_run_server.sh ./
 COPY .fractal_server.env ./
-COPY slurm_config.json ./
-COPY pixi_config.json ./
+COPY resource.json ./
+COPY profile.json ./
 
 RUN mkdir -p /data/app/Tasks
 RUN mkdir -p /data/app/Artifacts

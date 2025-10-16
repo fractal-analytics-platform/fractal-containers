@@ -1,22 +1,12 @@
 #!/bin/bash
 
-SSH_HOST="slurm"
-SSH_USER="test01"
-SSH_PRIVATE_KEY_FILE="/ssh_key_test01.key"
 
-SETTINGS_FILE=./ssh-settings.json
-echo "{" > "$SETTINGS_FILE"
-echo " \"ssh_host\": \"${SSH_HOST}\"," >> "$SETTINGS_FILE"
-echo " \"ssh_username\": \"${SSH_USER}\"," >> "$SETTINGS_FILE"
-echo " \"ssh_private_key_path\": \"${SSH_PRIVATE_KEY_FILE}\"," >> "$SETTINGS_FILE"
-echo " \"ssh_tasks_dir\": \"/data/remote/tasks/\"," >> "$SETTINGS_FILE"
-echo " \"ssh_jobs_dir\": \"/data/remote/jobs/\"" >> "$SETTINGS_FILE"
-echo "}" >> "$SETTINGS_FILE"
-cat "$SETTINGS_FILE"
 
 # Update user
 FRACTAL_USER_ID=$(fractal --batch user whoami)
-fractal user edit "$FRACTAL_USER_ID" --new-ssh-settings-json "$SETTINGS_FILE" --new-project-dir /data/zarrs/test01
+echo "FRACTAL_USER_ID: $FRACTAL_USER_ID"
+fractal user edit "$FRACTAL_USER_ID" --new-project-dir /data/zarrs/test01
+
 
 # Assuming that group 1 is the ALL
 ALL_GROUP_ID=1
@@ -32,7 +22,7 @@ fractal task collect fractal-tasks-core --package-extras fractal-tasks
 
 # Download test zarr data
 mkdir -p /data/zarrs
-cd /data/zarrs/
+cd /data/zarrs/ || exit 1
 wget --quiet https://zenodo.org/records/10424292/files/20200812-CardiomyocyteDifferentiation14-Cycle1_mip.zarr.zip
 unzip -q 20200812-CardiomyocyteDifferentiation14-Cycle1_mip.zarr.zip
 rm -r 20200812-CardiomyocyteDifferentiation14-Cycle1_mip.zarr.zip __MACOSX
