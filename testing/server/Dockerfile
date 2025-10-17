@@ -9,14 +9,10 @@ RUN sed -i "s/RealMemory=[0-9]*/RealMemory=${SLURM_MEMORY}/g" /etc/slurm/slurm.c
 RUN apt update && apt install -y git curl
 RUN apt install -y libgles2
 
-# setting up DB configuration
-COPY server/server.env ./.fractal_server.env
-COPY server/slurm_config.json ./
-
 # Install fractal-server
+RUN python3.12 -m venv /fractal-server-venv-py3.12
 ADD config.env .
 COPY server/get_fractal_server.sh .
-RUN python3.12 -m venv /fractal-server-venv-py3.12
 RUN bash get_fractal_server.sh
 
 ENV PIP_DEFAULT_TIMEOUT=
@@ -24,8 +20,13 @@ ENV PIP_DEFAULT_TIMEOUT=
 RUN mkdir -p /home/fractal_share/
 RUN chmod -R 777 /home/fractal_share/
 
+COPY server/server.env ./.fractal_server.env
+COPY server/resource.json ./
+COPY server/profile.json ./
+
 # Launch command
 CMD /fractal-server-venv-py3.12/bin/fractalctl set-db && \
+    /fractal-server-venv-py3.12/bin/fractalctl init-db-data --resource resource.json --profile profile.json && \
     /fractal-server-venv-py3.12/bin/gunicorn fractal_server.main:app \
     --workers 2 \
     --timeout 20 \
