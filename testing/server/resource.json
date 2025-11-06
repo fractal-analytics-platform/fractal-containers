@@ -9,9 +9,7 @@
             "cpus_per_task": 1,
             "mem": "100M"
         },
-        "gpu_slurm_config": {
-            "partition": "main"
-        },
+        "gpu_slurm_config": null,
         "batching_config": {
             "target_cpus_per_job": 1,
             "max_cpus_per_job": 4,
