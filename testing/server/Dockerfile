@@ -26,7 +26,7 @@ COPY server/profile.json ./
 
 # Launch command
 CMD /fractal-server-venv-py3.12/bin/fractalctl set-db && \
-    /fractal-server-venv-py3.12/bin/fractalctl init-db-data --resource resource.json --profile profile.json --admin-email fractal@example.org --admin-password 1234 --admin-project-dir /home/test01 && \
+    /fractal-server-venv-py3.12/bin/fractalctl init-db-data --resource resource.json --profile profile.json --admin-email fractal@example.org --admin-pwd 1234 --admin-project-dir /home/test01 && \
     /fractal-server-venv-py3.12/bin/gunicorn fractal_server.main:app \
     --workers 2 \
     --timeout 20 \
