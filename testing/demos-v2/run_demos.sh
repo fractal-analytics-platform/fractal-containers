@@ -48,11 +48,6 @@ for THISDIR in "$ZARRDIR01" "$ZARRDIR02" "$PARAMETERSDIR01" "$PARAMETERSDIR02"; 
     chmod -R 777 "$THISDIR"
 done
 
-# Whoami
-fractal user whoami
-FRACTAL_USER_ID=$(fractal --batch user whoami )
-
-fractal user edit "$FRACTAL_USER_ID" --new-project-dir /home/test01
 # Trigger task collection
 bash get_fractal_tasks_core.sh
 
