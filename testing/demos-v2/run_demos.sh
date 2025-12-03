@@ -42,7 +42,6 @@ ZARRDIR01=./01_cardio_tiny_dataset/output_cardiac-tiny
 ZARRDIR02=./02_cardio_small/output-cardio-2x2-zenodo-subset
 PARAMETERSDIR01=./01_cardio_tiny_dataset/Parameters
 PARAMETERSDIR02=./02_cardio_small/Parameters
-
 for THISDIR in "$ZARRDIR01" "$ZARRDIR02" "$PARAMETERSDIR01" "$PARAMETERSDIR02"; do
     mkdir -p "$THISDIR"
     chmod -R 777 "$THISDIR"
@@ -50,6 +49,10 @@ done
 
 # Trigger task collection
 bash get_fractal_tasks_core.sh
+
+# Add pwd as a project_dir
+USER_ID=$(fractal --batch user whoami)
+fractal user edit "$USER_ID" --add-project-dir "$(pwd)"
 
 # Wait for task collection to be complete
 while [ "$(fractal task list)" == "[]" ]; do
