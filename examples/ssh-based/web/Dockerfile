@@ -18,6 +18,7 @@ ENV ORIGIN=http://localhost:5173
 ENV PORT=5173
 ENV LOG_LEVEL_CONSOLE=trace
 ENV FRACTAL_RUNNER_BACKEND=slurm_ssh
+ENV FRACTAL_DEFAULT_GROUP_NAME=All
 
 COPY get_fractal_web.sh ./
 RUN chmod +x get_fractal_web.sh

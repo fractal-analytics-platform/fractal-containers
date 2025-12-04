@@ -1,22 +1,5 @@
 #!/bin/bash
 
-
-
-# Update user
-FRACTAL_USER_ID=$(fractal --batch user whoami)
-echo "FRACTAL_USER_ID: $FRACTAL_USER_ID"
-fractal user edit "$FRACTAL_USER_ID" --new-project-dir /data/zarrs/test01
-
-
-# Assuming that group 1 is the ALL
-ALL_GROUP_ID=1
-if [ $(fractal group get "$ALL_GROUP_ID" | grep name | grep All) != "0" ]; then
-    echo "User group with id $ALL_GROUP_ID is not the 'All' group. Exit."
-    exit 1
-fi
-fractal group update "$ALL_GROUP_ID" --new-viewer-paths /data
-
-
 # Trigger collection of fractal-tasks-core
 fractal task collect fractal-tasks-core --package-extras fractal-tasks
 
