@@ -1,5 +1,6 @@
-FROM node:20-alpine3.17
+FROM node:20-alpine3.21
 
+RUN apk update
 RUN apk add git
 
 ARG FRACTAL_WEB_GIT
