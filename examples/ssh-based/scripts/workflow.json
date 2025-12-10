@@ -58,7 +58,7 @@
       },
       "task": {
         "pkg_name": "fractal-tasks-core",
-        "version": "1.5.4",
+        "version": "1.5.6",
         "name": "Convert Cellvoyager to OME-Zarr"
       }
     },
@@ -81,7 +81,7 @@
       },
       "task": {
         "pkg_name": "fractal-tasks-core",
-        "version": "1.5.4",
+        "version": "1.5.6",
         "name": "Project Image (HCS Plate)"
       }
     }

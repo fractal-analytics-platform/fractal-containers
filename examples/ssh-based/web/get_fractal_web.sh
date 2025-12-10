@@ -20,7 +20,7 @@ else
         # Case 3: only release set
         mkdir fractal-web
         cd fractal-web
-        wget -qO- "https://github.com/fractal-analytics-platform/fractal-web/releases/download/v${FRACTAL_WEB_VERSION}/node-${NODE_MAJOR_VERSION}-fractal-web-v${FRACTAL_WEB_VERSION}.tar.gz" | tar -xz
+        wget -qO- "https://github.com/fractal-analytics-platform/fractal-web/releases/download/v${FRACTAL_WEB_RELEASE}/node-${NODE_MAJOR_VERSION}-fractal-web-v${FRACTAL_WEB_VERSION}.tar.gz" | tar -xz
     else
         # Case 4: both release and git set
         echo "Error: cannot set both FRACTAL_WEB_RELEASE and FRACTAL_WEB_GIT." && exit 2
