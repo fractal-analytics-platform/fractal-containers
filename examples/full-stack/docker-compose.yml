@@ -126,6 +126,11 @@ services:
       - 8501:8501
     networks:
       - fractal
+    healthcheck:
+      test: wget http://fractal-feature-explorer:8501/_stcore/health > /dev/null 2>&1
+      interval: 5s
+      timeout: 2s
+      retries: 5
 
 volumes:
   data:
