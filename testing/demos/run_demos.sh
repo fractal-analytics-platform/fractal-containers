@@ -82,19 +82,8 @@ wait_for_job "$PROJECT_ID" "$JOB_ID" "examples/01"
 # Check job status, once again
 fractal job show "$PROJECT_ID" "$JOB_ID"
 
-echo "START examples/01 output validation"
-TMPFILE="tmp_01_validation.txt"
-python validate_results.py >> $TMPFILE 2>&1
-VALIDATION_EXIT_CODE=$?
-cat $TMPFILE
-
-# Check exit code
-if [ $VALIDATION_EXIT_CODE -ne 0 ]; then
-    echo "Error: examples/01 VALIDATION_EXIT_CODE=$VALIDATION_EXIT_CODE"
-    exit 1
-fi
-
-echo "END examples/01 output validation"
-
+echo "START validation example 01"
+python validate_results_01.py
+echo "END validation example 01"
 
 echo "END run_all_demos.sh"
