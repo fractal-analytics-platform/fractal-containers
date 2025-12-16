@@ -10,7 +10,7 @@ on:
 
 jobs:
 
-  tests-v2:
+  tests:
     timeout-minutes: 25
     runs-on: ubuntu-24.04
 
@@ -20,4 +20,4 @@ jobs:
         persist-credentials: false
 
     - name: Run demos
-      run: cd testing && make run-demos-v2-github
+      run: cd testing && make run-demos-github

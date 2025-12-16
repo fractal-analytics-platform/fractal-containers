@@ -20,7 +20,7 @@
         }
     },
     "jobs_slurm_python_worker": "/fractal-server-venv-py3.12/bin/python",
-    "jobs_poll_interval": 0,
+    "jobs_poll_interval": 1,
     "tasks_local_dir": "/home/fractal_share/tasks",
     "tasks_python_config": {
         "default_version": "3.12",
