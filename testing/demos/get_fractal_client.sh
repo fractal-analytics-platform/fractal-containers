@@ -1,3 +1,6 @@
+#!/bin/bash
+
+# shellcheck disable=SC1091
 source config.env
 echo "FRACTAL_CLIENT_V2_RELEASE=$FRACTAL_CLIENT_V2_RELEASE"
 echo "FRACTAL_CLIENT_V2_GIT=$FRACTAL_CLIENT_V2_GIT"

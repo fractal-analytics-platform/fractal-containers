@@ -1,3 +1,6 @@
+#!/bin/bash
+
+# shellcheck disable=SC1091
 source config.env
 echo "FRACTAL_SERVER_RELEASE=$FRACTAL_SERVER_RELEASE"
 echo "FRACTAL_SERVER_GIT=$FRACTAL_SERVER_GIT"
@@ -18,7 +21,7 @@ if [ -z "${FRACTAL_SERVER_RELEASE}" ]; then
 else
     if [ -z "${FRACTAL_SERVER_GIT}" ]; then
         # Case 3: only release set
-        /fractal-server-venv-py3.12/bin/python3.12 -m pip install fractal-server==$FRACTAL_SERVER_RELEASE
+        /fractal-server-venv-py3.12/bin/python3.12 -m pip install fractal-server=="$FRACTAL_SERVER_RELEASE"
     else
         # Case 4: both release and git set
         echo "Error: cannot set both FRACTAL_SERVER_RELEASE and FRACTAL_SERVER_GIT." && exit 1
