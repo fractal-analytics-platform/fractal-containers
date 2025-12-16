@@ -44,6 +44,7 @@ services:
       - 8000:8000
     volumes:
       - fractal_share:/home/fractal_share/
+      - ./Resources:/home/fractal_share/Resources
     healthcheck:
       # check if server is up from within the container (hence the localhost)
       test: curl --fail http://localhost:8000/api/alive/ || exit 1
@@ -81,8 +82,6 @@ services:
     build:
       context: .
       dockerfile: demos/Dockerfile
-    # ports:
-    #   - 6817:6817
     volumes:
       - fractal_share:/home/fractal_share/
       - ./Resources:/home/fractal_share/Resources
