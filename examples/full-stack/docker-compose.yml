@@ -3,7 +3,7 @@ services:
     cpus: 1.0
     mem_limit: "1G"
     container_name: fractal-db
-    image: postgres:15.4-alpine
+    image: postgres:16.11-alpine
     restart: always
     ports:
       - 5433:5433
@@ -34,10 +34,10 @@ services:
     cpus: 3.0
     mem_limit: 5g
     build:
-      context: ../slurm-common
+      context: ./server-and-slurm
       dockerfile: Dockerfile
       args:
-        - FRACTAL_SERVER_VERSION=2.15.1
+        - FRACTAL_SERVER_VERSION=2.18.2
         - SLURM_CPUS=3
         - SLURM_MEMORY=3000
     depends_on:
@@ -65,7 +65,7 @@ services:
       context: ./web
       dockerfile: Dockerfile
       args:
-        - FRACTAL_WEB_VERSION=1.19.1
+        - FRACTAL_WEB_VERSION=1.22.1
     depends_on:
       slurm:
         condition: service_healthy
@@ -79,7 +79,7 @@ services:
     build:
       context: ./server-config
       args:
-        - FRACTAL_CLIENT_VERSION=2.9.1
+        - FRACTAL_CLIENT_VERSION=2.18.0
     depends_on:
       slurm:
         condition: service_healthy
@@ -118,7 +118,7 @@ services:
     build:
       context: ./dashboard
       args:
-        - FRACTAL_FEATURE_EXPLORER_VERSION=0.1.9
+        - FRACTAL_FEATURE_EXPLORER_VERSION=0.1.14
     depends_on:
       slurm:
         condition: service_healthy

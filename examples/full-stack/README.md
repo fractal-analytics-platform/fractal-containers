@@ -10,7 +10,7 @@ This example includes a full-fledged Fractal deployment, useful for demo's and o
 
 # List of Fractal services in this example
 
-* The `fractal-web` web client, available on port 5173 (see http://localhost:5173, and login with credentials `admin@fractal.xy`/`1234`).
+* The `fractal-web` web client, available on port 5173 (see http://localhost:5173, and login with credentials `admin@example.org`/`1234`).
 * The `fractal-server` backend, available on port 8000 (see e.g http://localhost:8000/docs).
 * The `fractal-data` service that serves OME-Zarr files and loads the vizarr viewer to view them in the browser, available on port 3000 (see an example OME-Zarr at http://localhost:3000/data/vizarr/?source=http://localhost:3000/data/files/data/zarrs/20200812-CardiomyocyteDifferentiation14-Cycle1_mip.zarr/B/03/0).
 * A `filebrowser` service, available on port 8080, see http://localhost:8080. This is especially useful if you want to "download" zarr files to your host machine, or if you want to "upload" new input images.
@@ -28,7 +28,7 @@ git clone https://github.com/fractal-analytics-platform/fractal-containers.git
 cd fractal-containers/examples/full-stack
 ```
 
-2. Startup services with `docker compose up`. This can take a while, e.g. a couple minutes with a poor network connection. Verify that all is OK e.g. by browsing to http://localhost:5173 and logging in with default credentials (email `admin@fractal.xy` and password `1234`).
+2. Startup services with `docker compose up`. This can take a while, e.g. a couple minutes with a poor network connection. Verify that all is OK e.g. by browsing to http://localhost:5173 and logging in with default credentials (email `admin@example.org` and password `1234`).
 
 3. Collect the `fractal-tasks-core` tasks pacakge with the `fractal-task` extra. This can be done from the web client or the command line. In both cases, it may take a few minutes and it will use a sizeable amount of disk space (e.g. 5 GB), mostly due to installing `pytorch` in a Python virtual environment.
     * Collecting tasks can be done from the webclient at http://localhost:5173/v2/tasks/management by setting "Package" to `fractal-tasks-core` and "Package Extras" to `fractal-tasks`.

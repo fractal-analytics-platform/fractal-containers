@@ -8,7 +8,7 @@ RUN python3 -m venv venv-client
 RUN ./venv-client/bin/python -m pip install fractal-client==${FRACTAL_CLIENT_VERSION}
 
 ENV FRACTAL_SERVER=http://slurm:8000
-ENV FRACTAL_USER=admin@fractal.xy
+ENV FRACTAL_USER=admin@example.org
 ENV FRACTAL_PASSWORD=1234
 
 COPY config.sh ./

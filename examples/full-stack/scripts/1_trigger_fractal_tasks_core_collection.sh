@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# Set cache path to the local directory, remove it if it exists
-FRACTAL_CACHE_PATH=$(pwd)/".cache"
-export FRACTAL_CACHE_PATH="$FRACTAL_CACHE_PATH"
-if [ -d "$FRACTAL_CACHE_PATH" ]; then
-    rm -rv "$FRACTAL_CACHE_PATH"  2> /dev/null
-fi
+set -eu
+
+export FRACTAL_USER=admin@example.org
+export FRACTAL_PASSWORD=1234
+export FRACTAL_SERVER=http://localhost:8000
 
 fractal task collect fractal-tasks-core --package-extras fractal-tasks
