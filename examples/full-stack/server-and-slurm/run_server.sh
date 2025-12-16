@@ -1,21 +1,19 @@
 #!/bin/bash
 
-set -eu
+# Note: init-db-data will fail, if it runs a second time
+# set -eu
 
 # Activate SLURM, by running the entrypoint of the base image
 /etc/slurm/docker-entrypoint.sh
 
-# shellcheck disable=SC1091
-source /venv-server/bin/activate
+/venv-server/bin/fractalctl set-db
 
-fractalctl set-db
-
-fractalctl init-db-data \
+/venv-server/bin/fractalctl init-db-data \
     --resource resource.json --profile profile.json \
     --admin-email admin@example.org --admin-pwd 1234 \
     --admin-project-dir /data/zarrs/test01
 
-gunicorn fractal_server.main:app \
+/venv-server/bin/gunicorn fractal_server.main:app \
     --workers 2 \
     --timeout 20 \
     --bind 0.0.0.0:8000 \
