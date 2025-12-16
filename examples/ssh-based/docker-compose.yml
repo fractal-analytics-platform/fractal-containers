@@ -35,11 +35,12 @@ services:
     cpus: 3.0
     mem_limit: 5g
     build:
+      network: host
       context: ./slurm_cluster
       dockerfile: Dockerfile
       args:
         - FRACTAL_SERVER_GIT=
-        - FRACTAL_SERVER_RELEASE=2.15.0a4
+        - FRACTAL_SERVER_RELEASE=2.18.0a5
         - SLURM_CPUS=3
         - SLURM_MEMORY=3000
     volumes:
@@ -62,11 +63,12 @@ services:
     hostname: server
     container_name: server
     build:
+      network: host
       context: ./server
       dockerfile: Dockerfile
       args:
         - FRACTAL_SERVER_GIT=
-        - FRACTAL_SERVER_RELEASE=2.15.0a4
+        - FRACTAL_SERVER_RELEASE=2.18.0a5
     depends_on:
       db:
         condition: service_healthy
@@ -87,10 +89,12 @@ services:
   web:
     container_name: fractal-web
     build:
+      network: host
       context: ./web
       dockerfile: Dockerfile
       args:
-        - FRACTAL_WEB_VERSION=1.19.0-a0
+        - FRACTAL_WEB_GIT=main
+        - FRACTAL_WEB_RELEASE=
     ports:
       - 5173:5173
     networks:
@@ -99,9 +103,10 @@ services:
   server-config:
     container_name: server-config
     build:
+      network: host
       context: ./server-config
       args:
-        - FRACTAL_CLIENT_VERSION=2.9.0
+        - FRACTAL_CLIENT_VERSION=2.18.0a0
     depends_on:
       server:
         condition: service_healthy

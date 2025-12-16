@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Exit immediately if a command exits with a non-zero status
 set -e
 
 # Set cache path to the local directory, remove it if it exists
@@ -15,19 +14,18 @@ echo "#!/bin/bash"> "$SUBMIT_SCRIPT"
 chmod +x "$SUBMIT_SCRIPT"
 BASE_LABEL=$(date +%s)
 
-for INDEX in {1..20}; do
+for INDEX in {1..10}; do
 
     LABEL="${BASE_LABEL}-${INDEX}"
     PROJECT_NAME="proj-$LABEL"
     DS_NAME="ds-$LABEL"
     WF_NAME="wf-$LABEL"
-    ZARR_DIR=/data/zarrs/${LABEL}
     WF_JSON_FILE=workflow.json
 
     # Create project and dataset
     PROJECT_ID=$(fractal --batch project new "$PROJECT_NAME")
     echo "PROJECT_ID=$PROJECT_ID created"
-    DS_ID=$(fractal --batch project add-dataset "$PROJECT_ID" "$DS_NAME" --zarr-dir "$ZARR_DIR")
+    DS_ID=$(fractal --batch project add-dataset "$PROJECT_ID" "$DS_NAME" --project-dir /data/zarrs/test01 --zarr-subfolder "$LABEL")
     echo "DS_IN_ID=$DS_ID created"
     # Import workflow
     OUT=$(fractal --batch workflow import --project-id "$PROJECT_ID" --json-file "$WF_JSON_FILE" --workflow-name "$WF_NAME")
