@@ -14,4 +14,6 @@ COPY .streamlit/config.toml /app/.streamlit/
 
 EXPOSE 8501
 
-CMD ["/app/run_dashboard.sh"]
+WORKDIR /app
+
+CMD ["./run_dashboard.sh"]
