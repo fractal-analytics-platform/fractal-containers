@@ -69,10 +69,7 @@ services:
     depends_on:
       slurm:
         condition: service_healthy
-    ports:
-      - 5173:5173
-    networks:
-      - fractal
+    network_mode: "host"
 
   server-config:
     container_name: server-config
@@ -103,15 +100,11 @@ services:
     container_name: fractal-data
     image: ghcr.io/fractal-analytics-platform/fractal-data:stable
     environment:
-      - FRACTAL_SERVER_URL=http://slurm:8000
+      - FRACTAL_SERVER_URL=http://localhost:8000
       - AUTHORIZATION_SCHEME=fractal-server
-    ports:
-      - 3000:3000
-    networks:
-      - fractal
+    network_mode: "host"
     volumes:
       - data:/data:ro
-
 
   fractal-feature-explorer:
     container_name: fractal-feature-explorer
@@ -122,10 +115,7 @@ services:
     depends_on:
       slurm:
         condition: service_healthy
-    ports:
-      - 8501:8501
-    networks:
-      - fractal
+    network_mode: "host"
     healthcheck:
       test: wget http://fractal-feature-explorer:8501/_stcore/health > /dev/null 2>&1
       interval: 5s
