@@ -3,10 +3,8 @@ services:
     cpus: 1.0
     mem_limit: "1G"
     container_name: fractal-db
-    image: postgres:15.4-alpine
+    image: postgres:16.11-alpine
     restart: always
-    ports:
-      - 5433:5433
     command: -p 5433
     environment:
       POSTGRES_USER: fractal
@@ -25,8 +23,7 @@ services:
       retries: 5
     volumes:
       - postgres_db:/var/lib/postgresql/data
-    networks:
-      - fractal
+    network_mode: "host"
 
   slurm:
     hostname: slurm
@@ -34,10 +31,10 @@ services:
     cpus: 3.0
     mem_limit: 5g
     build:
-      context: ../slurm-common
+      context: ./server-and-slurm
       dockerfile: Dockerfile
       args:
-        - FRACTAL_SERVER_VERSION=2.15.1
+        - FRACTAL_SERVER_VERSION=2.18.2
         - SLURM_CPUS=3
         - SLURM_MEMORY=3000
     depends_on:
@@ -47,17 +44,12 @@ services:
       - data:/data
     environment:
       - SLURM_CPUS_ON_NODE=1
-    ports:
-      - 8000:8000
-      - 6817:6817
-      - 6818:6818
     healthcheck:
-      test: wget http://slurm:8000/api/alive/ > /dev/null 2>&1
+      test: wget http://localhost:8000/api/alive/ > /dev/null 2>&1
       interval: 5s
       timeout: 2s
       retries: 5
-    networks:
-      - fractal
+    network_mode: "host"
 
   web:
     container_name: fractal-web
@@ -65,28 +57,24 @@ services:
       context: ./web
       dockerfile: Dockerfile
       args:
-        - FRACTAL_WEB_VERSION=1.19.1
+        - FRACTAL_WEB_VERSION=1.22.1
     depends_on:
       slurm:
         condition: service_healthy
-    ports:
-      - 5173:5173
-    networks:
-      - fractal
+    network_mode: "host"
 
   server-config:
     container_name: server-config
     build:
       context: ./server-config
       args:
-        - FRACTAL_CLIENT_VERSION=2.9.1
+        - FRACTAL_CLIENT_VERSION=2.18.0
     depends_on:
       slurm:
         condition: service_healthy
     volumes:
       - data:/data
-    networks:
-      - fractal
+    network_mode: "host"
 
   fractal-filebrowser:
     container_name: fractal-filebrowser
@@ -94,8 +82,6 @@ services:
       context: ./filebrowser
     ports:
       - 8080:80
-    networks:
-      - fractal
     volumes:
       - data:/data
 
@@ -103,34 +89,28 @@ services:
     container_name: fractal-data
     image: ghcr.io/fractal-analytics-platform/fractal-data:stable
     environment:
-      - FRACTAL_SERVER_URL=http://slurm:8000
+      - FRACTAL_SERVER_URL=http://localhost:8000
       - AUTHORIZATION_SCHEME=fractal-server
-    ports:
-      - 3000:3000
-    networks:
-      - fractal
+    network_mode: "host"
     volumes:
       - data:/data:ro
-
 
   fractal-feature-explorer:
     container_name: fractal-feature-explorer
     build:
       context: ./dashboard
       args:
-        - FRACTAL_FEATURE_EXPLORER_VERSION=0.1.9
+        - FRACTAL_FEATURE_EXPLORER_VERSION=0.1.14
     depends_on:
       slurm:
         condition: service_healthy
-    ports:
-      - 8501:8501
-    networks:
-      - fractal
+    network_mode: "host"
+    healthcheck:
+      test: wget http://localhost:8501/_stcore/health > /dev/null 2>&1
+      interval: 5s
+      timeout: 2s
+      retries: 5
 
 volumes:
   data:
   postgres_db:
-
-networks:
-  fractal:
-    driver: bridge
