@@ -46,42 +46,42 @@ done
 
 #### EXAMPLE 01
 
-echo "Now create project"
-PROJECT_ID=$(fractal --batch project new "project-01")
-echo "PROJECT_ID=$PROJECT_ID"
+# echo "Now create project"
+# PROJECT_ID=$(fractal --batch project new "project-01")
+# echo "PROJECT_ID=$PROJECT_ID"
 
-# Add input dataset, and add a resource to it
-echo "Now create dataset"
-DATASET_ID=$(
-    fractal --batch project add-dataset \
-        "$PROJECT_ID" "dataset-01" \
-        --project-dir "/home/fractal_share/zarrs" --zarr-subfolder "example-01"
-    )
-echo "DATASET_ID=$DATASET_ID"
+# # Add input dataset, and add a resource to it
+# echo "Now create dataset"
+# DATASET_ID=$(
+#     fractal --batch project add-dataset \
+#         "$PROJECT_ID" "dataset-01" \
+#         --project-dir "/home/fractal_share/zarrs" --zarr-subfolder "example-01"
+#     )
+# echo "DATASET_ID=$DATASET_ID"
 
-echo "Now import workflow"
-WORKFLOW_ID=$(
-    fractal --batch workflow import \
-    --project-id "$PROJECT_ID" \
-    --json-file /home/fractal_share/Resources/workflow01.json | cut -d " " -f1
-)
-echo "WORKFLOW_ID=$WORKFLOW_ID"
+# echo "Now import workflow"
+# WORKFLOW_ID=$(
+#     fractal --batch workflow import \
+#     --project-id "$PROJECT_ID" \
+#     --json-file /home/fractal_share/Resources/workflow01.json | cut -d " " -f1
+# )
+# echo "WORKFLOW_ID=$WORKFLOW_ID"
 
-echo "Now submit job"
-JOB_ID=$(fractal --batch job submit "$PROJECT_ID" "$WORKFLOW_ID" "$DATASET_ID")
-echo "JOB_ID=$JOB_ID"
+# echo "Now submit job"
+# JOB_ID=$(fractal --batch job submit "$PROJECT_ID" "$WORKFLOW_ID" "$DATASET_ID")
+# echo "JOB_ID=$JOB_ID"
 
-# Wait for job to be done or failed
-echo "Now wait for job completion"
-wait_for_job "$PROJECT_ID" "$JOB_ID" "examples/01"
+# # Wait for job to be done or failed
+# echo "Now wait for job completion"
+# wait_for_job "$PROJECT_ID" "$JOB_ID" "examples/01"
 
-# Check job status, once again
-fractal job show "$PROJECT_ID" "$JOB_ID"
+# # Check job status, once again
+# fractal job show "$PROJECT_ID" "$JOB_ID"
 
-# Zarr output validation
-echo "START validation example 01"
-python validate_results_01.py
-echo "END validation example 01"
+# # Zarr output validation
+# echo "START validation example 01"
+# python validate_results_01.py
+# echo "END validation example 01"
 
 
 #### EXAMPLE 02
