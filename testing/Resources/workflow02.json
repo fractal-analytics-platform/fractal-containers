@@ -1,5 +1,5 @@
 {
-  "name": "example01",
+  "name": "Workflow cardiac-tiny-23",
   "task_list": [
     {
       "meta_non_parallel": {
@@ -7,13 +7,13 @@
         "mem": 4000
       },
       "meta_parallel": {
-        "cpus_per_task": 1,
-        "mem": 4000
+        "cpus_per_task": 4,
+        "mem": 8000
       },
       "args_non_parallel": {
         "overwrite": true,
         "image_dirs": [
-          "/home/fractal_share/Resources/images/10.5281_zenodo.8287221/"
+          "/home/fractal_share/Resources/images/10.5281_zenodo.7057076/"
         ],
         "num_levels": 5,
         "coarsening_xy": 2,
@@ -48,12 +48,7 @@
           }
         ]
       },
-      "args_parallel": {
-        "chunk_sizes": {
-          "c": 1,
-          "z": 10
-        }
-      },
+      "args_parallel": null,
       "type_filters": {},
       "task": {
         "pkg_name": "fractal-tasks-core",
@@ -71,11 +66,9 @@
         "mem": 4000
       },
       "args_non_parallel": {
-        "method": "mip",
-        "overwrite": true,
-        "re_initialize_plate": false
+        "overwrite": true
       },
-      "args_parallel": {},
+      "args_parallel": null,
       "type_filters": {},
       "task": {
         "pkg_name": "fractal-tasks-core",
@@ -86,52 +79,65 @@
     {
       "meta_non_parallel": null,
       "meta_parallel": {
-        "cpus_per_task": 2,
+        "cpus_per_task": 4,
         "mem": 8000,
         "needs_gpu": true
       },
       "args_non_parallel": null,
       "args_parallel": {
-        "level": 0,
+        "level": 2,
         "channel": {
-          "label": "DAPI",
-          "normalize": {
-            "type": "default"
-          }
+          "wavelength_id": "A01_C01"
         },
-        "channel2": {
-          "normalize": {
-            "type": "default"
-          }
-        },
-        "overwrite": true,
-        "use_masks": true,
-        "model_type": "cyto2",
-        "relabeling": true,
+        "model_type": "nuclei",
         "diameter_level0": 60,
-        "input_ROI_table": "FOV_ROI_table",
-        "output_label_name": "nuclei",
-        "advanced_cellpose_model_params": {
-          "tile": true,
-          "interp": true,
-          "invert": false,
-          "augment": false,
-          "net_avg": false,
-          "use_gpu": true,
-          "min_size": 15,
-          "resample": true,
-          "batch_size": 8,
-          "tile_overlap": 0.1,
-          "flow_threshold": 0.4,
-          "stitch_threshold": 0,
-          "cellprob_threshold": 0
-        }
+        "input_ROI_table": "well_ROI_table",
+        "output_ROI_table": "nuclei_ROI_table",
+        "output_label_name": "nuclei"
       },
       "type_filters": {},
       "task": {
         "pkg_name": "fractal-tasks-core",
 
         "name": "Cellpose Segmentation"
+      }
+    },
+    {
+      "meta_non_parallel": null,
+      "meta_parallel": {
+        "cpus_per_task": 4,
+        "mem": 8000
+      },
+      "args_non_parallel": null,
+      "args_parallel": {
+        "level": 0,
+        "input_specs": {
+          "dapi_img": {
+            "type": "image",
+            "channel": {
+              "wavelength_id": "A01_C01"
+            }
+          },
+          "label_img": {
+            "type": "label",
+            "label_name": "nuclei"
+          }
+        },
+        "output_specs": {
+          "regionprops_DAPI": {
+            "type": "dataframe",
+            "label_name": "nuclei",
+            "table_name": "nuclei"
+          }
+        },
+        "workflow_file": "/home/fractal_share/Resources/02_regionprops_from_existing_labels_feature.yaml",
+        "input_ROI_table": "well_ROI_table"
+      },
+      "type_filters": {},
+      "task": {
+        "pkg_name": "fractal-tasks-core",
+
+        "name": "Napari Workflows Wrapper"
       }
     }
   ]
