@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -o xtrace
+
 # Trigger collection of `fractal-tasks-core`, either from PyPI or from a
 # wheel file built locally.
 
