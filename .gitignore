@@ -10,3 +10,6 @@ advanced/fractal-slurm-data/
 *.swp
 
 .DS_Store
+
+venv
+.venv
