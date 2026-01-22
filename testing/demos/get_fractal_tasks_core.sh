@@ -16,6 +16,8 @@ source config.env
 echo "FRACTAL_TASKS_CORE_V2_RELEASE=$FRACTAL_TASKS_CORE_V2_RELEASE"
 echo "FRACTAL_TASKS_CORE_V2_GIT=$FRACTAL_TASKS_CORE_V2_GIT"
 
+export PANDAS_PIN_OPTION="--post-pinned-dependency pandas=2.3.3"
+
 if [ -z "${FRACTAL_TASKS_CORE_V2_RELEASE}" ]; then
     if [ -z "${FRACTAL_TASKS_CORE_V2_GIT}" ]; then
         # Case 1: no release, no git
@@ -41,13 +43,13 @@ if [ -z "${FRACTAL_TASKS_CORE_V2_RELEASE}" ]; then
             ABS_WHL="$(pwd)/$WHL"
             chmod 777 "$ABS_WHL"
 
-            fractal task collect "$ABS_WHL" --package-extras fractal-tasks
+            fractal task collect "$ABS_WHL" --package-extras fractal-tasks $PANDAS_PIN_OPTION
         )
     fi
 else
     if [ -z "${FRACTAL_TASKS_CORE_V2_GIT}" ]; then
         # Case 3: only release set
-        fractal task collect fractal-tasks-core --package-extras fractal-tasks --package-version "$FRACTAL_TASKS_CORE_V2_RELEASE"
+        fractal task collect fractal-tasks-core --package-extras fractal-tasks --package-version "$FRACTAL_TASKS_CORE_V2_RELEASE" $PANDAS_PIN_OPTION
     else
         # Case 4: both release and git set
         echo "Error: cannot set both FRACTAL_TASKS_CORE_V2_RELEASE and FRACTAL_TASKS_CORE_V2_GIT."
