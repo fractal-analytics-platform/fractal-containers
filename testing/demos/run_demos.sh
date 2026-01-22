@@ -28,7 +28,7 @@ export FRACTAL_PASSWORD=1234
 fractal user whoami
 
 # Create `zarr_dir` folders in advance, so that we can make them 777
-echo "START - Create and chmod-77 a bunch of relevant folders"
+echo "START - Create and chmod-777 a bunch of relevant folders"
 mkdir -p /home/fractal_share/zarrs/example-01
 chmod -R 777 /home/fractal_share/zarrs/example-01
 mkdir -p /home/fractal_share/zarrs/example-02
