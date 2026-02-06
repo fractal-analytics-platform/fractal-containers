@@ -25,8 +25,8 @@
     "tasks_python_config": {
         "default_version": "3.12",
         "versions": {
-            "3.11": "/.venv3.11/bin/python3.11",
-            "3.12": "/.venv3.12/bin/python3.12"
+            "3.12": "/.venv3.12/bin/python3.12",
+            "3.13": "/.venv3.13/bin/python3.13"
         }
     },
     "tasks_pixi_config": {
