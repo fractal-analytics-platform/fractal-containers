@@ -34,7 +34,7 @@ services:
       context: ./server-and-slurm
       dockerfile: Dockerfile
       args:
-        - FRACTAL_SERVER_VERSION=2.18.2
+        - FRACTAL_SERVER_VERSION=2.19.1
         - SLURM_CPUS=3
         - SLURM_MEMORY=3000
     depends_on:
@@ -57,7 +57,7 @@ services:
       context: ./web
       dockerfile: Dockerfile
       args:
-        - FRACTAL_WEB_VERSION=1.22.1
+        - FRACTAL_WEB_VERSION=1.23.0
     depends_on:
       slurm:
         condition: service_healthy
@@ -68,7 +68,7 @@ services:
     build:
       context: ./server-config
       args:
-        - FRACTAL_CLIENT_VERSION=2.18.0
+        - FRACTAL_CLIENT_VERSION=2.18.2
     depends_on:
       slurm:
         condition: service_healthy
@@ -100,7 +100,7 @@ services:
     build:
       context: ./dashboard
       args:
-        - FRACTAL_FEATURE_EXPLORER_VERSION=0.1.14
+        - FRACTAL_FEATURE_EXPLORER_VERSION=0.1.17
     depends_on:
       slurm:
         condition: service_healthy
