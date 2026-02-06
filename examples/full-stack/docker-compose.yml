@@ -3,7 +3,7 @@ services:
     cpus: 1.0
     mem_limit: "1G"
     container_name: fractal-db
-    image: postgres:16.11-alpine
+    image: postgres:18-alpine3.23
     restart: always
     command: -p 5433
     environment:
