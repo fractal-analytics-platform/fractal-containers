@@ -8,6 +8,8 @@ on:
   schedule:
     - cron: "0 23 * * 2,3,4"
 
+permissions: {}
+
 jobs:
 
   test-full-stack-example:
@@ -15,7 +17,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       with:
         persist-credentials: false
 
