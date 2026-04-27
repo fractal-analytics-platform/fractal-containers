@@ -57,7 +57,7 @@
       "type_filters": {},
       "task": {
         "pkg_name": "fractal-tasks-core",
-        "version": "1.5.6",
+        "version": "1.6.0",
         "name": "Convert Cellvoyager to OME-Zarr"
       }
     },
@@ -79,7 +79,7 @@
       "type_filters": {},
       "task": {
         "pkg_name": "fractal-tasks-core",
-        "version": "1.5.6",
+        "version": "1.6.0",
         "name": "Project Image (HCS Plate)"
       }
     },
@@ -130,7 +130,7 @@
       "type_filters": {},
       "task": {
         "pkg_name": "fractal-tasks-core",
-        "version": "1.5.6",
+        "version": "1.6.0",
         "name": "Cellpose Segmentation"
       }
     }
