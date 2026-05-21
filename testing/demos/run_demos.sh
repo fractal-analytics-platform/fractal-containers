@@ -33,8 +33,8 @@ mkdir -p /home/fractal_share/zarrs/example-01
 chmod -R 777 /home/fractal_share/zarrs/example-01
 mkdir -p /home/fractal_share/zarrs/example-02
 chmod -R 777 /home/fractal_share/zarrs/example-02
-mkdir -p /home/fractal_share/zarrs/.fractal_cache/
-chmod -R 777 /home/fractal_share/zarrs/.fractal_cache/
+mkdir -p /home/fractal_share/zarrs/fractal/.fractal_cache/
+chmod -R 777 /home/fractal_share/zarrs/fractal/.fractal_cache/
 echo "END - Create and chmod-77 a bunch of relevant folders"
 
 # Collect fractal-tasks-core
