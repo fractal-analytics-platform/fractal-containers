@@ -6,7 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update -y
 RUN apt install -y sudo munge slurmd slurm-client slurmctld mariadb-server slurmdbd
 RUN apt install -y vim less curl
-RUN apt-get install -y ca-certificates
+RUN apt install -y ca-certificates
 RUN apt install -y python3 python3-pip python3-venv
 COPY slurm.conf /etc/slurm/
 COPY cgroup.conf /etc/slurm/
