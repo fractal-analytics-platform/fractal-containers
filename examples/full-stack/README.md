@@ -35,9 +35,9 @@ cd fractal-containers/examples/full-stack
     * The command-line version of point 3 is e.g. as follows
 ```
 cd scripts
-python3.12 -m venv venv
+python3.13 -m venv venv
 source venv/bin/activate
-python3.12 -m pip install fractal-client
+python3.13 -m pip install fractal-client
 ./1_trigger_fractal_tasks_core_collection.sh
 # wait a few minutes, and check whether new tasks appear in http://localhost:5173/v2/tasks.
 ```
