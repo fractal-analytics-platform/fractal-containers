@@ -27,8 +27,8 @@
         "versions": {
             "3.11": "/.venv3.11/bin/python3.11",
             "3.12": "/.venv3.12/bin/python3.12",
-            "3.13": "/.venv3.12/bin/python3.13",
-            "3.14": "/.venv3.12/bin/python3.14"
+            "3.13": "/.venv3.13/bin/python3.13",
+            "3.14": "/.venv3.14/bin/python3.14"
         }
     },
     "tasks_pixi_config": {},
