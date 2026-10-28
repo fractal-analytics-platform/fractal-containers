@@ -12,7 +12,7 @@ RUN mkdir -p /data/app/Artifacts
 
 RUN echo "Install fractal-server ${FRACTAL_SERVER_VERSION}"
 RUN python3.14 -m venv /venv-server
-RUN /venv-server/bin/python.14 -m pip install fractal-server==${FRACTAL_SERVER_VERSION}
+RUN /venv-server/bin/python3.14 -m pip install fractal-server==${FRACTAL_SERVER_VERSION}
 
 
 COPY run_server.sh ./
