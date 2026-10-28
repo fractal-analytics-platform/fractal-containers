@@ -100,7 +100,7 @@ services:
     build:
       context: ./dashboard
       args:
-        - FRACTAL_FEATURE_EXPLORER_VERSION=0.1.15
+        - FRACTAL_FEATURE_EXPLORER_VERSION=0.1.21
     depends_on:
       slurm:
         condition: service_healthy
