@@ -10,7 +10,7 @@ RUN apt update && apt install -y git curl
 RUN apt install -y libgles2
 
 # Install fractal-server
-RUN python3.12 -m venv /fractal-server-venv-py3.12
+RUN python3.14 -m venv /fractal-server-venv-py3.14
 ADD config.env .
 COPY server/get_fractal_server.sh .
 RUN bash get_fractal_server.sh
@@ -25,9 +25,9 @@ COPY server/resource.json ./
 COPY server/profile.json ./
 
 # Launch command
-CMD /fractal-server-venv-py3.12/bin/fractalctl set-db && \
-    /fractal-server-venv-py3.12/bin/fractalctl init-db-data --resource resource.json --profile profile.json --admin-email admin@example.org --admin-pwd 1234 --admin-project-dir /home/fractal_share/zarrs && \
-    /fractal-server-venv-py3.12/bin/gunicorn fractal_server.main:app \
+CMD /fractal-server-venv-py3.14/bin/fractalctl set-db && \
+    /fractal-server-venv-py3.14/bin/fractalctl init-db-data --resource resource.json --profile profile.json --admin-email admin@example.org --admin-pwd 1234 --admin-project-dir /home/fractal_share/zarrs && \
+    /fractal-server-venv-py3.14/bin/gunicorn fractal_server.main:app \
     --workers 2 \
     --timeout 20 \
     --bind 0.0.0.0:8000 \
