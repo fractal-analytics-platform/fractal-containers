@@ -22,6 +22,10 @@ RUN mkdir /pixi
 COPY install_pixi.sh /pixi/install_pixi.sh
 RUN bash /pixi/install_pixi.sh
 
+# Install apptainer
+COPY install_apptainer.sh /apptainer/install_apptainer.sh
+RUN bash /apptainer/install_apptainer.sh
+
 # User configuration
 ADD sudoers /etc/sudoers
 RUN useradd -m fractal -s /usr/bin/bash -d /home/fractal && echo "fractal:fractal" | chpasswd && adduser fractal sudo && echo "fractal     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers

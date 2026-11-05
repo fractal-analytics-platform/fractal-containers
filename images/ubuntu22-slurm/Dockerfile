@@ -13,6 +13,10 @@ COPY cgroup.conf /etc/slurm/
 RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 
+# Install apptainer
+COPY install_apptainer.sh /apptainer/install_apptainer.sh
+RUN bash /apptainer/install_apptainer.sh
+
 # User configuration
 ADD sudoers /etc/sudoers
 RUN useradd -m fractal -s /usr/bin/bash -d /home/fractal && echo "fractal:fractal" | chpasswd && adduser fractal sudo && echo "fractal     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
