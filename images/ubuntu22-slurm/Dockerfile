@@ -14,8 +14,10 @@ RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 
 # Install apptainer
-COPY install_apptainer.sh /apptainer/install_apptainer.sh
-RUN bash /apptainer/install_apptainer.sh
+RUN apt install -y software-properties-common
+RUN add-apt-repository -y ppa:apptainer/ppa
+RUN apt update -y
+RUN apt install -y apptainer-suid
 
 # User configuration
 ADD sudoers /etc/sudoers

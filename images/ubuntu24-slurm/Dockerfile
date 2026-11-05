@@ -23,8 +23,10 @@ COPY install_pixi.sh /pixi/install_pixi.sh
 RUN bash /pixi/install_pixi.sh
 
 # Install apptainer
-COPY install_apptainer.sh /apptainer/install_apptainer.sh
-RUN bash /apptainer/install_apptainer.sh
+RUN apt install -y software-properties-common
+RUN add-apt-repository -y ppa:apptainer/ppa
+RUN apt update -y
+RUN apt install -y apptainer-suid
 
 # User configuration
 ADD sudoers /etc/sudoers
