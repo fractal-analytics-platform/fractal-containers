@@ -19,7 +19,7 @@ jobs:
         env:
             GITHUB_ACTOR: ${{ github.actor }}
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u "${GITHUB_ACTOR}" --password-stdin
-      - name: Build the Docker image Ubuntu22-slurm-accounting
-        run:  docker build images/ubuntu22-slurm-accounting --tag ghcr.io/fractal-analytics-platform/ubuntu22-slurm-accounting:0.1
+      - name: Build the Docker image Ubuntu24-slurm-accounting
+        run:  docker build images/ubuntu24-slurm-accounting --tag ghcr.io/fractal-analytics-platform/ubuntu24-slurm-accounting:0.1
       - name: Push Docker Image
-        run: docker push ghcr.io/fractal-analytics-platform/ubuntu22-slurm-accounting:0.1
+        run: docker push ghcr.io/fractal-analytics-platform/ubuntu24-slurm-accounting:0.1
