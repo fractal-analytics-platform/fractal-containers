@@ -25,6 +25,7 @@ RUN bash /pixi/install_pixi.sh
 # Install apptainer
 RUN apt install -y software-properties-common
 RUN add-apt-repository -y ppa:apptainer/ppa
+RUN apt update -y
 RUN apt install -y apptainer-suid
 
 # User configuration
