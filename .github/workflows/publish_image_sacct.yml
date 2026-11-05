@@ -1,0 +1,25 @@
+name: Build and Publish Docker SLURM Accounting Image
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Login
+        env:
+            GITHUB_ACTOR: ${{ github.actor }}
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u "${GITHUB_ACTOR}" --password-stdin
+      - name: Build the Docker image Ubuntu24-slurm-accounting
+        run:  docker build images/ubuntu24-slurm-accounting --tag ghcr.io/fractal-analytics-platform/ubuntu24-slurm-accounting:0.1
+      - name: Push Docker Image
+        run: docker push ghcr.io/fractal-analytics-platform/ubuntu24-slurm-accounting:0.1
