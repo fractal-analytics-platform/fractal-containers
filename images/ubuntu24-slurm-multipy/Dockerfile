@@ -2,8 +2,6 @@ FROM ghcr.io/fractal-analytics-platform/ubuntu24-slurm:0.1
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt update -y
-RUN apt install -y software-properties-common
 RUN add-apt-repository ppa:deadsnakes/ppa
 
 # Install non-standard Python versions
