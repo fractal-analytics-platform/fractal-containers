@@ -26,7 +26,7 @@ RUN bash /pixi/install_pixi.sh
 RUN apt install -y software-properties-common
 RUN add-apt-repository -y ppa:apptainer/ppa
 RUN apt update -y
-RUN apt install -y apptainer-suid
+RUN apt install -y apptainer
 
 # User configuration
 ADD sudoers /etc/sudoers
