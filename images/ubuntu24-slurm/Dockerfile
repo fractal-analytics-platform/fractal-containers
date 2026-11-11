@@ -4,14 +4,19 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Slurm configuration
 RUN apt update -y
-RUN apt install -y sudo munge slurmd slurm-client slurmctld mariadb-server slurmdbd
+RUN apt install -y sudo munge slurmd slurm-client slurmctld mariadb-server slurmdbd slurmrestd
 RUN apt install -y vim less curl
 RUN apt install -y ca-certificates
+RUN apt install -y socat openssl
 RUN apt install -y python3 python3-pip python3-venv
 COPY slurm.conf /etc/slurm/
 COPY cgroup.conf /etc/slurm/
 COPY slurmdbd.conf /etc/slurm/
 RUN chmod 600 /etc/slurm/slurmdbd.conf
+# Generate JWT key and TLS certificates for slurmrestd
+RUN dd if=/dev/urandom of=/etc/slurm/jwt_hs256.key bs=32 count=1 && chmod 600 /etc/slurm/jwt_hs256.key
+COPY generate_tls_cert.sh /etc/slurm/
+RUN bash /etc/slurm/generate_tls_cert.sh
 
 # SSH configuration
 RUN apt-get install -y openssh-server
@@ -27,8 +32,10 @@ RUN apt install -y apptainer
 ADD sudoers /etc/sudoers
 RUN useradd -m fractal -s /usr/bin/bash -d /home/fractal && echo "fractal:fractal" | chpasswd && adduser fractal sudo && echo "fractal     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 RUN useradd --uid 2001 -m test01 -s /usr/bin/bash -d /home/test01 && echo "test01:test01" | chpasswd
+# slurmrestd refuses to run as root or as SlurmUser
+RUN useradd -r -M -s /usr/sbin/nologin slurmrestd
 COPY docker-entrypoint.sh /etc/slurm/
-EXPOSE 22 6817 6818 8000
+EXPOSE 22 6817 6818 6820 8000
 
 # Install pixi
 RUN mkdir /pixi
