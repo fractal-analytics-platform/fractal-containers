@@ -21,3 +21,10 @@ curl --cacert ca.pem -H "X-SLURM-USER-NAME: test01" -H "X-SLURM-USER-TOKEN: <tok
 ```
 
 The JWT key and TLS certificates are generated at build time and are for testing only.
+
+[`ubuntu24-slurm/tests/test_slurmrestd.sh`](ubuntu24-slurm/tests/test_slurmrestd.sh) shows more examples (submit, list and cancel a job) and checks that the API works:
+
+```console
+docker cp ubuntu24-slurm/tests/test_slurmrestd.sh <container>:/tmp/
+docker exec <container> bash /tmp/test_slurmrestd.sh
+```
