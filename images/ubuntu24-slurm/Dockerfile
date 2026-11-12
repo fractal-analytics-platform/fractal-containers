@@ -17,11 +17,6 @@ RUN chmod 600 /etc/slurm/slurmdbd.conf
 RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 
-# Install pixi
-RUN mkdir /pixi
-COPY install_pixi.sh /pixi/install_pixi.sh
-RUN bash /pixi/install_pixi.sh
-
 # Install apptainer
 RUN apt install -y software-properties-common
 RUN add-apt-repository -y ppa:apptainer/ppa
@@ -34,5 +29,11 @@ RUN useradd -m fractal -s /usr/bin/bash -d /home/fractal && echo "fractal:fracta
 RUN useradd --uid 2001 -m test01 -s /usr/bin/bash -d /home/test01 && echo "test01:test01" | chpasswd
 COPY docker-entrypoint.sh /etc/slurm/
 EXPOSE 22 6817 6818 8000
+
+# Install pixi
+RUN mkdir /pixi
+COPY install_pixi.sh /pixi/install_pixi.sh
+RUN bash /pixi/install_pixi.sh
+
 
 ENTRYPOINT ["/etc/slurm/docker-entrypoint.sh"]
