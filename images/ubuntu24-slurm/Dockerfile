@@ -32,8 +32,9 @@ RUN apt install -y apptainer
 ADD sudoers /etc/sudoers
 RUN useradd -m fractal -s /usr/bin/bash -d /home/fractal && echo "fractal:fractal" | chpasswd && adduser fractal sudo && echo "fractal     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 RUN useradd --uid 2001 -m test01 -s /usr/bin/bash -d /home/test01 && echo "test01:test01" | chpasswd
-# Lets jobs run as `fractal` write into folders created by `test01` (SLURM user != SSH user)
-RUN usermod -aG test01 fractal
+RUN useradd --uid 2002 -m test02 -s /usr/bin/bash -d /home/test02 && echo "test02:test02" | chpasswd
+# Lets jobs run as `test02` (SLURM user) write into folders created by `test01` (SSH user)
+RUN usermod -aG test01 test02
 # slurmrestd refuses to run as root or as SlurmUser
 RUN useradd -r -M -s /usr/sbin/nologin slurmrestd
 COPY docker-entrypoint.sh /etc/slurm/
