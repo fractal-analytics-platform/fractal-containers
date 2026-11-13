@@ -55,7 +55,9 @@ echo
 echo "Starting slurmrestd (https://localhost:6820, JWT auth)"
 echo
 
-SLURM_JWT=daemon runuser -u slurmrestd -- slurmrestd -a rest_auth/jwt -s slurmctld 127.0.0.1:6821 \
+# Skip the namespace isolation steps, not allowed by Docker's default seccomp profile
+SLURMRESTD_SECURITY=disable_unshare_sysv,disable_unshare_files SLURM_JWT=daemon \
+  runuser -u slurmrestd -- slurmrestd -a rest_auth/jwt -s slurmctld 127.0.0.1:6821 \
   > /var/log/slurm/slurmrestd.log 2>&1 &
 socat OPENSSL-LISTEN:6820,reuseaddr,fork,cert=/etc/slurm/tls/server.pem,key=/etc/slurm/tls/server.key,verify=0 \
   TCP:127.0.0.1:6821 > /var/log/slurm/rest-tls-proxy.log 2>&1 &

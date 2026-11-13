@@ -7,16 +7,16 @@ RUN apt update -y
 RUN apt install -y sudo munge slurmd slurm-client slurmctld mariadb-server slurmdbd slurmrestd
 RUN apt install -y vim less curl
 RUN apt install -y ca-certificates
-RUN apt install -y socat openssl
+RUN apt install -y socat
 RUN apt install -y python3 python3-pip python3-venv
 COPY slurm.conf /etc/slurm/
 COPY cgroup.conf /etc/slurm/
 COPY slurmdbd.conf /etc/slurm/
 RUN chmod 600 /etc/slurm/slurmdbd.conf
-# Generate JWT key and TLS certificates for slurmrestd
-RUN dd if=/dev/urandom of=/etc/slurm/jwt_hs256.key bs=32 count=1 && chmod 600 /etc/slurm/jwt_hs256.key
-COPY generate_tls_cert.sh /etc/slurm/
-RUN bash /etc/slurm/generate_tls_cert.sh
+# Fixed JWT key and TLS certificates for slurmrestd (see info-certificates.md)
+RUN printf '%s' 'fractal-containers-test-only-jwt-key' > /etc/slurm/jwt_hs256.key && chmod 600 /etc/slurm/jwt_hs256.key
+COPY tls/ /etc/slurm/tls/
+RUN chmod 600 /etc/slurm/tls/server.key
 
 # SSH configuration
 RUN apt-get install -y openssh-server

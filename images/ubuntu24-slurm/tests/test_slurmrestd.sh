@@ -21,6 +21,22 @@ done
 echo "ping"
 curl -s --cacert $CA "${AUTH[@]}" $URL/ping | grep -q '"pinged": "UP"'
 
+# test token generated from the fixed key (as server would)
+echo "token made from the fixed key, without scontrol"
+KEY_TOKEN=$(python3 -c '
+import base64, hashlib, hmac, json, time
+def b64(data):
+    return base64.urlsafe_b64encode(data).rstrip(b"=")
+key = open("/etc/slurm/jwt_hs256.key", "rb").read()
+now = int(time.time())
+header = b64(json.dumps({"alg": "HS256", "typ": "JWT"}).encode())
+payload = b64(json.dumps({"sun": "test01", "iat": now, "exp": now + 600}).encode())
+signature = b64(hmac.new(key, header + b"." + payload, hashlib.sha256).digest())
+print((header + b"." + payload + b"." + signature).decode())
+')
+curl -s --cacert $CA -H "X-SLURM-USER-NAME: test01" -H "X-SLURM-USER-TOKEN: $KEY_TOKEN" $URL/ping \
+  | grep -q '"pinged": "UP"'
+
 echo "wrong token (slurm 23.11 returns 500)"
 CODE=$(curl -s -o /dev/null -w '%{http_code}' --cacert $CA \
   -H "X-SLURM-USER-NAME: test01" -H "X-SLURM-USER-TOKEN: wrong" $URL/jobs)
