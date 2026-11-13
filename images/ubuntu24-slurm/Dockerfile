@@ -4,14 +4,19 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Slurm configuration
 RUN apt update -y
-RUN apt install -y sudo munge slurmd slurm-client slurmctld mariadb-server slurmdbd
+RUN apt install -y sudo munge slurmd slurm-client slurmctld mariadb-server slurmdbd slurmrestd
 RUN apt install -y vim less curl
 RUN apt install -y ca-certificates
+RUN apt install -y socat
 RUN apt install -y python3 python3-pip python3-venv
 COPY slurm.conf /etc/slurm/
 COPY cgroup.conf /etc/slurm/
 COPY slurmdbd.conf /etc/slurm/
 RUN chmod 600 /etc/slurm/slurmdbd.conf
+# Fixed JWT key and TLS certificates for slurmrestd (see info-certificates.md)
+RUN printf '%s' 'fractal-containers-test-only-jwt-key' > /etc/slurm/jwt_hs256.key && chmod 600 /etc/slurm/jwt_hs256.key
+COPY tls/ /etc/slurm/tls/
+RUN chmod 600 /etc/slurm/tls/server.key
 
 # SSH configuration
 RUN apt-get install -y openssh-server
@@ -27,8 +32,13 @@ RUN apt install -y apptainer
 ADD sudoers /etc/sudoers
 RUN useradd -m fractal -s /usr/bin/bash -d /home/fractal && echo "fractal:fractal" | chpasswd && adduser fractal sudo && echo "fractal     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 RUN useradd --uid 2001 -m test01 -s /usr/bin/bash -d /home/test01 && echo "test01:test01" | chpasswd
+RUN useradd --uid 2002 -m test02 -s /usr/bin/bash -d /home/test02 && echo "test02:test02" | chpasswd
+# Lets jobs run as `test02` (SLURM user) write into folders created by `test01` (SSH user)
+RUN usermod -aG test01 test02
+# slurmrestd refuses to run as root or as SlurmUser
+RUN useradd -r -M -s /usr/sbin/nologin slurmrestd
 COPY docker-entrypoint.sh /etc/slurm/
-EXPOSE 22 6817 6818 8000
+EXPOSE 22 6817 6818 6820 8000
 
 # Install pixi
 RUN mkdir /pixi
