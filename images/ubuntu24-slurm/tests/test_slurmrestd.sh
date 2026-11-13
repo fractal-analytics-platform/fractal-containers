@@ -15,7 +15,7 @@ URL=https://localhost:6820/slurm/v0.0.40
 #export TOKEN
 AUTH=(-H "X-SLURM-USER-NAME: test01" -H "X-SLURM-USER-TOKEN: $TOKEN")
 
-# slurmrestd can take a few seconds to start/etc/slurm/jwt_hs256.key
+# slurmrestd can take a few seconds to start
 for i in $(seq 30); do
   curl -s --cacert $CA "${AUTH[@]}" $URL/ping > /dev/null && break
   sleep 1
