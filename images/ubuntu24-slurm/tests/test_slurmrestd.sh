@@ -1,6 +1,6 @@
 #!/bin/bash
 # Some checks for slurmrestd in the ubuntu24-slurm image.
-# Run it as root inside the container, see images/README.md
+# Needs TOKEN and CA to be set, see tests/README.md
 
 set -e
 set -u   # Fail for undefined variables (e.g. TOKEN)

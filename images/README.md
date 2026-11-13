@@ -22,9 +22,4 @@ curl --cacert ubuntu24-slurm/tls/ca.pem -H "X-SLURM-USER-NAME: test01" -H "X-SLU
 For testing only, the JWT key is a fixed value (see `ubuntu24-slurm/Dockerfile`), so tokens can also be created without `scontrol`.
 The TLS certificates are committed in `ubuntu24-slurm/tls/`, see [`ubuntu24-slurm/info-certificates.md`](ubuntu24-slurm/info-certificates.md).
 
-[`ubuntu24-slurm/tests/test_slurmrestd.sh`](ubuntu24-slurm/tests/test_slurmrestd.sh) shows more examples (submit, list and cancel a job) and checks that the API works:
-
-```console
-docker cp ubuntu24-slurm/tests/test_slurmrestd.sh <container>:/tmp/
-docker exec <container> bash /tmp/test_slurmrestd.sh
-```
+[`ubuntu24-slurm/tests/test_slurmrestd.sh`](ubuntu24-slurm/tests/test_slurmrestd.sh) shows more examples (submit, list and cancel a job) and checks that the API works, see [`ubuntu24-slurm/tests/README.md`](ubuntu24-slurm/tests/README.md) for how to run it.
