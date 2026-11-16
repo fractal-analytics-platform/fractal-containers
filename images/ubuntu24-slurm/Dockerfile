@@ -28,6 +28,12 @@ RUN add-apt-repository -y ppa:apptainer/ppa
 RUN apt update -y
 RUN apt install -y apptainer
 
+# Empty /etc/subuid and /etc/subgid, so that `apptainer build` does not use
+# `newuidmap`/`newgidmap` (which fail inside an unprivileged container)
+RUN truncate -s 0 /etc/subuid /etc/subgid
+# Prevent `useradd` from adding entries to /etc/subuid and /etc/subgid
+RUN printf 'SUB_UID_COUNT 0\nSUB_GID_COUNT 0\n' >> /etc/login.defs
+
 # User configuration
 ADD sudoers /etc/sudoers
 RUN useradd -m fractal -s /usr/bin/bash -d /home/fractal && echo "fractal:fractal" | chpasswd && adduser fractal sudo && echo "fractal     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
