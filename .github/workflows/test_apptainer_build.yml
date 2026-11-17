@@ -1,0 +1,30 @@
+name: Test `apptainer build` in ubuntu24-slurm-multipy
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions: {}
+
+jobs:
+  test-apptainer-build:
+    timeout-minutes: 30
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      # Use the same tag as the `FROM` of ubuntu24-slurm-multipy, so that the
+      # locally built image is used instead of the published one
+      - name: Build the Docker image ubuntu24-slurm
+        run: docker build images/ubuntu24-slurm --tag ghcr.io/fractal-analytics-platform/ubuntu24-slurm:0.1
+
+      - name: Build the Docker image ubuntu24-slurm-multipy
+        run: docker build images/ubuntu24-slurm-multipy --tag ghcr.io/fractal-analytics-platform/ubuntu24-slurm-multipy:0.1
+
+      - name: Test `apptainer build` as test01
+        run: ./images/ubuntu24-slurm-multipy/tests/test_apptainer_build.sh
