@@ -3,13 +3,14 @@
 set -eu
 
 TESTS_DIR=$(cd "$(dirname "$0")" && pwd)
+IMAGE=${1}
 
 docker run --rm --hostname slurm \
   --security-opt seccomp=unconfined \
   --security-opt apparmor=unconfined \
   --device /dev/fuse \
-  -v "$TESTS_DIR/test.def:/tmp/test.def:ro" \
-  ghcr.io/fractal-analytics-platform/ubuntu24-slurm-multipy:0.1 \
+  -v "${TESTS_DIR}/test.def:/tmp/test.def:ro" \
+  "${IMAGE}" \
   bash -c '
     set -eu
     install -o test01 -g test01 /tmp/test.def /home/test01/test.def

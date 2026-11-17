@@ -1,4 +1,4 @@
-name: Test `apptainer build` in ubuntu24-slurm-multipy
+name: Test `apptainer build` in ubuntu24-slurm
 
 on:
   push:
@@ -7,6 +7,9 @@ on:
     branches: ["main"]
 
 permissions: {}
+
+env:
+  IMAGE: apptainer-test
 
 jobs:
   test-apptainer-build:
@@ -18,13 +21,8 @@ jobs:
         with:
           persist-credentials: false
 
-      # Use the same tag as the `FROM` of ubuntu24-slurm-multipy, so that the
-      # locally built image is used instead of the published one
       - name: Build the Docker image ubuntu24-slurm
-        run: docker build images/ubuntu24-slurm --tag ghcr.io/fractal-analytics-platform/ubuntu24-slurm:0.1
-
-      - name: Build the Docker image ubuntu24-slurm-multipy
-        run: docker build images/ubuntu24-slurm-multipy --tag ghcr.io/fractal-analytics-platform/ubuntu24-slurm-multipy:0.1
+        run: docker build images/ubuntu24-slurm --tag "$IMAGE"
 
       # Disable the AppArmor restriction on unprivileged user namespaces (on by
       # default in Ubuntu >= 24.04), so that apptainer can create user
@@ -33,4 +31,4 @@ jobs:
         run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 
       - name: Test `apptainer build` as test01
-        run: ./images/ubuntu24-slurm-multipy/tests/test_apptainer_build.sh
+        run: ./images/ubuntu24-slurm/tests/test_apptainer_build.sh "$IMAGE"
