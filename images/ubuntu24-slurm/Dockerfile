@@ -48,7 +48,7 @@ RUN bash /pixi/install_pixi.sh
 # Empty /etc/subuid and /etc/subgid (filled by the `useradd` calls above), so
 # that `apptainer build` does not use `newuidmap`/`newgidmap` (which fail inside
 # an unprivileged container). Keep this after every `useradd` call.
-RUN : > /etc/subuid && : > /etc/subgid
+RUN rm /etc/subuid /etc/subgid && touch /etc/subuid /etc/subgid
 
 
 ENTRYPOINT ["/etc/slurm/docker-entrypoint.sh"]
