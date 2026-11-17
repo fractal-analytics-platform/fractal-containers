@@ -46,8 +46,8 @@ COPY install_pixi.sh /pixi/install_pixi.sh
 RUN bash /pixi/install_pixi.sh
 
 # Empty /etc/subuid and /etc/subgid (filled by the `useradd` calls above), so
-# that `apptainer build` does not use `newuidmap`/`newgidmap` (which fail inside
-# an unprivileged container). Keep this after every `useradd` call.
+# that `apptainer build` does not use `newuidmap`/`newgidmap`
+# (which fail inside an unprivileged container).
 RUN rm /etc/subuid /etc/subgid && touch /etc/subuid /etc/subgid
 
 
