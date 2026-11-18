@@ -13,7 +13,8 @@ docker run --rm --hostname slurm \
   "${IMAGE}" \
   bash -c '
     set -eu
-    install -o test01 -g test01 /tmp/test.def /home/test01/test.def
+    cp /tmp/test.def /home/test01/test.def
+    chown test01:test01 /home/test01/test.def
     runuser -l test01 -c "
       set -eu
       apptainer build test.sif test.def
