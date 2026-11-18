@@ -1,0 +1,6 @@
+Bootstrap: docker
+From: ghcr.io/prefix-dev/pixi:0.80.0
+
+%post
+    set -e
+    echo "Hello, world!" > /hello.txt
