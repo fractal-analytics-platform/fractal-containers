@@ -4,14 +4,16 @@ set -eu
 
 TESTS_DIR=$(cd "$(dirname "$0")" && pwd)
 IMAGE=${1}
+TEST_USER=test01
+TEST_WORKDIR=/home/${TEST_USER}
 
 docker run --rm --hostname slurm \
   --security-opt seccomp=unconfined \
   --security-opt apparmor=unconfined \
   --device /dev/fuse \
-  -v "${TESTS_DIR}/test.def:/home/test01/test.def:ro" \
-  --user test01 \
-  --workdir /home/test01 \
+  -v "${TESTS_DIR}/test.def:${TEST_WORKDIR}/test.def:ro" \
+  --user "${TEST_USER}" \
+  --workdir "${TEST_WORKDIR}" \
   --entrypoint bash \
   "${IMAGE}" \
   -c '
