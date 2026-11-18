@@ -15,10 +15,8 @@ docker run --rm --hostname slurm \
     set -eu
     cp /tmp/test.def /home/test01/test.def
     chown test01:test01 /home/test01/test.def
-    runuser -l test01 -c "
-      set -eu
-      apptainer build test.sif test.def
-      apptainer exec test.sif pixi --version | grep -q \"pixi 0.80.0\"
-      apptainer exec test.sif cat /hello.txt | grep -q \"Hello, world!\"
-    "
+    cd /home/test01
+    runuser -u test01 -- apptainer build test.sif test.def
+    runuser -u test01 -- apptainer exec test.sif pixi --version | grep -q "pixi 0.80.0"
+    runuser -u test01 -- apptainer exec test.sif cat /hello.txt | grep -q "Hello, world!"
   '
