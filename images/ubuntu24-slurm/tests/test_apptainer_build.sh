@@ -10,11 +10,13 @@ docker run --rm --hostname slurm \
   --security-opt apparmor=unconfined \
   --device /dev/fuse \
   -v "${TESTS_DIR}/test.def:/home/test01/test.def:ro" \
+  --user test01 \
+  --workdir /home/test01 \
+  --entrypoint bash \
   "${IMAGE}" \
-  bash -c '
+  -c '
     set -eu
-    cd /home/test01
-    runuser -u test01 -- apptainer build test.sif test.def
-    runuser -u test01 -- apptainer exec test.sif pixi --version | grep -q "pixi 0.80.0"
-    runuser -u test01 -- apptainer exec test.sif cat /hello.txt | grep -q "Hello, world!"
+    apptainer build test.sif test.def
+    apptainer exec test.sif pixi --version | grep -q "pixi 0.80.0"
+    apptainer exec test.sif cat /hello.txt | grep -q "Hello, world!"
   '
